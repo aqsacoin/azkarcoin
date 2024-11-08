@@ -1,74 +1,47 @@
-/* ضبط الهيكل العام */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Cairo', sans-serif;
-    background-color: #E0F7FA; /* خلفية زرقاء فاتحة */
-    color: #FF8C00; /* لون الخطوط */
-    text-align: center;
-    padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #E0F7FA; /* سماوي */
+  color: #FFA726; /* برتقالي */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
-/* تنسيق الحاوية */
 .container {
-    width: 90%;
-    max-width: 700px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 15px;
-    background: #ffffff;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* العناوين */
-h2 {
-    color: #00796B; /* لون العناوين أخضر مائل للأزرق */
-    margin-bottom: 15px;
-    font-size: 24px;
+h1, h2 {
+  color: #FFA726;
 }
 
-/* الأزرار */
 button {
-    background-color: #FFD700; /* لون الأزرار ذهبي */
-    color: #000;
-    border: none;
-    padding: 12px 25px;
-    margin: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+  background-color: #FFD700; /* ذهبي */
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 10px 0;
+  cursor: pointer;
 }
 
 button:disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
+  background-color: #BDBDBD;
+  cursor: not-allowed;
 }
 
-button:hover {
-    background-color: #FFC107; /* تدرج ذهبي عند التمرير */
-    transform: scale(1.05); /* تكبير بسيط عند التمرير */
+.content p {
+  margin: 10px 0;
 }
-
-/* قسم التعدين */
-#mining-section {
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 2px solid #00796B; /* شريط علوي */
-}
-
-#countdown {
-    font-weight: bold;
-    font-size: 20px;
-    color: #FF5722; /* لون العد التنازلي */
-}
-
-/* نصوص الآية والذكر والحديث */
-#ayahDisplay, #dhikrDisplay, #hadithDisplay {
-    font-size: 20px;
-    font-weight:
