@@ -1,50 +1,45 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>موقع التعدين</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع التعدين</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div id="login-container" class="login-container">
-    <div class="login-form" id="register-form">
-      <h2>تسجيل مستخدم جديد</h2>
-      <form id="register">
-        <label for="email">البريد الإلكتروني:</label>
-        <input type="email" id="email" required>
-        <label for="username">إسم المستخدم:</label>
-        <input type="text" id="username" required>
-        <label for="password">كلمة السر:</label>
-        <input type="password" id="password" required>
-        <label for="confirm-password">تأكيد كلمة السر:</label>
-        <input type="password" id="confirm-password" required>
-        <button type="submit">تسجيل</button>
-      </form>
-    </div>
-    <div class="login-form" id="login-form">
-      <h2>تسجيل الدخول</h2>
-      <form id="login">
-        <label for="login-email">البريد الإلكتروني:</label>
-        <input type="email" id="login-email" required>
-        <label for="login-password">كلمة السر:</label>
-        <input type="password" id="login-password" required>
-        <button type="submit">تسجيل الدخول</button>
-      </form>
-    </div>
-  </div>
 
-  <div id="main-content" class="main-content" style="display:none;">
-    <!-- المحتوى الرئيسي بعد تسجيل الدخول -->
-    <h1>مرحبا بك في موقع التعدين</h1>
-    <div id="mining">
-      <!-- تفاصيل التعدين و الأزرار هنا -->
-    </div>
-    <div id="counter">
-      <p id="mining-timer">الوقت المتبقي للتعدين: <span id="timer">08:00:00</span></p>
-    </div>
-  </div>
+    <div class="container">
+        <h1>أهلاً بك في موقع التعدين</h1>
 
-  <script src="script.js"></script>
+        <!-- نموذج التسجيل و الدخول -->
+        <div id="auth">
+            <h2>تسجيل الدخول أو التسجيل</h2>
+            <form id="authForm">
+                <input type="text" id="username" placeholder="إسم المستخدم" required>
+                <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+                <input type="password" id="password" placeholder="كلمة المرور" required>
+                <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
+                <button type="submit">تسجيل</button>
+                <button type="button" id="loginButton">تسجيل الدخول</button>
+            </form>
+        </div>
+
+        <!-- واجهة المستخدم بعد التسجيل -->
+        <div id="userContent" style="display:none;">
+            <button id="showAyahBtn">إعرض الآية</button>
+            <button id="showDhikrBtn">إعرض الذكر</button>
+            <button id="showHadithBtn">إعرض الحديث</button>
+            <button id="startMiningBtn">إبدأ التعدين</button>
+
+            <p id="ayah"></p>
+            <p id="dhikr"></p>
+            <p id="hadith"></p>
+
+            <p id="timer">وقت التعدين: 0:00</p>
+            <p>العملات المستخرجة: <span id="minedCoins">0</span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
