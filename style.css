@@ -1,77 +1,80 @@
-/* الإعدادات الأساسية للصفحة */
+/* تغيير الخلفية لتكون سماوية */
 body {
+    background-color: #A7D8FF;
     font-family: 'Arial', sans-serif;
-    background-color: #f7f7f7;
-    direction: rtl;
-    color: #333;
+    color: #FF6F00; /* اللون البرتقالي للنصوص */
+    margin: 0;
+    padding: 0;
 }
 
-header {
-    text-align: center;
-    background-color: #5f9ea0;
-    padding: 20px;
-    color: white;
-}
-
-#mining-info {
-    text-align: center;
-    margin-top: 20px;
-}
-
-#mining-info h3 {
-    font-size: 18px;
-}
-
-#buttons {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-#buttons button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 32px;
-    margin: 5px;
+/* تحسين شكل الأزرار */
+button {
+    background-color: #FFD700; /* اللون الذهبي */
     border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-#buttons button:hover {
-    background-color: #45a049;
-}
-
-#mining-timer {
-    text-align: center;
-    margin-top: 20px;
+    padding: 12px 24px;
     font-size: 18px;
-    font-weight: bold;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #FFBF00; /* التغيير عند التمرير */
+}
+
+/* تحسين شكل الرأس والعناوين */
+h1, h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #FF6F00;
+}
+
+/* التنسيق العام للفورم */
+form {
+    text-align: center;
+    margin-top: 30px;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    padding: 10px;
+    margin: 10px;
+    font-size: 1rem;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 #auth-section {
+    display: block;
     text-align: center;
     margin-top: 50px;
 }
 
-#auth-section input {
-    padding: 10px;
-    margin: 5px;
-    font-size: 16px;
-    width: 80%;
+#auth-section h2 {
+    font-size: 1.5rem;
+    color: #FF6F00;
 }
 
-#auth-section button {
-    background-color: #5f9ea0;
-    color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
+/* ترتيب أزرار التعدين */
+#mining-info {
+    text-align: center;
+    margin-top: 30px;
 }
 
-#auth-section button:hover {
-    background-color: #4CAF50;
+/* تحسين شكل الحواف والأيقونات */
+#mining-timer, #balance, #extracted {
+    font-size: 1.5rem;
+    margin: 10px;
+    color: #FF6F00;
+}
+
+/* تباين الأزرار وتحديد مواقعها بشكل أفضل */
+button:focus {
+    outline: none;
+}
+
+button:active {
+    background-color: #FF6F00;
 }
