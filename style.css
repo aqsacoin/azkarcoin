@@ -1,87 +1,62 @@
-/* تخصيص الخطوط */
-body {
-    font-family: 'Arial', sans-serif;
-    background: url('https://example.com/islamic-background.jpg') no-repeat center center fixed;
-    background-size: cover;
-    color: #ffffff;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل المستخدم - AZKARCOIN</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-header {
-    background-color: rgba(0, 0, 0, 0.5); /* لتظليل الجزء العلوي */
-    padding: 20px;
-    text-align: center;
-}
+    <div class="container">
+        <h1>تسجيل الدخول أو إنشاء حساب</h1>
 
-.header-container h1 {
-    font-size: 3rem;
-    color: #ffff00; /* ذهبى */
-}
+        <form id="loginForm" onsubmit="return registerUser()">
+            <label for="username">اسم المستخدم:</label>
+            <input type="text" id="username" required>
 
-.verse {
-    font-size: 1.5rem;
-    font-style: italic;
-    color: #ffcc00; /* أصفر فاتح */
-}
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" required>
 
-.mining-info {
-    padding: 30px;
-    background-color: rgba(0, 0, 0, 0.7);
-}
+            <label for="password">كلمة المرور:</label>
+            <input type="password" id="password" required>
 
-.features {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
+            <label for="confirmPassword">تأكيد كلمة المرور:</label>
+            <input type="password" id="confirmPassword" required>
 
-.feature-item {
-    margin: 0 15px;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 15px;
-    border-radius: 8px;
-    width: 200px;
-}
+            <button type="submit">تسجيل</button>
+        </form>
+    </div>
 
-.daily-dhikr, .daily-verse {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
+    <script>
+        // فحص إذا كان المستخدم مسجل مسبقاً
+        if (localStorage.getItem('loggedIn')) {
+            window.location.href = "index.html";
+        }
 
-footer {
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    color: #ffffff;
-    font-size: 0.9rem;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-}
+        // دالة التسجيل
+        function registerUser() {
+            let username = document.getElementById('username').value;
+            let email = document.getElementById('email').value;
+            let password = document.getElementById('password').value;
+            let confirmPassword = document.getElementById('confirmPassword').value;
 
-/* تصميم الأزرار */
-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #007b5e; /* أخضر */
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.3s ease;
-}
+            if (password !== confirmPassword) {
+                alert("كلمة المرور غير متطابقة!");
+                return false;
+            }
 
-button:hover {
-    background-color: #004f3a; /* أخضر داكن عند المرور */
-}
+            // حفظ بيانات المستخدم في localStorage
+            localStorage.setItem('username', username);
+            localStorage.setItem('email', email);
+            localStorage.setItem('password', password);
+            localStorage.setItem('loggedIn', true);
 
-button:active {
-    background-color: #003f2a; /* أخضر غامق عند الضغط */
-}
+            // بعد التسجيل يتم التوجيه إلى الصفحة الرئيسية
+            window.location.href = "index.html";
+            return false;  // منع إرسال النموذج
+        }
+    </script>
 
-button:disabled {
-    background-color: #ccc; /* لون الأزرار عند عدم التفعيل */
-    cursor: not-allowed;
-}
+</body>
+</html>
