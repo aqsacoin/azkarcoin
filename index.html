@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الموقع الإسلامي</title>
+    <title>أذكار كوين</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <div class="logo">
-            <h1>موقع التـعدين الإسلامي</h1>
+            <h1>أذكار كوين</h1> <!-- تعديل اسم الموقع في الشعار -->
         </div>
     </header>
 
@@ -30,7 +30,17 @@
             <button onclick="register()">تسجيل</button>
         </div>
 
+        <!-- الصفحة الرئيسية بعد تسجيل الدخول -->
         <div id="mainPage" style="display: none;">
+            <h2>مرحبا بك في أذكار كوين!</h2> <!-- تعديل رسالة الترحيب -->
+            
+            <!-- عرض بيانات المستخدم -->
+            <div id="userInfo">
+                <p id="userNameDisplay">اسم المستخدم: </p> <!-- اسم المستخدم -->
+                <p id="userEmailDisplay">البريد الإلكتروني: </p> <!-- البريد الإلكتروني -->
+            </div>
+
+            <!-- أزرار العرض -->
             <button id="showAyahBtn">عرض آية</button>
             <button id="showHadithBtn">عرض حديث</button>
             <button id="showDhikrBtn">عرض ذكر</button>
