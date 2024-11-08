@@ -34,7 +34,7 @@ const userEmailDisplay = document.getElementById("userEmailDisplay");  // الع
 
 let minedCoins = 0;
 let timer = localStorage.getItem('timer') ? parseInt(localStorage.getItem('timer')) : 8 * 60 * 60; // 8 ساعات بالثواني
-let miningActive = false;
+let miningActive = localStorage.getItem('miningActive') === 'true'; // استرجاع حالة التعدين
 let canMine = false; // يتم تعيين هذه القيمة إلى true عندما يتم الضغط على جميع الأزرار
 let loggedInUser = null; // المتغير الذي يخزن المستخدم المسجل دخوله
 
@@ -82,8 +82,9 @@ function checkIfCanMine() {
 
 // بدء التعدين
 mineBtn.addEventListener("click", () => {
-    if (canMine) {
+    if (canMine && !miningActive) {
         miningActive = true;
+        localStorage.setItem('miningActive', 'true'); // تخزين حالة التعدين في localStorage
         startMining();
     }
 });
@@ -99,6 +100,7 @@ function startMining() {
             miningActive = false;
             canMine = false; // عدم السماح بالتعدين مرة أخرى
             mineBtn.disabled = true; // تعطيل زر التعدين بعد أن انتهت المدة
+            localStorage.setItem('miningActive', 'false'); // تحديث حالة التعدين في localStorage
         } else {
             timer--;
             updateUI(); // تحديث المؤقت
@@ -165,4 +167,9 @@ function showMainPage() {
     const userData = JSON.parse(localStorage.getItem(loggedInUser));
     userNameDisplay.textContent = `اسم المستخدم: ${userData.username}`;
     userEmailDisplay.textContent = `البريد الإلكتروني: ${userData.email}`;
+}
+
+// التحقق إذا كان التعدين نشطاً عند تحميل الصفحة
+if (miningActive) {
+    startMining();  // إذا كان التعدين نشطًا عند تحميل الصفحة، نبدأ التعدين مرة أخرى
 }
