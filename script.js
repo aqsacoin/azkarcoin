@@ -1,92 +1,143 @@
-const ayahs = [
-    "آية 1: بسم الله الرحمن الرحيم...",
-    "آية 2: الحمد لله رب العالمين...",
-    "آية 3: الله لا إله إلا هو...",
-    // إضافة المزيد من الآيات
+let verseButton = document.getElementById('verseButton');
+let dhikrButton = document.getElementById('dhikrButton');
+let startMiningButton = document.getElementById('startMiningButton');
+let resultDiv = document.getElementById('result');
+let timerDiv = document.getElementById('timer');
+
+let verseArray = [
+    "بسم الله الرحمن الرحيم",
+    "الحمد لله رب العالمين",
+    "الرحمن الرحيم",
+    "مالك يوم الدين",
+    "إياك نعبد وإياك نستعين",
+    "اهدنا الصراط المستقيم",
+    "صراط الذين أنعمت عليهم غير المغضوب عليهم ولا الضالين",
+    "قل هو الله أحد",
+    "الله الصمد",
+    "لم يلد ولم يولد",
+    "ولم يكن له كفواً أحد",
+    "قل أعوذ برب الفلق",
+    "من شر ما خلق",
+    "ومن شر غاسق إذا وقب",
+    "ومن شر النفاثات في العقد",
+    "ومن شر حاسد إذا حسد",
+    "قل أعوذ برب الناس",
+    "ملك الناس",
+    "إله الناس",
+    "من شر الوسواس الخناس",
+    "الذي يوسوس في صدور الناس",
+    "من الجنة والناس",
+    "وخلقنا الإنسان من سلالة من طين",
+    "ثم جعلناه نطفة في قرار مكين",
+    "ثم خلقنا النطفة علقة فخلقنا العلقة مضغة فخلقنا المضغة عظاماً فكسونا العظام لحماً",
+    "ثم أنشأناه خلقاً آخر",
+    "فتبارك الله أحسن الخالقين",
+    "والسماء بنيناها بأيد وإنا لموسعون",
+    "والأرض فرشناها فنعم الماهدون",
+    "ومن كل شيء خلقنا زوجين لعلكم تذكرون",
+    "ففروا إلى الله إني لكم منه نذير مبين",
+    "ولا تدعوا مع الله إلهًا آخر",
+    "كل شيء هالك إلا وجهه",
+    "له الحكم وإليه ترجعون",
+    "لو أنزلنا هذا القرآن على جبل لرأيته خاشعًا متصدعًا من خشية الله",
+    "هو الذي يريكم البرق خوفًا وطمعًا",
+    "يسبح الرعد بحمده",
+    "ويرسل الصواعق فيصيب بها من يشاء وهم يجادلون في الله وهو شديد المحال",
+    "الله نور السماوات والأرض",
+    "مثل نوره كمشكاة فيها مصباح",
+    "المصباح في زجاجة",
+    "الزجاجة كأنها كوكب دري",
+    "يؤتي الحكمة من يشاء ومن يؤت الحكمة فقد أوتي خيراً كثيراً",
+    "قل يا عبادي الذين أسرفوا على أنفسهم لا تقنطوا من رحمة الله",
+    "إن الله يغفر الذنوب جميعاً إنه هو الغفور الرحيم",
+    "وما خلقت الجن والإنس إلا ليعبدون",
+    "قل هو الرحمن آمنا به",
+    "فسبح بحمد ربك واستغفره",
+    "رب اغفر وارحم وأنت خير الراحمين"
 ];
 
-const dhikrs = [
-    "ذكر 1: سبحان الله",
-    "ذكر 2: الحمد لله",
-    "ذكر 3: الله أكبر",
-    // إضافة المزيد من الأذكار
+let dhikrArray = [
+    "سبحان الله",
+    "الحمد لله",
+    "الله أكبر",
+    "لا إله إلا الله",
+    "أستغفر الله",
+    "اللهم صل وسلم على نبينا محمد",
+    "لا حول ولا قوة إلا بالله",
+    "ربي اغفر لي",
+    "سبحان الله وبحمده",
+    "سبحان الله العظيم",
+    "اللهم أنت السلام ومنك السلام",
+    "اللهم اجعلني من أهل الجنة",
+    "اللهم اجعل القرآن ربيع قلبي",
+    "اللهم اجعلنا من أهل الهدى والتقى",
+    "اللهم اجعلنا من أهل الصدق والأمانة",
+    "اللهم اجعلنا من الذين يسيرون على صراطك المستقيم",
+    "اللهم اجعلنا من الذين يذكرونك كثيرا",
+    "اللهم اهدنا واغفر لنا",
+    "اللهم ارزقنا الفردوس الأعلى",
+    "اللهم إني أسالك الجنة وما يقرب إليها من قول أو عمل",
+    "اللهم استر عيوبنا واغفر ذنوبنا",
+    "اللهم اجعلنا من الشاكرين",
+    "اللهم اجعلنا من الصابرين",
+    "اللهم اجعلنا من التوابين",
+    "اللهم اجعلنا من أهل التقوى",
+    "اللهم اجعلنا من أهل الصدقة",
+    "اللهم اجعلنا من أهل الرحمة",
+    "اللهم اجعلنا من أهل الجهاد",
+    "اللهم اجعلنا من أهل العلم",
+    "اللهم اجعلنا من أهل السجود",
+    "اللهم اجعلنا من أهل الطاعة",
+    "اللهم اجعلنا من أهل الذكر",
+    "اللهم اجعلنا من أهل التوبة",
+    "اللهم اجعلنا من أهل الدعاء",
+    "اللهم اجعلنا من أهل الخشوع",
+    "اللهم اجعلنا من أهل المغفرة",
+    "اللهم اجعلنا من أهل التسبيح",
+    "اللهم اجعلنا من أهل الصلاة",
+    "اللهم اجعلنا من أهل التوحيد",
+    "اللهم اجعلنا من أهل الجنة",
+    "اللهم اجعلني من أهل العلم النافع",
+    "اللهم اغفر لي وللمؤمنين والمؤمنات",
+    "اللهم ارحمني واغفر لي",
+    "اللهم اجعلني من عبادك الصالحين",
+    "اللهم استرني فوق الأرض وتحت الأرض",
+    "اللهم ارض عني",
+    "اللهم اجعلني من عبادك المخلصين",
+    "اللهم اعني على ذكرك وشكرك",
+    "اللهم اجعلني من المحسنين"
 ];
 
-const hadiths = [
-    "حديث 1: قال رسول الله صلى الله عليه وسلم...",
-    "حديث 2: قال رسول الله صلى الله عليه وسلم...",
-    "حديث 3: قال رسول الله صلى الله عليه وسلم...",
-    // إضافة المزيد من الأحاديث
-];
-
-let miningTimer;
-let totalMinedCoins = 0;
-let coinsThisCycle = 0;
-
-document.getElementById("authForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const username = document.getElementById("username").value;
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirmPassword").value;
-
-    if (password === confirmPassword) {
-        localStorage.setItem("username", username);
-        localStorage.setItem("email", email);
-        localStorage.setItem("password", password);
-        document.getElementById("auth").style.display = "none";
-        document.getElementById("userContent").style.display = "block";
-    } else {
-        alert("كلمة المرور غير متطابقة!");
-    }
+// عرض آية أو ذكر عند الضغط على الزر
+verseButton.addEventListener('click', () => {
+    const randomVerse = verseArray[Math.floor(Math.random() * verseArray.length)];
+    resultDiv.textContent = "الآية: " + randomVerse;
 });
 
-document.getElementById("loginButton").addEventListener("click", function() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    if (localStorage.getItem("username") === username && localStorage.getItem("password") === password) {
-        document.getElementById("auth").style.display = "none";
-        document.getElementById("userContent").style.display = "block";
-    } else {
-        alert("إسم المستخدم أو كلمة المرور غير صحيحة!");
-    }
+dhikrButton.addEventListener('click', () => {
+    const randomDhikr = dhikrArray[Math.floor(Math.random() * dhikrArray.length)];
+    resultDiv.textContent = "الذكر: " + randomDhikr;
 });
 
-document.getElementById("showAyahBtn").addEventListener("click", function() {
-    const randomAyah = ayahs[Math.floor(Math.random() * ayahs.length)];
-    document.getElementById("ayah").innerText = randomAyah;
-});
+startMiningButton.addEventListener('click', startMining);
 
-document.getElementById("showDhikrBtn").addEventListener("click", function() {
-    const randomDhikr = dhikrs[Math.floor(Math.random() * dhikrs.length)];
-    document.getElementById("dhikr").innerText = randomDhikr;
-});
-
-document.getElementById("showHadithBtn").addEventListener("click", function() {
-    const randomHadith = hadiths[Math.floor(Math.random() * hadiths.length)];
-    document.getElementById("hadith").innerText = randomHadith;
-});
-
-document.getElementById("startMiningBtn").addEventListener("click", function() {
-    coinsThisCycle = 3;
-    totalMinedCoins += coinsThisCycle;
-    document.getElementById("minedCoins").innerText = totalMinedCoins;
-    startMiningTimer();
-});
-
-function startMiningTimer() {
+// المؤقت التنازلي
+function startMining() {
     let timeLeft = 8 * 60 * 60; // 8 ساعات بالثواني
-    miningTimer = setInterval(function() {
-        timeLeft--;
-        let hours = Math.floor(timeLeft / 3600);
-        let minutes = Math.floor((timeLeft % 3600) / 60);
-        let seconds = timeLeft % 60;
-        document.getElementById("timer").innerText = `وقت التعدين: ${hours}:${minutes}:${seconds}`;
+
+    const countdown = setInterval(() => {
+        const hours = Math.floor(timeLeft / 3600);
+        const minutes = Math.floor((timeLeft % 3600) / 60);
+        const seconds = timeLeft % 60;
+
+        timerDiv.textContent = `الوقت المتبقي: ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
 
         if (timeLeft <= 0) {
-            clearInterval(miningTimer);
-            alert("انتهت دورة التعدين، أعد المحاولة بعد 8 ساعات.");
+            clearInterval(countdown);
+            timerDiv.textContent = "انتهى الوقت!";
+            // هنا يمكنك إضافة المزيد من الأكواد للقيام بعمليات عند انتهاء المؤقت
         }
+
+        timeLeft--;
     }, 1000);
 }
