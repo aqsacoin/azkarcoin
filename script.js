@@ -31,7 +31,7 @@ const registerForm = document.getElementById("registerForm");
 const mainPage = document.getElementById("mainPage");
 
 let minedCoins = 0;
-let timer = 8 * 60 * 60; // 8 ساعات بالثواني
+let timer = localStorage.getItem('timer') ? parseInt(localStorage.getItem('timer')) : 8 * 60 * 60; // 8 ساعات بالثواني
 let miningActive = false;
 let canMine = false; // يتم تعيين هذه القيمة إلى true عندما يتم الضغط على جميع الأزرار
 let loggedInUser = null; // المتغير الذي يخزن المستخدم المسجل دخوله
@@ -44,15 +44,6 @@ let dhikrClicked = false;
 if (localStorage.getItem("loggedInUser")) {
     loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     showMainPage();
-}
-
-// استرجاع حالة التعدين من localStorage
-if (localStorage.getItem("timer")) {
-    timer = parseInt(localStorage.getItem("timer"));
-}
-
-if (localStorage.getItem("minedCoins")) {
-    minedCoins = parseInt(localStorage.getItem("minedCoins"));
 }
 
 // عرض آية
@@ -109,7 +100,7 @@ function startMining() {
         } else {
             timer--;
             updateUI(); // تحديث المؤقت
-            localStorage.setItem("timer", timer); // حفظ قيمة المؤقت في localStorage
+            localStorage.setItem('timer', timer); // حفظ الوقت المتبقي في localStorage
         }
     }, 1000);
 }
@@ -121,9 +112,6 @@ function updateUI() {
     let seconds = timer % 60;
     timerDisplay.textContent = `المؤقت: ${hours}:${minutes}:${seconds}`;
     minedCoinsDisplay.textContent = `عدد العملات المستخرجة: ${minedCoins}`;
-
-    // حفظ عدد العملات المستخرجة في localStorage
-    localStorage.setItem("minedCoins", minedCoins);
 }
 
 // دالة تسجيل الدخول
