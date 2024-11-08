@@ -1,49 +1,50 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع التعدين</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>موقع التعدين</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- عرض عدد العملات المستخرجة الكلي -->
-    <div id="total-mined-container">
-        <p>عدد العملات المستخرجة الكلي: <span id="total-mined-count">0</span></p>
+  <div id="login-container" class="login-container">
+    <div class="login-form" id="register-form">
+      <h2>تسجيل مستخدم جديد</h2>
+      <form id="register">
+        <label for="email">البريد الإلكتروني:</label>
+        <input type="email" id="email" required>
+        <label for="username">إسم المستخدم:</label>
+        <input type="text" id="username" required>
+        <label for="password">كلمة السر:</label>
+        <input type="password" id="password" required>
+        <label for="confirm-password">تأكيد كلمة السر:</label>
+        <input type="password" id="confirm-password" required>
+        <button type="submit">تسجيل</button>
+      </form>
     </div>
-
-    <!-- عرض مؤقت التعدين -->
-    <div id="mining-timer-container">
-        <p id="mining-timer">التعدين غير نشط</p>
+    <div class="login-form" id="login-form">
+      <h2>تسجيل الدخول</h2>
+      <form id="login">
+        <label for="login-email">البريد الإلكتروني:</label>
+        <input type="email" id="login-email" required>
+        <label for="login-password">كلمة السر:</label>
+        <input type="password" id="login-password" required>
+        <button type="submit">تسجيل الدخول</button>
+      </form>
     </div>
+  </div>
 
-    <!-- عرض عدد العملات المستخرجة في هذه الدورة -->
-    <div id="mining-count-container">
-        <p>عدد العملات المستخرجة في هذه الدورة: <span id="mined-count">0</span></p>
+  <div id="main-content" class="main-content" style="display:none;">
+    <!-- المحتوى الرئيسي بعد تسجيل الدخول -->
+    <h1>مرحبا بك في موقع التعدين</h1>
+    <div id="mining">
+      <!-- تفاصيل التعدين و الأزرار هنا -->
     </div>
-
-    <!-- أزرار عرض الآية والذكر والحديث -->
-    <button id="show-verse-btn">عرض الآية</button>
-    <button id="show-dhikr-btn">عرض الذكر</button>
-    <button id="show-hadith-btn">عرض الحديث</button>
-
-    <!-- زر بدء التعدين -->
-    <button id="start-mining-btn">ابدأ التعدين</button>
-
-    <!-- نافذة تسجيل الدخول -->
-    <div id="login-modal">
-        <input type="text" id="login-email" placeholder="البريد الإلكتروني">
-        <input type="password" id="login-password" placeholder="كلمة المرور">
-        <button id="login-btn">تسجيل الدخول</button>
+    <div id="counter">
+      <p id="mining-timer">الوقت المتبقي للتعدين: <span id="timer">08:00:00</span></p>
     </div>
+  </div>
 
-    <!-- نافذة التسجيل -->
-    <div id="register-modal">
-        <input type="text" id="register-email" placeholder="البريد الإلكتروني">
-        <input type="password" id="register-password" placeholder="كلمة المرور">
-        <button id="register-btn">تسجيل</button>
-    </div>
-
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
