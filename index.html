@@ -3,120 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AzkarCoin</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>موقع AZKARCOIN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* الأساسيات */
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #e0f7fa; /* خلفية سماوية فاتحة */
+            color: #333333; /* لون النص */
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2, h3 {
+            color: #2c6b3a; /* اللون الأخضر الداكن للعناوين */
+            text-align: center;
+        }
+
+        /* الزخارف الإضافية */
+        header {
+            background-color: #4caf50; /* خلفية رأس الموقع */
+            padding: 20px 0;
+            border-bottom: 3px solid #b4cc9e; /* إضافة خط أسفل الرأس */
+        }
+
+        footer {
+            background-color: #4caf50;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+        }
+
+        /* الأزرار */
+        button {
+            background-color: #ffcc00; /* زر ذهبي */
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ffb300; /* تدرج للزر عند المرور عليه */
+            transform: scale(1.05);
+        }
+
+        /* زر التعدين عند تعطيله */
+        button:disabled {
+            background-color: #cccccc; /* زر معطل بلون رمادي */
+            cursor: not-allowed;
+        }
+
+        /* المنطقة الرئيسية */
+        section {
+            padding: 30px;
+            background-color: #ffffff; /* خلفية بيضاء للمحتوى */
+            border-radius: 10px;
+            margin: 20px auto;
+            max-width: 900px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* الألوان الزخرفية */
+        .daily-verse, .daily-dhikr {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c6b3a; /* اللون الأخضر الداكن */
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        /* العد التنازلي */
+        #countdown {
+            background-color: #f1f8e9;
+            border-radius: 10px;
+            padding: 20px;
+            color: #2c6b3a;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+
     <header>
-        <div class="header-container">
-            <h1>أذكارك اليومية مع أذكار كوين</h1>
-            <p class="verse">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
-        </div>
+        <h1>موقع AZKARCOIN</h1>
+        <p>أذكار وتعدين للعملة الرقمية AZKARCOIN</p>
     </header>
 
-    <section class="mining-info">
-        <h2>دورة التعدين الحالية</h2>
-        <p>تم استخراج 3 عملات جديدة. استمر في ذكر الله للحصول على المزيد!</p>
+    <section>
+        <h2>الآية الكريمة</h2>
+        <button id="verseButton">إعرض الآية</button>
+        <p id="verse" class="daily-verse" style="display: none;">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ...</p>
+
+        <h2>الذكر</h2>
+        <button id="dhikrButton">إعرض الذكر</button>
+        <p id="dhikr" class="daily-dhikr" style="display: none;">سُبْحَانَ اللَّهِ وَبِحَمْدِهِ...</p>
+
+        <h2>ابدأ التعدين</h2>
+        <button id="startMiningButton" disabled>إبدأ التعدين</button>
     </section>
 
-    <section class="features">
-        <!-- زر عرض الآية أولاً -->
-        <div class="feature-item">
-            <h3>آية قرآنية</h3>
-            <button class="verse-button" onclick="showVerse()">عرض الآية</button>
-            <p class="daily-verse" id="verseText" style="display:none;">وَقُل رَّبِّ زِدْنِي عِلْمًا</p>
-        </div>
-
-        <!-- زر عرض الذكر بعد عرض الآية -->
-        <div class="feature-item">
-            <h3>ذكر اليوم</h3>
-            <button class="dhikr-button" onclick="showDhikr()">عرض الذكر</button>
-            <p class="daily-dhikr" id="dhikrText" style="display:none;">اللهم اجعلنا من أهل القرآن</p>
-        </div>
-
-        <!-- زر بدء التعدين بعد عرض الآية والذكر -->
-        <div class="feature-item">
-            <button class="mining-button" id="startMiningButton" onclick="startMining()" disabled>ابدأ التعدين</button>
-        </div>
-
-        <div id="countdown" style="display:none;">
-            <p>دورة التعدين التالية ستبدأ بعد:</p>
-            <p id="timer"></p>
-        </div>
+    <section id="countdown">
+        <h3>العد التنازلي التالي لدورة التعدين</h3>
+        <p id="timer">00:00:00</p>
     </section>
 
     <footer>
-        <p>&copy; 2024 AzkarCoin. جميع الحقوق محفوظة.</p>
+        <p>حقوق الطبع والنشر &copy; 2024 AZKARCOIN</p>
     </footer>
 
     <script>
-        let verseShown = false;
-        let dhikrShown = false;
+        // الحصول على الأزرار والعناصر
+        const verseButton = document.getElementById('verseButton');
+        const dhikrButton = document.getElementById('dhikrButton');
+        const startMiningButton = document.getElementById('startMiningButton');
+        const verseElement = document.getElementById('verse');
+        const dhikrElement = document.getElementById('dhikr');
+        const timerElement = document.getElementById('timer');
+
+        // إظهار الآية والذكر عند الضغط على الأزرار
+        verseButton.addEventListener('click', () => {
+            verseElement.style.display = 'block';
+        });
+
+        dhikrButton.addEventListener('click', () => {
+            dhikrElement.style.display = 'block';
+        });
+
+        // تفعيل زر التعدين بعد إظهار الآية والذكر
         let miningInProgress = false;
-        let miningEndTime = 0;
+        const miningInterval = 8 * 60 * 60 * 1000; // 8 ساعات
 
-        function showVerse() {
-            document.getElementById("verseText").style.display = "block"; // إظهار الآية
-            verseShown = true;
-            checkMiningButtonState();
-        }
-
-        function showDhikr() {
-            document.getElementById("dhikrText").style.display = "block"; // إظهار الذكر
-            dhikrShown = true;
-            checkMiningButtonState();
-        }
-
-        function checkMiningButtonState() {
-            // تفعيل زر التعدين فقط إذا تم عرض الآية والذكر
-            if (verseShown && dhikrShown && !miningInProgress) {
-                document.getElementById("startMiningButton").disabled = false; // تفعيل زر التعدين
-            }
-        }
-
-        function startMining() {
-            if (verseShown && dhikrShown && !miningInProgress) {
+        function startMiningCycle() {
+            if (!miningInProgress) {
                 miningInProgress = true;
-                document.getElementById("startMiningButton").disabled = true; // تعطيل الأزرار بعد بدء التعدين
-                document.getElementById("verseText").style.display = "none"; // إخفاء الآية
-                document.getElementById("dhikrText").style.display = "none"; // إخفاء الذكر
-                document.getElementById("countdown").style.display = "block"; // إظهار العد التنازلي
-
-                // حساب وقت الانتهاء بعد 8 ساعات (8 ساعات = 28800000 مللي ثانية)
-                miningEndTime = new Date().getTime() + 8 * 60 * 60 * 1000;
-                startCountdown(); // بدء العد التنازلي
-            } else {
-                alert("يرجى عرض الآية والذكر أولاً.");
+                startMiningButton.disabled = true;
+                // بدء العد التنازلي
+                let countdownTime = miningInterval;
+                const intervalId = setInterval(() => {
+                    const hours = Math.floor(countdownTime / (1000 * 60 * 60));
+                    const minutes = Math.floor((countdownTime % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((countdownTime % (1000 * 60)) / 1000);
+                    timerElement.innerHTML = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    countdownTime -= 1000;
+                    if (countdownTime < 0) {
+                        clearInterval(intervalId);
+                        miningInProgress = false;
+                        startMiningButton.disabled = false;
+                        verseElement.style.display = 'none';
+                        dhikrElement.style.display = 'none';
+                    }
+                }, 1000);
             }
         }
 
-        function startCountdown() {
-            let countdownInterval = setInterval(function() {
-                let now = new Date().getTime();
-                let timeLeft = miningEndTime - now;
+        startMiningButton.addEventListener('click', () => {
+            startMiningCycle();
+        });
 
-                if (timeLeft <= 0) {
-                    clearInterval(countdownInterval); // إيقاف العد التنازلي
-                    document.getElementById("timer").innerHTML = "تمت دورة التعدين! يمكنك بدء دورة جديدة الآن.";
-                    setTimeout(function() {
-                        resetMining(); // إعادة تفعيل الأزرار بعد انتهاء الدورة
-                    }, 3000); // بعد 3 ثواني
-                } else {
-                    let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                    let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                    document.getElementById("timer").innerHTML = hours + "ساعة " + minutes + "دقيقة " + seconds + "ثانية ";
-                }
-            }, 1000); // تحديث كل ثانية
+        // تفعيل زر التعدين فقط بعد الضغط على الأزرار السابقة
+        function checkButtons() {
+            if (verseElement.style.display === 'block' && dhikrElement.style.display === 'block') {
+                startMiningButton.disabled = false;
+            }
         }
 
-        function resetMining() {
-            miningInProgress = false;
-            document.getElementById("countdown").style.display = "none"; // إخفاء العد التنازلي
-            document.getElementById("startMiningButton").disabled = false; // إعادة تفعيل زر التعدين
-            verseShown = false;
-            dhikrShown = false;
-        }
+        verseButton.addEventListener('click', checkButtons);
+        dhikrButton.addEventListener('click', checkButtons);
     </script>
+
 </body>
 </html>
