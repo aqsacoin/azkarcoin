@@ -17,19 +17,19 @@
     <section class="mining-info">
         <h2>دورة التعدين الحالية</h2>
         <p>تم استخراج 3 عملات جديدة. استمر في ذكر الله للحصول على المزيد!</p>
-        <button class="mining-button" onclick="startMining()">ابدأ التعدين</button>
+        <button class="mining-button" id="startMiningButton" onclick="startMining()" disabled>ابدأ التعدين</button>
     </section>
 
     <section class="features">
         <div class="feature-item">
-            <h3>ذكر اليوم</h3>
-            <p class="daily-dhikr">اللهم اجعلنا من أهل القرآن</p>
-            <button class="dhikr-button" onclick="showDhikr()">عرض الذكر</button>
+            <h3>آية قرآنية</h3>
+            <button class="verse-button" onclick="showVerse()">عرض الآية</button>
+            <p class="daily-verse" id="verseText" style="display:none;">وَقُل رَّبِّ زِدْنِي عِلْمًا</p>
         </div>
         <div class="feature-item">
-            <h3>آية قرآنية</h3>
-            <p class="daily-verse">وَقُل رَّبِّ زِدْنِي عِلْمًا</p>
-            <button class="verse-button" onclick="showVerse()">عرض الآية</button>
+            <h3>ذكر اليوم</h3>
+            <button class="dhikr-button" onclick="showDhikr()">عرض الذكر</button>
+            <p class="daily-dhikr" id="dhikrText" style="display:none;">اللهم اجعلنا من أهل القرآن</p>
         </div>
     </section>
 
@@ -38,16 +38,34 @@
     </footer>
 
     <script>
-        function startMining() {
-            alert("تم بدء دورة التعدين! استمر في ذكر الله للحصول على المزيد من العملات.");
+        let verseShown = false;
+        let dhikrShown = false;
+
+        function showVerse() {
+            document.getElementById("verseText").style.display = "block"; // إظهار الآية
+            verseShown = true;
+            checkMiningButtonState();
         }
 
         function showDhikr() {
-            alert("الذكر اليومي: اللهم اجعلنا من أهل القرآن");
+            document.getElementById("dhikrText").style.display = "block"; // إظهار الذكر
+            dhikrShown = true;
+            checkMiningButtonState();
         }
 
-        function showVerse() {
-            alert("الآية القرآنية: وَقُل رَّبِّ زِدْنِي عِلْمًا");
+        function checkMiningButtonState() {
+            // تفعيل زر التعدين فقط إذا تم عرض الآية والذكر
+            if (verseShown && dhikrShown) {
+                document.getElementById("startMiningButton").disabled = false; // تفعيل زر التعدين
+            }
+        }
+
+        function startMining() {
+            if (verseShown && dhikrShown) {
+                alert("تم بدء دورة التعدين! استمر في ذكر الله للحصول على المزيد من العملات.");
+            } else {
+                alert("يرجى عرض الآية والذكر أولاً.");
+            }
         }
     </script>
 </body>
