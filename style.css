@@ -80,3 +80,8 @@ button:hover {
 button:active {
     background-color: #003f2a; /* أخضر غامق عند الضغط */
 }
+
+button:disabled {
+    background-color: #ccc; /* لون الأزرار عند عدم التفعيل */
+    cursor: not-allowed;
+}
