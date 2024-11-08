@@ -45,6 +45,18 @@ function showMainSection() {
     document.getElementById("main-section").style.display = "block";
 }
 
+// عرض تسجيل الدخول
+document.getElementById("show-login").addEventListener("click", function() {
+    document.getElementById("auth-section").style.display = "none";
+    document.getElementById("login-section").style.display = "block";
+});
+
+// عرض صفحة التسجيل
+document.getElementById("show-register").addEventListener("click", function() {
+    document.getElementById("login-section").style.display = "none";
+    document.getElementById("auth-section").style.display = "block";
+});
+
 // زر عرض الآية
 document.getElementById("ayah-btn").addEventListener("click", function() {
     const ayahText = ayat[Math.floor(Math.random() * ayat.length)];
