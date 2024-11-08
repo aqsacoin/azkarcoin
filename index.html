@@ -3,60 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع التعدين الإسلامي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <title>الموقع الإسلامي</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="logo">
-                <h1>موقع التعدين الإسلامي</h1>
-            </div>
-        </header>
-
-        <div class="navbar">
-            <a href="#" class="active" id="homeBtn">الصفحة الرئيسية</a>
-            <a href="#register" id="registerBtn">تسجيل حساب</a>
-            <a href="#login" id="loginBtn">تسجيل الدخول</a>
+    <header>
+        <div class="logo">
+            <h1>موقع التـعدين الإسلامي</h1>
         </div>
+    </header>
 
-        <!-- نموذج التسجيل -->
-        <div id="register" class="form-container" style="display:none;">
-            <h2>تسجيل حساب جديد</h2>
-            <form id="registerForm">
-                <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-                <input type="text" id="username" placeholder="إسم المستخدم" required>
-                <input type="password" id="password" placeholder="كلمة السر" required>
-                <input type="password" id="confirmPassword" placeholder="تأكيد كلمة السر" required>
-                <button type="submit">تسجيل</button>
-            </form>
-        </div>
-
-        <!-- نموذج تسجيل الدخول -->
-        <div id="login" class="form-container" style="display:none;">
+    <div id="content">
+        <div id="loginForm">
             <h2>تسجيل الدخول</h2>
-            <form id="loginForm">
-                <input type="text" id="loginUsername" placeholder="إسم المستخدم" required>
-                <input type="password" id="loginPassword" placeholder="كلمة السر" required>
-                <button type="submit">دخول</button>
-            </form>
+            <input type="text" id="usernameLogin" placeholder="اسم المستخدم" />
+            <input type="password" id="passwordLogin" placeholder="كلمة المرور" />
+            <button onclick="login()">تسجيل الدخول</button>
         </div>
 
-        <!-- الصفحة الرئيسية -->
-        <div id="homePage" class="home-page" style="display:none;">
-            <h2>أهلاً بك في موقع التعدين الإسلامي</h2>
+        <div id="registerForm">
+            <h2>التسجيل</h2>
+            <input type="email" id="emailRegister" placeholder="البريد الإلكتروني" />
+            <input type="text" id="usernameRegister" placeholder="اسم المستخدم" />
+            <input type="password" id="passwordRegister" placeholder="كلمة المرور" />
+            <input type="password" id="confirmPasswordRegister" placeholder="تأكيد كلمة المرور" />
+            <button onclick="register()">تسجيل</button>
+        </div>
+
+        <div id="mainPage" style="display: none;">
             <button id="showAyahBtn">عرض آية</button>
             <button id="showHadithBtn">عرض حديث</button>
             <button id="showDhikrBtn">عرض ذكر</button>
-            <button id="mineBtn" disabled>ابدأ التعدين</button>
-            <div id="timer">المؤقت: 08:00:00</div>
+            <button id="mineBtn" disabled>بدء التعدين</button>
+            <div id="timer">المؤقت: 00:00:00</div>
             <div id="minedCoins">عدد العملات المستخرجة: 0</div>
         </div>
-
-        <footer>
-            <p>&copy; 2024 موقع التعدين الإسلامي</p>
-        </footer>
     </div>
 
     <script src="script.js"></script>
