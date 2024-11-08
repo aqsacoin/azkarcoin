@@ -46,6 +46,15 @@ if (localStorage.getItem("loggedInUser")) {
     showMainPage();
 }
 
+// استرجاع حالة التعدين من localStorage
+if (localStorage.getItem("timer")) {
+    timer = parseInt(localStorage.getItem("timer"));
+}
+
+if (localStorage.getItem("minedCoins")) {
+    minedCoins = parseInt(localStorage.getItem("minedCoins"));
+}
+
 // عرض آية
 showAyahBtn.addEventListener("click", () => {
     const randomAyah = ayat[Math.floor(Math.random() * ayat.length)];
@@ -100,6 +109,7 @@ function startMining() {
         } else {
             timer--;
             updateUI(); // تحديث المؤقت
+            localStorage.setItem("timer", timer); // حفظ قيمة المؤقت في localStorage
         }
     }, 1000);
 }
@@ -111,6 +121,9 @@ function updateUI() {
     let seconds = timer % 60;
     timerDisplay.textContent = `المؤقت: ${hours}:${minutes}:${seconds}`;
     minedCoinsDisplay.textContent = `عدد العملات المستخرجة: ${minedCoins}`;
+
+    // حفظ عدد العملات المستخرجة في localStorage
+    localStorage.setItem("minedCoins", minedCoins);
 }
 
 // دالة تسجيل الدخول
