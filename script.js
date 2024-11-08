@@ -29,6 +29,8 @@ const minedCoinsDisplay = document.getElementById("minedCoins");
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 const mainPage = document.getElementById("mainPage");
+const userNameDisplay = document.getElementById("userNameDisplay");  // العنصر لعرض اسم المستخدم
+const userEmailDisplay = document.getElementById("userEmailDisplay");  // العنصر لعرض البريد الإلكتروني
 
 let minedCoins = 0;
 let timer = localStorage.getItem('timer') ? parseInt(localStorage.getItem('timer')) : 8 * 60 * 60; // 8 ساعات بالثواني
@@ -137,7 +139,9 @@ function register() {
 
     if (password === confirmPassword) {
         if (!localStorage.getItem(username)) {
-            localStorage.setItem(username, password);
+            // تخزين بيانات المستخدم في localStorage
+            const userData = { email: email, username: username, password: password };
+            localStorage.setItem(username, JSON.stringify(userData));
             alert("تم التسجيل بنجاح!");
             registerForm.style.display = "none";
             loginForm.style.display = "block";
@@ -154,4 +158,9 @@ function showMainPage() {
     loginForm.style.display = "none";
     registerForm.style.display = "none";
     mainPage.style.display = "block";
+
+    // عرض بيانات المستخدم في الصفحة الشخصية
+    const userData = JSON.parse(localStorage.getItem(loggedInUser));
+    userNameDisplay.textContent = `اسم المستخدم: ${userData.username}`;
+    userEmailDisplay.textContent = `البريد الإلكتروني: ${userData.email}`;
 }
