@@ -121,7 +121,9 @@ function login() {
     const username = document.getElementById("usernameLogin").value;
     const password = document.getElementById("passwordLogin").value;
 
-    if (localStorage.getItem(username) && localStorage.getItem(username) === password) {
+    const storedUser = JSON.parse(localStorage.getItem(username));
+
+    if (storedUser && storedUser.password === password) {
         loggedInUser = username;
         localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
         showMainPage();
