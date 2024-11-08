@@ -3,80 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AZKARCOIN - التعدين</title>
+    <title>AzkarCoin - تعدين</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="logo.png"> <!-- إضافة شعار الموقع -->
 </head>
 <body>
-
     <div class="container">
-        <h1>مرحباً بك في AZKARCOIN</h1>
-        <p>تم تسجيل الدخول بنجاح.</p>
+        <header>
+            <h1>أذكار و تعدين - AzkarCoin</h1>
+            <p>الرجاء الضغط على الأزرار التالية لتفعيل التعدين.</p>
+        </header>
 
-        <div class="buttons">
-            <button id="showVerse" onclick="showVerse()">إعرض الآية</button>
-            <button id="showDhikr" onclick="showDhikr()">إعرض الذكر</button>
-            <button id="startMining" onclick="startMining()">إبدأ التعدين</button>
+        <!-- نموذج تسجيل الدخول (أول زيارة للمستخدم) -->
+        <div id="loginForm">
+            <h2>تسجيل الدخول</h2>
+            <form id="login">
+                <input type="email" id="email" placeholder="البريد الإلكتروني" required>
+                <input type="text" id="username" placeholder="إسم المستخدم" required>
+                <input type="password" id="password" placeholder="كلمة السر" required>
+                <input type="password" id="confirmPassword" placeholder="تأكيد كلمة السر" required>
+                <button type="submit">تسجيل</button>
+            </form>
         </div>
 
-        <div id="verse" class="hidden">
-            <p>آية قرآنية هنا</p>
+        <!-- الأزرار الخاصة بعرض الآية والذكر وبدء التعدين -->
+        <div id="mainContent" style="display:none;">
+            <button id="showVerseButton">عرض الآية</button>
+            <button id="showDhikrButton">عرض الذكر</button>
+            <button id="startMiningButton" disabled>إبدأ التعدين</button>
+
+            <!-- مكان عرض الآية والذكر -->
+            <div id="verse"></div>
+            <div id="dhikr"></div>
         </div>
 
-        <div id="dhikr" class="hidden">
-            <p>ذكر هنا</p>
-        </div>
-
-        <p id="countdown" class="hidden">التعدين سيبدأ في: <span id="timer"></span></p>
+        <footer>
+            <p>&copy; 2024 AzkarCoin. جميع الحقوق محفوظة.</p>
+        </footer>
     </div>
 
-    <script>
-        // فحص إذا كان المستخدم مسجلاً
-        if (!localStorage.getItem('loggedIn')) {
-            window.location.href = "login.html";
-        }
-
-        // عرض الآية
-        function showVerse() {
-            document.getElementById("verse").classList.remove("hidden");
-            document.getElementById("dhikr").classList.add("hidden");
-        }
-
-        // عرض الذكر
-        function showDhikr() {
-            document.getElementById("dhikr").classList.remove("hidden");
-            document.getElementById("verse").classList.add("hidden");
-        }
-
-        // بدء التعدين
-        function startMining() {
-            let miningTime = localStorage.getItem('miningTime');
-            if (!miningTime || new Date().getTime() > miningTime) {
-                localStorage.setItem('miningTime', new Date().getTime() + 8 * 60 * 60 * 1000); // 8 ساعات
-                document.getElementById('countdown').classList.remove('hidden');
-                startCountdown();
-            } else {
-                alert("التعدين قيد التشغيل بالفعل. يرجى الانتظار حتى نهاية الدورة.");
-            }
-        }
-
-        // العد التنازلي لل8 ساعات
-        function startCountdown() {
-            let miningEndTime = localStorage.getItem('miningTime');
-            let countdownInterval = setInterval(function() {
-                let remainingTime = miningEndTime - new Date().getTime();
-                if (remainingTime <= 0) {
-                    clearInterval(countdownInterval);
-                    document.getElementById("timer").innerText = "الوقت انتهى!";
-                    alert("لقد انتهت الدورة، يمكنك البدء من جديد.");
-                } else {
-                    let hours = Math.floor(remainingTime / (1000 * 60 * 60));
-                    let minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-                    let seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-                    document.getElementById("timer").innerText = `${hours} ساعة, ${minutes} دقيقة, ${seconds} ثانية`;
-                }
-            }, 1000);
-        }
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
