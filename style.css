@@ -1,88 +1,77 @@
-/* تنسيق عام */
+/* الإعدادات الأساسية للصفحة */
 body {
-    font-family: 'Amiri', serif;
-    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+    direction: rtl;
     color: #333;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
 }
 
 header {
-    background-color: #2b7a77;
-    color: white;
+    text-align: center;
+    background-color: #5f9ea0;
     padding: 20px;
-    border-radius: 8px;
-}
-
-footer {
-    background-color: #2b7a77;
     color: white;
-    padding: 10px;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
 }
 
-button {
+#mining-info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#mining-info h3 {
+    font-size: 18px;
+}
+
+#buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#buttons button {
     background-color: #4CAF50;
-    border: none;
     color: white;
     padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    border-radius: 5px;
-    margin: 10px;
+    margin: 5px;
+    border: none;
     cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
 }
 
-button:disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
-}
-
-button:hover {
+#buttons button:hover {
     background-color: #45a049;
 }
 
-/* تنسيق النموذج */
-#loginForm {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-input {
-    padding: 10px;
-    margin: 10px 0;
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-input:focus {
-    border-color: #4CAF50;
-}
-
-/* تنسيق مكان عرض الآية والذكر */
-#verse, #dhikr {
+#mining-timer {
+    text-align: center;
     margin-top: 20px;
     font-size: 18px;
-    padding: 15px;
-    background-color: #e3f2fd;
+    font-weight: bold;
+}
+
+#auth-section {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#auth-section input {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    width: 80%;
+}
+
+#auth-section button {
+    background-color: #5f9ea0;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
     border-radius: 5px;
-    display: inline-block;
-    max-width: 80%;
-    margin-top: 20px;
+}
+
+#auth-section button:hover {
+    background-color: #4CAF50;
 }
