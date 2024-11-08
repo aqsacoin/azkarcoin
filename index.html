@@ -17,19 +17,26 @@
     <section class="mining-info">
         <h2>دورة التعدين الحالية</h2>
         <p>تم استخراج 3 عملات جديدة. استمر في ذكر الله للحصول على المزيد!</p>
-        <button class="mining-button" id="startMiningButton" onclick="startMining()" disabled>ابدأ التعدين</button>
     </section>
 
     <section class="features">
+        <!-- زر عرض الآية أولاً -->
         <div class="feature-item">
             <h3>آية قرآنية</h3>
             <button class="verse-button" onclick="showVerse()">عرض الآية</button>
             <p class="daily-verse" id="verseText" style="display:none;">وَقُل رَّبِّ زِدْنِي عِلْمًا</p>
         </div>
+
+        <!-- زر عرض الذكر بعد عرض الآية -->
         <div class="feature-item">
             <h3>ذكر اليوم</h3>
             <button class="dhikr-button" onclick="showDhikr()">عرض الذكر</button>
             <p class="daily-dhikr" id="dhikrText" style="display:none;">اللهم اجعلنا من أهل القرآن</p>
+        </div>
+
+        <!-- زر بدء التعدين بعد عرض الآية والذكر -->
+        <div class="feature-item">
+            <button class="mining-button" id="startMiningButton" onclick="startMining()" disabled>ابدأ التعدين</button>
         </div>
     </section>
 
