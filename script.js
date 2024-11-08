@@ -33,7 +33,7 @@ const mainPage = document.getElementById("mainPage");
 let minedCoins = 0;
 let timer = 8 * 60 * 60; // 8 ساعات بالثواني
 let miningActive = false;
-let canMine = false;
+let canMine = false; // يتم تعيين هذه القيمة إلى true عندما يتم الضغط على جميع الأزرار
 let loggedInUser = null; // المتغير الذي يخزن المستخدم المسجل دخوله
 
 let ayahClicked = false;
@@ -73,7 +73,8 @@ showDhikrBtn.addEventListener("click", () => {
 // التحقق إذا يمكن بدء التعدين
 function checkIfCanMine() {
     if (ayahClicked && hadithClicked && dhikrClicked) {
-        mineBtn.disabled = false; // تمكين زر التعدين بعد الضغط على الأزرار
+        canMine = true; // تمكين التعدين بعد الضغط على جميع الأزرار
+        mineBtn.disabled = false; // تمكين زر التعدين
     }
 }
 
@@ -91,7 +92,7 @@ function startMining() {
         if (timer <= 0) {
             clearInterval(interval);
             alert("تم التعدين! تم إضافة عملات جديدة.");
-            minedCoins += 3; // إضافة عملة واحدة بعد 8 ساعات
+            minedCoins += 3; // إضافة 3 عملات بعد 8 ساعات
             updateUI();
             miningActive = false;
             canMine = false; // عدم السماح بالتعدين مرة أخرى
