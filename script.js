@@ -1,130 +1,76 @@
-// مصفوفات الآيات والأذكار والأحاديث (تم ملؤها بـ 50 عنصرًا عشوائيًا)
+// المصفوفات الخاصة بالآيات، الأذكار، والأحاديث
 const verses = [
-    "بسم الله الرحمن الرحيم",
-    "إِنَّ اللَّهَ غَفُورٌ رَحِيمٌ",
-    "قُلْ هُوَ اللَّهُ أَحَدٌ",
-    "وَقُل رَّبِّي زِدْنِي عِلْمًا",
-    "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
-    "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
-    "قَالَ رَبُّ السَّمَاوَاتِ وَالْأَرْضِ",
-    "يُدَبِّرُ الْأَمْرَ مِنَ السَّمَاءِ إِلَى الْأَرْضِ",
-    "إِنَّ اللَّهَ يَأْمُرُكُمْ أَنْ تُؤَدُّوا الْأَمَانَاتِ إِلَى أَهْلِهَا",
-    "وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا",
-    "وَاعْبُدُوا اللَّهَ وَلَا تُشْرِكُوا بِهِ شَيْئًا",
-    "إِنَّ اللَّهَ مَعَ الَّذِينَ اتَّقَوْا وَالَّذِينَ هُمْ مُحْسِنُونَ",
-    "قُلْ لَا إِلٰهَ إِلَّا اللَّهُ",
-    "يُحْيِي وَيُمِيتُ",
-    "إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
-    "لَا تَقْتُلُوا أَوْلَادَكُمْ خَشَّةَ فَقْرٍ",
-    "وَفِي السَّمَاءِ رَزْقُكُمْ وَمَا تُوعَدُونَ",
-    "إِنَّ رَبَّكُمْ يَبْسُطُ الرَّزْقَ لِمَن يَشَاءُ وَيَقْدِرُ",
-    "يَا أَيُّهَا الَّذِينَ آمَنُوا أَنْفِقُوا فِي سَبِيلِ اللَّهِ",
-    "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",
-    "وَقَالَ رَبُّكُمْ ادْعُونِي أَسْتَجِبْ لَكُمْ",
-    "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ",
-    "وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا",
-    "وَمَنْ يَفْعَلْ ذَلِكَ يَرْضَهُ",
-    "إِنَّ اللَّهَ غَفُورٌ رَحِيمٌ",
-    "وَقُل رَّبِّي لَا تَذَرْنِي فَرْدًا وَأَنتَ خَيْرُ الْوَارِثِينَ",
-    "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
-    "وَالْفَجْرِ وَلَيَالٍ عَشْرٍ",
-    "وَأَنْعَمْتُ عَلَيْهِمْ",
-    "مُحَمَّدٌ رَسُولُ اللَّهِ",
-    "يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ",
-    "إِنَّ الَّذِينَ يَحْشِرُونَ لِي الْمَالَ",
-    "وَإِنَّ اللَّهَ غَفُورٌ رَحِيمٌ",
-    "يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ",
-    "إِنَّ اللَّهَ سَمِيعٌ عَلِيمٌ",
-    "وَتُؤْمِنُونَ بِالْجَبَرُ"
+  "الآية 1", "الآية 2", "الآية 3", "الآية 4", "الآية 5", 
+  // أضف المزيد هنا ...
 ];
 
-const dhikrs = [
-    "سبحان الله",
-    "الحمد لله",
-    "الله أكبر",
-    "لا إله إلا الله",
-    "استغفر الله",
-    "اللهم صل على محمد",
-    "اللهم اغفر لي",
-    "اللهم إني أسألك الجنة",
-    "اللهم أعني على ذكرك",
-    "سبحان الله وبحمده",
-    "سبحان الله العظيم",
-    "اللهم إني أعوذ بك من شر نفسي",
-    "اللهم إني أستودعك ديني",
-    "اللهم اجعلني من أهل الجنة",
-    "اللهم ثبت قلبي",
-    "اللهم اجعلني من الشاكرين",
-    "اللهم ارزقني صبرًا جميلاً",
-    "اللهم اجعلني من المتقين",
-    "اللهم زدني علمًا",
-    "اللهم اجعلني من المحسنين",
-    "اللهم اجعلني من التوابين",
-    "اللهم اجعلني من الذاكرين",
-    "اللهم اجعلني من عبادك الصالحين",
-    "اللهم اجعلني من أهل النعيم",
-    "اللهم اجعلني من أهل الجنة",
-    "اللهم ارزقني حبك",
-    "اللهم إني أسألك رحمتك",
-    "اللهم اجعلني من المفلحين",
-    "اللهم اجعلني من الصادقين",
-    "اللهم إني أسألك عفوًا وعافية",
-    "اللهم اجعلني من الشهداء"
+const azkars = [
+  "ذكر 1", "ذكر 2", "ذكر 3", "ذكر 4", "ذكر 5",
+  // أضف المزيد هنا ...
 ];
 
 const hadiths = [
-    "قال رسول الله صلى الله عليه وسلم: «من لا يشكر الناس لا يشكر الله»",
-    "قال رسول الله صلى الله عليه وسلم: «من صلى عليّ واحدة صلى الله عليه بها عشرة»",
-    "قال رسول الله صلى الله عليه وسلم: «إنما الأعمال بالنيات»",
-    "قال رسول الله صلى الله عليه وسلم: «من سلك طريقًا يلتمس فيه علمًا سهل الله له به طريقًا إلى الجنة»",
-    "قال رسول الله صلى الله عليه وسلم: «المؤمن مرآة المؤمن»",
-    "قال رسول الله صلى الله عليه وسلم: «الدين النصيحة»",
-    "قال رسول الله صلى الله عليه وسلم: «من أطعم جائعًا أو سقاه الله من ماءٍ...»",
-    "قال رسول الله صلى الله عليه وسلم: «من صام رمضان إيمانًا واحتسابًا غفر له ما تقدم من ذنبه»",
-    "قال رسول الله صلى الله عليه وسلم: «من لا يشكر الناس لا يشكر الله»",
-    "قال رسول الله صلى الله عليه وسلم: «من صام رمضان إيمانًا واحتسابًا غفر له ما تقدم من ذنبه»",
-    "قال رسول الله صلى الله عليه وسلم: «من صلى عليّ صلاةً صلى الله عليه بها عشرًا»"
+  "حديث 1", "حديث 2", "حديث 3", "حديث 4", "حديث 5",
+  // أضف المزيد هنا ...
 ];
 
-// متغيرات التعدين
+// إعدادات التسجيل والدخول
+document.getElementById('register').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const email = document.getElementById('email').value;
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const confirmPassword = document.getElementById('confirm-password').value;
+
+  if (password !== confirmPassword) {
+    alert("كلمة السر غير متطابقة!");
+    return;
+  }
+
+  const user = { email, username, password };
+  localStorage.setItem('user', JSON.stringify(user));
+
+  alert("تم التسجيل بنجاح!");
+  document.getElementById('register-form').style.display = 'none';
+  document.getElementById('login-form').style.display = 'block';
+});
+
+document.getElementById('login').addEventListener('submit', function (event) {
+  event.preventDefault();
+  const email = document.getElementById('login-email').value;
+  const password = document.getElementById('login-password').value;
+
+  const storedUser = JSON.parse(localStorage.getItem('user'));
+
+  if (storedUser && storedUser.email === email && storedUser.password === password) {
+    alert("تم تسجيل الدخول بنجاح!");
+    document.getElementById('login-container').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    startMining();
+  } else {
+    alert("بيانات الدخول غير صحيحة");
+  }
+});
+
+// التعدين والمؤقت
 let miningTimer;
-let totalMined = 0; // عدد العملات المستخرجة الكلي
-let miningActive = false;
-let minedInThisCycle = 0; // عدد العملات المستخرجة في الدورة الحالية
-let countdownTimer;
-let remainingTime = 24 * 60 * 60; // الوقت المتبقي للدورة (بالثواني)
+let miningTimeLeft = 8 * 60 * 60; // 8 ساعات بالثواني
 
-// تحديث عدد العملات المستخرجة الكلي في الواجهة
-function updateTotalMined() {
-    const totalMinedElement = document.getElementById("total-mined-count");
-    totalMinedElement.textContent = totalMined;
-}
-
-// تحديث الوقت المتبقي
-function updateCountdown() {
-    const hours = Math.floor(remainingTime / 3600);
-    const minutes = Math.floor((remainingTime % 3600) / 60);
-    const seconds = remainingTime % 60;
-    document.getElementById("countdown-timer").textContent = `${hours}:${minutes}:${seconds}`;
-
-    if (remainingTime <= 0) {
-        clearInterval(countdownTimer);
-        document.getElementById("mining-timer").textContent = "الدورة انتهت";
-    } else {
-        remainingTime--;
-    }
-}
-
-// بدء التعدين
 function startMining() {
-    if (!miningActive) {
-        miningActive = true;
-        minedInThisCycle = 0; // إعادة تعيين العدد لكل دورة جديدة
-        document.getElementById("mining-timer").textContent = "التعدين نشط...";
+  miningTimer = setInterval(function() {
+    const hours = Math.floor(miningTimeLeft / 3600);
+    const minutes = Math.floor((miningTimeLeft % 3600) / 60);
+    const seconds = miningTimeLeft % 60;
 
-        miningTimer = setInterval(() => {
-            if (minedInThisCycle < 3) {
-                minedInThisCycle++;
-                totalMined++;
-                document.getElementById("mined-count").textContent = minedInThisCycle;
-                updateTotalMined();
+    document.getElementById('timer').textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    miningTimeLeft--;
+
+    if (miningTimeLeft < 0) {
+      clearInterval(miningTimer);
+      alert("دورة التعدين انتهت!");
+      // إعادة تعيين المؤقت لبدء دورة تعدين جديدة
+      miningTimeLeft = 8 * 60 * 60; // 8 ساعات
+      startMining();
+    }
+  }, 1000);
+}
