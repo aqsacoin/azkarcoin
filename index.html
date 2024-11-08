@@ -38,6 +38,11 @@
         <div class="feature-item">
             <button class="mining-button" id="startMiningButton" onclick="startMining()" disabled>ابدأ التعدين</button>
         </div>
+
+        <div id="countdown" style="display:none;">
+            <p>دورة التعدين التالية ستبدأ بعد:</p>
+            <p id="timer"></p>
+        </div>
     </section>
 
     <footer>
@@ -47,6 +52,8 @@
     <script>
         let verseShown = false;
         let dhikrShown = false;
+        let miningInProgress = false;
+        let miningEndTime = 0;
 
         function showVerse() {
             document.getElementById("verseText").style.display = "block"; // إظهار الآية
@@ -62,17 +69,53 @@
 
         function checkMiningButtonState() {
             // تفعيل زر التعدين فقط إذا تم عرض الآية والذكر
-            if (verseShown && dhikrShown) {
+            if (verseShown && dhikrShown && !miningInProgress) {
                 document.getElementById("startMiningButton").disabled = false; // تفعيل زر التعدين
             }
         }
 
         function startMining() {
-            if (verseShown && dhikrShown) {
-                alert("تم بدء دورة التعدين! استمر في ذكر الله للحصول على المزيد من العملات.");
+            if (verseShown && dhikrShown && !miningInProgress) {
+                miningInProgress = true;
+                document.getElementById("startMiningButton").disabled = true; // تعطيل الأزرار بعد بدء التعدين
+                document.getElementById("verseText").style.display = "none"; // إخفاء الآية
+                document.getElementById("dhikrText").style.display = "none"; // إخفاء الذكر
+                document.getElementById("countdown").style.display = "block"; // إظهار العد التنازلي
+
+                // حساب وقت الانتهاء بعد 8 ساعات (8 ساعات = 28800000 مللي ثانية)
+                miningEndTime = new Date().getTime() + 8 * 60 * 60 * 1000;
+                startCountdown(); // بدء العد التنازلي
             } else {
                 alert("يرجى عرض الآية والذكر أولاً.");
             }
+        }
+
+        function startCountdown() {
+            let countdownInterval = setInterval(function() {
+                let now = new Date().getTime();
+                let timeLeft = miningEndTime - now;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval); // إيقاف العد التنازلي
+                    document.getElementById("timer").innerHTML = "تمت دورة التعدين! يمكنك بدء دورة جديدة الآن.";
+                    setTimeout(function() {
+                        resetMining(); // إعادة تفعيل الأزرار بعد انتهاء الدورة
+                    }, 3000); // بعد 3 ثواني
+                } else {
+                    let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    document.getElementById("timer").innerHTML = hours + "ساعة " + minutes + "دقيقة " + seconds + "ثانية ";
+                }
+            }, 1000); // تحديث كل ثانية
+        }
+
+        function resetMining() {
+            miningInProgress = false;
+            document.getElementById("countdown").style.display = "none"; // إخفاء العد التنازلي
+            document.getElementById("startMiningButton").disabled = false; // إعادة تفعيل زر التعدين
+            verseShown = false;
+            dhikrShown = false;
         }
     </script>
 </body>
