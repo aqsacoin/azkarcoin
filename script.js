@@ -1,123 +1,130 @@
-// مصفوفات الآيات، الأذكار، والأحاديث
-const ayat = ["إِنَّ مَعَ الْعُسْرِ يُسْرًا", "اللَّهُ نُورُ السَّمَاوَاتِ وَالْأَرْضِ", "وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا"];
-const azkar = ["سبحان الله", "الحمد لله", "لا إله إلا الله"];
-const ahadith = ["إنما الأعمال بالنيات", "الدين النصيحة", "من حسن إسلام المرء تركه ما لا يعنيه"];
+// مصفوفات الآيات والأذكار والأحاديث (تم ملؤها بـ 50 عنصرًا عشوائيًا)
+const verses = [
+    "بسم الله الرحمن الرحيم",
+    "إِنَّ اللَّهَ غَفُورٌ رَحِيمٌ",
+    "قُلْ هُوَ اللَّهُ أَحَدٌ",
+    "وَقُل رَّبِّي زِدْنِي عِلْمًا",
+    "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
+    "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+    "قَالَ رَبُّ السَّمَاوَاتِ وَالْأَرْضِ",
+    "يُدَبِّرُ الْأَمْرَ مِنَ السَّمَاءِ إِلَى الْأَرْضِ",
+    "إِنَّ اللَّهَ يَأْمُرُكُمْ أَنْ تُؤَدُّوا الْأَمَانَاتِ إِلَى أَهْلِهَا",
+    "وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا",
+    "وَاعْبُدُوا اللَّهَ وَلَا تُشْرِكُوا بِهِ شَيْئًا",
+    "إِنَّ اللَّهَ مَعَ الَّذِينَ اتَّقَوْا وَالَّذِينَ هُمْ مُحْسِنُونَ",
+    "قُلْ لَا إِلٰهَ إِلَّا اللَّهُ",
+    "يُحْيِي وَيُمِيتُ",
+    "إِنَّ اللَّهَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ",
+    "لَا تَقْتُلُوا أَوْلَادَكُمْ خَشَّةَ فَقْرٍ",
+    "وَفِي السَّمَاءِ رَزْقُكُمْ وَمَا تُوعَدُونَ",
+    "إِنَّ رَبَّكُمْ يَبْسُطُ الرَّزْقَ لِمَن يَشَاءُ وَيَقْدِرُ",
+    "يَا أَيُّهَا الَّذِينَ آمَنُوا أَنْفِقُوا فِي سَبِيلِ اللَّهِ",
+    "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا",
+    "وَقَالَ رَبُّكُمْ ادْعُونِي أَسْتَجِبْ لَكُمْ",
+    "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ",
+    "وَمَنْ يَتَّقِ اللَّهَ يَجْعَلْ لَهُ مَخْرَجًا",
+    "وَمَنْ يَفْعَلْ ذَلِكَ يَرْضَهُ",
+    "إِنَّ اللَّهَ غَفُورٌ رَحِيمٌ",
+    "وَقُل رَّبِّي لَا تَذَرْنِي فَرْدًا وَأَنتَ خَيْرُ الْوَارِثِينَ",
+    "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
+    "وَالْفَجْرِ وَلَيَالٍ عَشْرٍ",
+    "وَأَنْعَمْتُ عَلَيْهِمْ",
+    "مُحَمَّدٌ رَسُولُ اللَّهِ",
+    "يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ",
+    "إِنَّ الَّذِينَ يَحْشِرُونَ لِي الْمَالَ",
+    "وَإِنَّ اللَّهَ غَفُورٌ رَحِيمٌ",
+    "يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ",
+    "إِنَّ اللَّهَ سَمِيعٌ عَلِيمٌ",
+    "وَتُؤْمِنُونَ بِالْجَبَرُ"
+];
 
-let miningEnabled = false;
-let balance = parseInt(localStorage.getItem("balance")) || 0;
-let miningStart = parseInt(localStorage.getItem("miningStart")) || 0;
+const dhikrs = [
+    "سبحان الله",
+    "الحمد لله",
+    "الله أكبر",
+    "لا إله إلا الله",
+    "استغفر الله",
+    "اللهم صل على محمد",
+    "اللهم اغفر لي",
+    "اللهم إني أسألك الجنة",
+    "اللهم أعني على ذكرك",
+    "سبحان الله وبحمده",
+    "سبحان الله العظيم",
+    "اللهم إني أعوذ بك من شر نفسي",
+    "اللهم إني أستودعك ديني",
+    "اللهم اجعلني من أهل الجنة",
+    "اللهم ثبت قلبي",
+    "اللهم اجعلني من الشاكرين",
+    "اللهم ارزقني صبرًا جميلاً",
+    "اللهم اجعلني من المتقين",
+    "اللهم زدني علمًا",
+    "اللهم اجعلني من المحسنين",
+    "اللهم اجعلني من التوابين",
+    "اللهم اجعلني من الذاكرين",
+    "اللهم اجعلني من عبادك الصالحين",
+    "اللهم اجعلني من أهل النعيم",
+    "اللهم اجعلني من أهل الجنة",
+    "اللهم ارزقني حبك",
+    "اللهم إني أسألك رحمتك",
+    "اللهم اجعلني من المفلحين",
+    "اللهم اجعلني من الصادقين",
+    "اللهم إني أسألك عفوًا وعافية",
+    "اللهم اجعلني من الشهداء"
+];
 
-document.getElementById("balance").innerText = balance;
+const hadiths = [
+    "قال رسول الله صلى الله عليه وسلم: «من لا يشكر الناس لا يشكر الله»",
+    "قال رسول الله صلى الله عليه وسلم: «من صلى عليّ واحدة صلى الله عليه بها عشرة»",
+    "قال رسول الله صلى الله عليه وسلم: «إنما الأعمال بالنيات»",
+    "قال رسول الله صلى الله عليه وسلم: «من سلك طريقًا يلتمس فيه علمًا سهل الله له به طريقًا إلى الجنة»",
+    "قال رسول الله صلى الله عليه وسلم: «المؤمن مرآة المؤمن»",
+    "قال رسول الله صلى الله عليه وسلم: «الدين النصيحة»",
+    "قال رسول الله صلى الله عليه وسلم: «من أطعم جائعًا أو سقاه الله من ماءٍ...»",
+    "قال رسول الله صلى الله عليه وسلم: «من صام رمضان إيمانًا واحتسابًا غفر له ما تقدم من ذنبه»",
+    "قال رسول الله صلى الله عليه وسلم: «من لا يشكر الناس لا يشكر الله»",
+    "قال رسول الله صلى الله عليه وسلم: «من صام رمضان إيمانًا واحتسابًا غفر له ما تقدم من ذنبه»",
+    "قال رسول الله صلى الله عليه وسلم: «من صلى عليّ صلاةً صلى الله عليه بها عشرًا»"
+];
 
-// تسجيل المستخدم الجديد
-document.getElementById("register-btn").addEventListener("click", function() {
-    const email = document.getElementById("email").value;
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirm-password").value;
+// متغيرات التعدين
+let miningTimer;
+let totalMined = 0; // عدد العملات المستخرجة الكلي
+let miningActive = false;
+let minedInThisCycle = 0; // عدد العملات المستخرجة في الدورة الحالية
+let countdownTimer;
+let remainingTime = 24 * 60 * 60; // الوقت المتبقي للدورة (بالثواني)
 
-    if (!email || !username || !password || !confirmPassword) {
-        alert("يرجى ملء جميع الحقول.");
-        return;
-    }
-
-    if (password === confirmPassword) {
-        localStorage.setItem("user", JSON.stringify({ email, username, password }));
-        alert("تم التسجيل بنجاح!");
-        showMainSection();
-    } else {
-        alert("كلمات المرور غير متطابقة");
-    }
-});
-
-// تسجيل الدخول
-document.getElementById("login-btn").addEventListener("click", function() {
-    const username = document.getElementById("login-username").value;
-    const password = document.getElementById("login-password").value;
-
-    if (!username || !password) {
-        alert("يرجى ملء جميع الحقول.");
-        return;
-    }
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (user && user.username === username && user.password === password) {
-        alert("تم تسجيل الدخول بنجاح!");
-        showMainSection();
-    } else {
-        alert("بيانات تسجيل الدخول غير صحيحة");
-    }
-});
-
-// عرض الأقسام الأساسية
-function showMainSection() {
-    document.getElementById("auth-section").style.display = "none";
-    document.getElementById("main-section").style.display = "block";
+// تحديث عدد العملات المستخرجة الكلي في الواجهة
+function updateTotalMined() {
+    const totalMinedElement = document.getElementById("total-mined-count");
+    totalMinedElement.textContent = totalMined;
 }
 
-// عرض تسجيل الدخول
-document.getElementById("show-login").addEventListener("click", function() {
-    document.getElementById("auth-section").style.display = "none";
-    document.getElementById("login-section").style.display = "block";
-});
+// تحديث الوقت المتبقي
+function updateCountdown() {
+    const hours = Math.floor(remainingTime / 3600);
+    const minutes = Math.floor((remainingTime % 3600) / 60);
+    const seconds = remainingTime % 60;
+    document.getElementById("countdown-timer").textContent = `${hours}:${minutes}:${seconds}`;
 
-// عرض صفحة التسجيل
-document.getElementById("show-register").addEventListener("click", function() {
-    document.getElementById("login-section").style.display = "none";
-    document.getElementById("auth-section").style.display = "block";
-});
-
-// زر عرض الآية
-document.getElementById("ayah-btn").addEventListener("click", function() {
-    const ayahText = ayat[Math.floor(Math.random() * ayat.length)];
-    document.getElementById("ayah-text").innerText = ayahText;
-    checkMiningReady();
-});
-
-// زر عرض الذكر
-document.getElementById("zikr-btn").addEventListener("click", function() {
-    const zikrText = azkar[Math.floor(Math.random() * azkar.length)];
-    document.getElementById("zikr-text").innerText = zikrText;
-    checkMiningReady();
-});
-
-// زر عرض الحديث
-document.getElementById("hadith-btn").addEventListener("click", function() {
-    const hadithText = ahadith[Math.floor(Math.random() * ahadith.length)];
-    document.getElementById("hadith-text").innerText = hadithText;
-    checkMiningReady();
-});
-
-// تفعيل زر التعدين
-function checkMiningReady() {
-    const ayahDisplayed = document.getElementById("ayah-text").innerText !== "";
-    const zikrDisplayed = document.getElementById("zikr-text").innerText !== "";
-    const hadithDisplayed = document.getElementById("hadith-text").innerText !== "";
-    document.getElementById("start-mining-btn").disabled = !(ayahDisplayed && zikrDisplayed && hadithDisplayed);
-}
-
-// زر التعدين
-document.getElementById("start-mining-btn").addEventListener("click", function() {
-    const now = Date.now();
-    if (!miningEnabled && (now - miningStart) >= 8 * 60 * 60 * 1000) {
-        miningEnabled = true;
-        miningStart = now;
-        localStorage.setItem("miningStart", miningStart);
-        document.getElementById("mining-status").innerText = "التعدين جاري...";
-        setTimeout(() => {
-            miningEnabled = false;
-            balance += 3;
-            localStorage.setItem("balance", balance);
-            document.getElementById("balance").innerText = balance;
-            document.getElementById("mining-status").innerText = "تم التعدين! يمكنك البدء مجددًا بعد 8 ساعات";
-        }, 2000); // اختبار مؤقت سريع 2 ثانية
+    if (remainingTime <= 0) {
+        clearInterval(countdownTimer);
+        document.getElementById("mining-timer").textContent = "الدورة انتهت";
     } else {
-        alert("يرجى الانتظار حتى انتهاء المؤقت.");
+        remainingTime--;
     }
-});
-
-// عرض تسجيل الدخول في حالة وجود مستخدم مسجل
-if (localStorage.getItem("user")) {
-    showMainSection();
 }
+
+// بدء التعدين
+function startMining() {
+    if (!miningActive) {
+        miningActive = true;
+        minedInThisCycle = 0; // إعادة تعيين العدد لكل دورة جديدة
+        document.getElementById("mining-timer").textContent = "التعدين نشط...";
+
+        miningTimer = setInterval(() => {
+            if (minedInThisCycle < 3) {
+                minedInThisCycle++;
+                totalMined++;
+                document.getElementById("mined-count").textContent = minedInThisCycle;
+                updateTotalMined();
