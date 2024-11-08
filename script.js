@@ -1,88 +1,84 @@
-// متغيرات الأزرار والعناصر
-const showVerseButton = document.getElementById('showVerseButton');
-const showDhikrButton = document.getElementById('showDhikrButton');
-const startMiningButton = document.getElementById('startMiningButton');
-const miningTimerElement = document.getElementById('miningTimer'); // عنصر لعرض المؤقت
+// متغيرات للحفاظ على الرصيد وعدد العملات المستخرجة
+let balance = 0; // الرصيد الأساسي للمستخدم
+let extracted = 0; // عدد العملات المستخرجة
+let isMining = false; // حالة التعدين
+let startTime = 0; // وقت بداية التعدين
+let miningInterval = null; // المؤقت الذي يحسب الوقت
+let miningDuration = 8 * 60 * 60 * 1000; // مدة دورة التعدين 8 ساعات بالمللي ثانية
+let remainingTime = miningDuration; // الوقت المتبقي
 
-const verseElement = document.getElementById('verse');
-const dhikrElement = document.getElementById('dhikr');
+// التحقق مما إذا كان المستخدم مسجلاً
+function checkUserLogin() {
+    if (localStorage.getItem('isLoggedIn') === 'true') {
+        document.getElementById('auth-section').style.display = 'none'; // إخفاء قسم التسجيل/تسجيل الدخول
+        updateMiningInfo(); // تحديث معلومات التعدين
+    } else {
+        document.getElementById('auth-section').style.display = 'block'; // عرض قسم التسجيل/تسجيل الدخول
+    }
+}
 
-const verse = "إِنَّ اللّهَ مَعَ الَّذِينَ اتَّقَوْا وَالَّذِينَ هُمْ مُحْسِنُونَ";
-const dhikr = "سُبْحَانَ اللّهِ وَبِحَمْدِهِ";
+// التحديث في الصفحة
+function updateMiningInfo() {
+    document.getElementById('balance').textContent = balance;
+    document.getElementById('extracted').textContent = extracted;
+}
 
 // عرض الآية
-showVerseButton.addEventListener('click', function() {
-    verseElement.innerHTML = verse;
-    checkReadyForMining();
+document.getElementById('show-verse').addEventListener('click', function() {
+    alert('هذه هي الآية القرآنية: بسم الله الرحمن الرحيم');
 });
 
 // عرض الذكر
-showDhikrButton.addEventListener('click', function() {
-    dhikrElement.innerHTML = dhikr;
-    checkReadyForMining();
+document.getElementById('show-dhikr').addEventListener('click', function() {
+    alert('سبحان الله وبحمده، سبحان الله العظيم');
 });
-
-// التحقق من استعداد التعدين
-function checkReadyForMining() {
-    if (verseElement.innerHTML && dhikrElement.innerHTML) {
-        startMiningButton.disabled = false;
-    }
-}
 
 // بدء التعدين
-let miningTimer;
-startMiningButton.addEventListener('click', function() {
-    alert("تم بدء التعدين!");
-    startMiningButton.disabled = true;
-    startMiningTimer(28800000); // 8 ساعات بالمللي ثانية
+document.getElementById('start-mining').addEventListener('click', function() {
+    if (!isMining) { // إذا لم يكن التعدين جارياً
+        isMining = true;
+        startTime = Date.now(); // تعيين وقت بداية التعدين
+        miningInterval = setInterval(function () {
+            remainingTime = miningDuration - (Date.now() - startTime); // الوقت المتبقي
+
+            if (remainingTime <= 0) {
+                clearInterval(miningInterval); // إيقاف المؤقت
+                extracted += 3; // إضافة 3 عملات عند انتهاء الدورة
+                balance += 3; // إضافة 3 عملات للرصيد
+                updateMiningInfo(); // تحديث المعلومات في الصفحة
+                alert("تم التعدين! لديك الآن " + extracted + " عملات.");
+                isMining = false;
+                remainingTime = miningDuration; // إعادة تعيين الوقت المتبقي
+            }
+
+            // تحديث المؤقت في الصفحة
+            let hours = Math.floor(remainingTime / 1000 / 60 / 60);
+            let minutes = Math.floor((remainingTime / 1000 / 60) % 60);
+            let seconds = Math.floor((remainingTime / 1000) % 60);
+            document.getElementById('mining-timer').textContent = `الوقت المتبقي: ${hours}:${minutes}:${seconds}`;
+        }, 1000);
+    }
 });
 
-// بدء المؤقت
-function startMiningTimer(duration) {
-    let timer = duration;
-    miningTimerElement.style.display = 'block'; // إظهار عنصر المؤقت
-
-    function updateTimer() {
-        let hours = Math.floor(timer / 3600000); // حساب الساعات
-        let minutes = Math.floor((timer % 3600000) / 60000); // حساب الدقائق
-        let seconds = Math.floor((timer % 60000) / 1000); // حساب الثواني
-
-        miningTimerElement.innerHTML = `المتبقي للتعدين: ${hours}:${minutes}:${seconds}`;
-
-        if (timer <= 0) {
-            clearInterval(miningTimer); // إيقاف المؤقت عند الوصول للصفر
-            startMiningButton.disabled = false; // إعادة تفعيل زر التعدين
-            miningTimerElement.innerHTML = "تم إيقاف التعدين.";
-        } else {
-            timer -= 1000; // تقليل الوقت بمقدار ثانية
-        }
-    }
-
-    miningTimer = setInterval(updateTimer, 1000); // تحديث المؤقت كل ثانية
-}
-
-// تسجيل الدخول
-document.getElementById('login').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const email = document.getElementById('email').value;
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirmPassword').value;
+// تسجيل الدخول أو التسجيل
+document.getElementById('login-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    let username = document.getElementById('username').value;
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    let confirmPassword = document.getElementById('confirm-password').value;
 
     if (password === confirmPassword) {
-        localStorage.setItem('user', JSON.stringify({ email, username }));
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
+        // حفظ بيانات المستخدم في localStorage
+        localStorage.setItem('username', username);
+        localStorage.setItem('email', email);
+        localStorage.setItem('isLoggedIn', 'true');
+        document.getElementById('auth-section').style.display = 'none';
+        updateMiningInfo(); // تحديث معلومات التعدين
     } else {
-        alert("كلمات السر غير متطابقة.");
+        alert("كلمة المرور غير متطابقة");
     }
 });
 
-// التحقق من حالة المستخدم عند إعادة تحميل الصفحة
-window.onload = function() {
-    const user = localStorage.getItem('user');
-    if (user) {
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('mainContent').style.display = 'block';
-    }
-};
+// تحقق من حالة تسجيل الدخول عند تحميل الصفحة
+checkUserLogin();
