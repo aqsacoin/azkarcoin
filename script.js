@@ -1,19 +1,19 @@
 // متغيرات للحفاظ على الرصيد وعدد العملات المستخرجة
-let balance = 0; // الرصيد الأساسي للمستخدم
-let extracted = 0; // عدد العملات المستخرجة
-let isMining = false; // حالة التعدين
-let startTime = 0; // وقت بداية التعدين
-let miningInterval = null; // المؤقت الذي يحسب الوقت
-let miningDuration = 8 * 60 * 60 * 1000; // مدة دورة التعدين 8 ساعات بالمللي ثانية
-let remainingTime = miningDuration; // الوقت المتبقي
+let balance = 0;
+let extracted = 0;
+let isMining = false;
+let startTime = 0;
+let miningInterval = null;
+let miningDuration = 8 * 60 * 60 * 1000; // مدة التعدين 8 ساعات
+let remainingTime = miningDuration; 
 
 // التحقق مما إذا كان المستخدم مسجلاً
 function checkUserLogin() {
     if (localStorage.getItem('isLoggedIn') === 'true') {
-        document.getElementById('auth-section').style.display = 'none'; // إخفاء قسم التسجيل/تسجيل الدخول
+        document.getElementById('auth-section').style.display = 'none'; 
         loadUserData(); // تحميل بيانات المستخدم
     } else {
-        document.getElementById('auth-section').style.display = 'block'; // عرض قسم التسجيل/تسجيل الدخول
+        document.getElementById('auth-section').style.display = 'block'; 
     }
 }
 
@@ -42,23 +42,22 @@ document.getElementById('show-dhikr').addEventListener('click', function() {
 
 // بدء التعدين بعد الضغط على الأزرار
 document.getElementById('start-mining').addEventListener('click', function() {
-    if (!isMining && (document.getElementById('show-verse').clicked || document.getElementById('show-dhikr').clicked)) { // التأكد من الضغط على الأزرار
+    if (!isMining) {
         isMining = true;
-        startTime = Date.now(); // تعيين وقت بداية التعدين
+        startTime = Date.now();
         miningInterval = setInterval(function () {
-            remainingTime = miningDuration - (Date.now() - startTime); // الوقت المتبقي
+            remainingTime = miningDuration - (Date.now() - startTime);
 
             if (remainingTime <= 0) {
-                clearInterval(miningInterval); // إيقاف المؤقت
-                extracted += 3; // إضافة 3 عملات عند انتهاء الدورة
-                balance += 3; // إضافة 3 عملات للرصيد
-                updateMiningInfo(); // تحديث المعلومات في الصفحة
+                clearInterval(miningInterval);
+                extracted += 3; 
+                balance += 3;
+                updateMiningInfo();
                 alert("تم التعدين! لديك الآن " + extracted + " عملات.");
                 isMining = false;
-                remainingTime = miningDuration; // إعادة تعيين الوقت المتبقي
+                remainingTime = miningDuration;
             }
 
-            // تحديث المؤقت في الصفحة
             let hours = Math.floor(remainingTime / 1000 / 60 / 60);
             let minutes = Math.floor((remainingTime / 1000 / 60) % 60);
             let seconds = Math.floor((remainingTime / 1000) % 60);
@@ -76,14 +75,13 @@ document.getElementById('login-form').addEventListener('submit', function(event)
     let confirmPassword = document.getElementById('confirm-password').value;
 
     if (password === confirmPassword) {
-        // حفظ بيانات المستخدم في localStorage
         localStorage.setItem('username', username);
         localStorage.setItem('email', email);
         localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('balance', balance); // حفظ الرصيد الحالي
-        localStorage.setItem('extracted', extracted); // حفظ عدد العملات المستخرجة
+        localStorage.setItem('balance', balance);
+        localStorage.setItem('extracted', extracted);
         document.getElementById('auth-section').style.display = 'none';
-        loadUserData(); // تحميل بيانات المستخدم بعد التسجيل
+        loadUserData();
     } else {
         alert("كلمة المرور غير متطابقة");
     }
