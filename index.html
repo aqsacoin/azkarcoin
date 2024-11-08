@@ -4,30 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>موقع التعدين</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- قسم التسجيل/تسجيل الدخول -->
-    <div id="auth-section">
-        <h2>تسجيل الدخول أو إنشاء حساب</h2>
-        <form id="login-form">
-            <input type="text" id="username" placeholder="اسم المستخدم" required><br>
-            <input type="email" id="email" placeholder="البريد الإلكتروني" required><br>
-            <input type="password" id="password" placeholder="كلمة المرور" required><br>
-            <input type="password" id="confirm-password" placeholder="تأكيد كلمة المرور" required><br>
-            <button type="submit">تسجيل الدخول</button>
-        </form>
-    </div>
+    <div class="container">
+        <div id="welcome-section">
+            <h2>مرحبا بك في موقع التعدين</h2>
+            <button id="showAyahBtn" onclick="showAyah()">إعرض الآية</button>
+            <p id="ayahDisplay"></p>
 
-    <!-- صفحة التعدين الرئيسية -->
-    <div id="mining-info">
-        <h1>مرحباً بك في تعدين العملات</h1>
-        <button id="show-verse">عرض الآية</button>
-        <button id="show-dhikr">عرض الذكر</button>
-        <button id="start-mining" disabled>إبدأ التعدين</button>
-        <div id="mining-timer">الوقت المتبقي: 00:00:00</div>
-        <div>الرصيد: <span id="balance">0</span></div>
-        <div>عدد العملات المستخرجة: <span id="extracted">0</span></div>
+            <button id="showDhikrBtn" onclick="showDhikr()">إعرض الذكر</button>
+            <p id="dhikrDisplay"></p>
+
+            <button id="showHadithBtn" onclick="showHadith()">إعرض الحديث النبوي</button>
+            <p id="hadithDisplay"></p>
+
+            <button id="startMiningBtn" onclick="startMining()" disabled>إبدأ التعدين</button>
+        </div>
+
+        <div id="mining-section">
+            <h2>دورة التعدين</h2>
+            <p>الوقت المتبقي للتعدين: <span id="countdown"></span></p>
+            <p>عدد العملات المستخرجة: <span id="extractedCoins">0</span> عملة</p>
+            <p>رصيدك الحالي: <span id="balance">0</span> عملة</p>
+        </div>
     </div>
 
     <script src="script.js"></script>
