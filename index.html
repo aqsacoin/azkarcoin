@@ -3,46 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AzkarCoin - تعدين</title>
+    <title>موقع AzkarCoin</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="logo.png"> <!-- إضافة شعار الموقع -->
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>أذكار و تعدين - AzkarCoin</h1>
-            <p>الرجاء الضغط على الأزرار التالية لتفعيل التعدين.</p>
-        </header>
+    <header>
+        <h1>أذكارك مع التعدين</h1>
+    </header>
 
-        <!-- نموذج تسجيل الدخول (أول زيارة للمستخدم) -->
-        <div id="loginForm">
-            <h2>تسجيل الدخول</h2>
-            <form id="login">
-                <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-                <input type="text" id="username" placeholder="إسم المستخدم" required>
-                <input type="password" id="password" placeholder="كلمة السر" required>
-                <input type="password" id="confirmPassword" placeholder="تأكيد كلمة السر" required>
-                <button type="submit">تسجيل</button>
-            </form>
-        </div>
+    <!-- قسم عرض الرصيد وعدد العملات المستخرجة -->
+    <div id="mining-info">
+        <h3>رصيدك الحالي: <span id="balance">0</span> عملة</h3>
+        <h3>عدد العملات المستخرجة: <span id="extracted">0</span></h3>
+    </div>
 
-        <!-- الأزرار الخاصة بعرض الآية والذكر وبدء التعدين -->
-        <div id="mainContent" style="display:none;">
-            <button id="showVerseButton">عرض الآية</button>
-            <button id="showDhikrButton">عرض الذكر</button>
-            <button id="startMiningButton" disabled>إبدأ التعدين</button>
+    <!-- أزرار عرض الآية القرآنية، الذكر وبدء التعدين -->
+    <div id="buttons">
+        <button id="show-verse">إعرض الآية</button>
+        <button id="show-dhikr">إعرض الذكر</button>
+        <button id="start-mining">إبدأ التعدين</button>
+    </div>
 
-            <!-- مكان عرض الآية والذكر -->
-            <div id="verse"></div>
-            <div id="dhikr"></div>
+    <!-- قسم عرض المؤقت -->
+    <div id="mining-timer">الوقت المتبقي: 8:00:00</div>
 
-            <!-- عنصر المؤقت -->
-            <div id="miningTimer" style="display:none; margin-top: 20px; font-size: 18px; padding: 15px; background-color: #ffeb3b; border-radius: 5px;"></div>
-        </div>
-
-        <footer>
-            <p>&copy; 2024 AzkarCoin. جميع الحقوق محفوظة.</p>
-        </footer>
+    <!-- إظهار بيانات تسجيل الدخول والتسجيل إذا كان المستخدم غير مسجل -->
+    <div id="auth-section" style="display: none;">
+        <h2>تسجيل الدخول أو التسجيل</h2>
+        <form id="login-form">
+            <label for="username">اسم المستخدم:</label>
+            <input type="text" id="username" name="username" required><br>
+            <label for="email">البريد الإلكتروني:</label>
+            <input type="email" id="email" name="email" required><br>
+            <label for="password">كلمة المرور:</label>
+            <input type="password" id="password" name="password" required><br>
+            <label for="confirm-password">تأكيد كلمة المرور:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required><br>
+            <button type="submit">تسجيل الدخول / التسجيل</button>
+        </form>
     </div>
 
     <script src="script.js"></script>
