@@ -2,6 +2,7 @@
 const showVerseButton = document.getElementById('showVerseButton');
 const showDhikrButton = document.getElementById('showDhikrButton');
 const startMiningButton = document.getElementById('startMiningButton');
+const miningTimerElement = document.getElementById('miningTimer'); // عنصر لعرض المؤقت
 
 const verseElement = document.getElementById('verse');
 const dhikrElement = document.getElementById('dhikr');
@@ -29,13 +30,36 @@ function checkReadyForMining() {
 }
 
 // بدء التعدين
+let miningTimer;
 startMiningButton.addEventListener('click', function() {
     alert("تم بدء التعدين!");
     startMiningButton.disabled = true;
-    setTimeout(() => {
-        startMiningButton.disabled = false;
-    }, 28800000); // 8 ساعات بالمللي ثانية
+    startMiningTimer(28800000); // 8 ساعات بالمللي ثانية
 });
+
+// بدء المؤقت
+function startMiningTimer(duration) {
+    let timer = duration;
+    miningTimerElement.style.display = 'block'; // إظهار عنصر المؤقت
+
+    function updateTimer() {
+        let hours = Math.floor(timer / 3600000); // حساب الساعات
+        let minutes = Math.floor((timer % 3600000) / 60000); // حساب الدقائق
+        let seconds = Math.floor((timer % 60000) / 1000); // حساب الثواني
+
+        miningTimerElement.innerHTML = `المتبقي للتعدين: ${hours}:${minutes}:${seconds}`;
+
+        if (timer <= 0) {
+            clearInterval(miningTimer); // إيقاف المؤقت عند الوصول للصفر
+            startMiningButton.disabled = false; // إعادة تفعيل زر التعدين
+            miningTimerElement.innerHTML = "تم إيقاف التعدين.";
+        } else {
+            timer -= 1000; // تقليل الوقت بمقدار ثانية
+        }
+    }
+
+    miningTimer = setInterval(updateTimer, 1000); // تحديث المؤقت كل ثانية
+}
 
 // تسجيل الدخول
 document.getElementById('login').addEventListener('submit', function(e) {
