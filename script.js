@@ -1,86 +1,50 @@
-// العناصر من واجهة المستخدم
-let verseButton = document.getElementById('verseButton');
-let dhikrButton = document.getElementById('dhikrButton');
-let hadithButton = document.getElementById('hadithButton');
-let startMiningButton = document.getElementById('startMiningButton');
-let resultDiv = document.getElementById('result');
-let timerDiv = document.getElementById('timer');
-let totalCoinsSpan = document.getElementById('totalCoins');
-let miningCycleCoinsSpan = document.getElementById('miningCycleCoins');
-
-let coinTotal = 0; // إجمالي العملات الكلي
-let miningCycleCoins = 0; // عدد العملات في دورة التعدين الحالية
-let miningInterval = 8 * 60 * 60 * 1000; // 8 ساعات بالميلي ثانية
-let miningTimer;
-
-// مصفوفات الآيات، الأذكار، والأحاديث (تمت تعبئتها بـ 50 عنصر)
-let verseArray = [
-    "بسم الله الرحمن الرحيم", "الحمد لله رب العالمين", "الرحمن الرحيم", /* ... البقية ... */
-    "الحمد لله الذي هدانا لهذا", "رب اغفر وارحم وأنت خير الراحمين"
+// المصفوفات
+const ayat = [
+    "إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا",
+    "وَقُل رَّبُّ زِدْنِي عِلْمًا",
+    "قُلْ إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَاِي وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ",
+    // أضف باقي الآيات هنا
 ];
 
-let dhikrArray = [
-    "سبحان الله", "الحمد لله", "لا إله إلا الله", "الله أكبر", /* ... البقية ... */
-    "اللهم اغفر لي ولوالدي وللمؤمنين", "اللهم اجعلني من عبادك الصالحين"
+const hadiths = [
+    "قال رسول الله صلى الله عليه وسلم: " + 
+    "من لا يشكر الناس لا يشكر الله.",
+    "قال رسول الله صلى الله عليه وسلم: " + 
+    "خير الناس أنفعهم للناس.",
+    // أضف باقي الأحاديث هنا
 ];
 
-let hadithArray = [
-    "إنما الأعمال بالنيات", "الدين النصيحة", "يسروا ولا تعسروا", "إن الله يحب إذا عمل أحدكم عملاً أن يتقنه", /* ... البقية ... */
-    "لا يشكر الله من لا يشكر الناس", "الدعاء هو العبادة"
+const dhikrs = [
+    "سبحان الله والحمد لله ولا إله إلا الله والله أكبر",
+    "اللهم صل على محمد",
+    "اللهم اغفر لي ولأبوي وللمؤمنين",
+    // أضف باقي الأذكار هنا
 ];
 
-// دوال لتحديد عنصر عشوائي من المصفوفات
-function getRandomElement(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
+// العناصر في الصفحة
+const showAyahBtn = document.getElementById("showAyahBtn");
+const showHadithBtn = document.getElementById("showHadithBtn");
+const showDhikrBtn = document.getElementById("showDhikrBtn");
+const mineBtn = document.getElementById("mineBtn");
+const timerDisplay = document.getElementById("timer");
+const minedCoinsDisplay = document.getElementById("minedCoins");
 
-// عرض الآية العشوائية عند الضغط على الزر
-verseButton.addEventListener('click', () => {
-    resultDiv.textContent = getRandomElement(verseArray);
+let minedCoins = 0;
+let timer = 8 * 60 * 60; // 8 ساعات بالثواني
+let miningActive = false;
+
+showAyahBtn.addEventListener("click", () => {
+    const randomAyah = ayat[Math.floor(Math.random() * ayat.length)];
+    alert(randomAyah);
+    checkIfCanMine();
 });
 
-// عرض الذكر العشوائي عند الضغط على الزر
-dhikrButton.addEventListener('click', () => {
-    resultDiv.textContent = getRandomElement(dhikrArray);
+showHadithBtn.addEventListener("click", () => {
+    const randomHadith = hadiths[Math.floor(Math.random() * hadiths.length)];
+    alert(randomHadith);
+    checkIfCanMine();
 });
 
-// عرض الحديث العشوائي عند الضغط على الزر
-hadithButton.addEventListener('click', () => {
-    resultDiv.textContent = getRandomElement(hadithArray);
-});
-
-// بدء التعدين
-startMiningButton.addEventListener('click', startMining);
-
-// دالة بدء التعدين
-function startMining() {
-    if (miningTimer) {
-        clearInterval(miningTimer);
-    }
-    
-    miningCycleCoins = 3; // عدد العملات المستخرجة في كل عملية تعدين
-    coinTotal += miningCycleCoins; // تحديث العدد الكلي للعملات
-    totalCoinsSpan.textContent = coinTotal;
-    miningCycleCoinsSpan.textContent = miningCycleCoins;
-    
-    startCountdown();
-}
-
-// دالة بدء المؤقت التنازلي للتعدين
-function startCountdown() {
-    let endTime = Date.now() + miningInterval;
-    
-    miningTimer = setInterval(() => {
-        let timeLeft = endTime - Date.now();
-        
-        if (timeLeft <= 0) {
-            clearInterval(miningTimer);
-            timerDiv.textContent = "يمكنك بدء التعدين الآن!";
-        } else {
-            let hours = Math.floor((timeLeft % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000));
-            let minutes = Math.floor((timeLeft % (60 * 60 * 1000)) / (60 * 1000));
-            let seconds = Math.floor((timeLeft % (60 * 1000)) / 1000);
-            timerDiv.textContent = `${hours}h ${minutes}m ${seconds}s`;
-        }
-    }, 1000);
-}
+showDhikrBtn.addEventListener("click", () => {
+    const randomDhikr = dhikrs[Math.floor(Math.random() * dhikrs.length)];
+    alert(randomDhikr);
