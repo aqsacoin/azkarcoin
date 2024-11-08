@@ -26,11 +26,21 @@ const showDhikrBtn = document.getElementById("showDhikrBtn");
 const mineBtn = document.getElementById("mineBtn");
 const timerDisplay = document.getElementById("timer");
 const minedCoinsDisplay = document.getElementById("minedCoins");
+const loginForm = document.getElementById("loginForm");
+const registerForm = document.getElementById("registerForm");
+const mainPage = document.getElementById("mainPage");
 
 let minedCoins = 0;
 let timer = 8 * 60 * 60; // 8 ساعات بالثواني
 let miningActive = false;
 let canMine = false;
+let loggedInUser = null; // المتغير الذي يخزن المستخدم المسجل دخوله
+
+// استرجاع حالة تسجيل الدخول
+if (localStorage.getItem("loggedInUser")) {
+    loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    showMainPage();
+}
 
 // عرض آية
 showAyahBtn.addEventListener("click", () => {
@@ -93,4 +103,46 @@ function updateUI() {
     let seconds = timer % 60;
     timerDisplay.textContent = `المؤقت: ${hours}:${minutes}:${seconds}`;
     minedCoinsDisplay.textContent = `عدد العملات المستخرجة: ${minedCoins}`;
+}
+
+// دالة تسجيل الدخول
+function login() {
+    const username = document.getElementById("usernameLogin").value;
+    const password = document.getElementById("passwordLogin").value;
+
+    if (localStorage.getItem(username) && localStorage.getItem(username) === password) {
+        loggedInUser = username;
+        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+        showMainPage();
+    } else {
+        alert("اسم المستخدم أو كلمة المرور غير صحيحة.");
+    }
+}
+
+// دالة التسجيل
+function register() {
+    const email = document.getElementById("emailRegister").value;
+    const username = document.getElementById("usernameRegister").value;
+    const password = document.getElementById("passwordRegister").value;
+    const confirmPassword = document.getElementById("confirmPasswordRegister").value;
+
+    if (password === confirmPassword) {
+        if (!localStorage.getItem(username)) {
+            localStorage.setItem(username, password);
+            alert("تم التسجيل بنجاح!");
+            registerForm.style.display = "none";
+            loginForm.style.display = "block";
+        } else {
+            alert("اسم المستخدم موجود مسبقًا.");
+        }
+    } else {
+        alert("كلمة المرور وتأكيد كلمة المرور غير متطابقين.");
+    }
+}
+
+// دالة إظهار الصفحة الرئيسية بعد تسجيل الدخول
+function showMainPage() {
+    loginForm.style.display = "none";
+    registerForm.style.display = "none";
+    mainPage.style.display = "block";
 }
