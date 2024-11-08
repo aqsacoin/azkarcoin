@@ -11,10 +11,17 @@ let remainingTime = miningDuration; // الوقت المتبقي
 function checkUserLogin() {
     if (localStorage.getItem('isLoggedIn') === 'true') {
         document.getElementById('auth-section').style.display = 'none'; // إخفاء قسم التسجيل/تسجيل الدخول
-        updateMiningInfo(); // تحديث معلومات التعدين
+        loadUserData(); // تحميل بيانات المستخدم
     } else {
         document.getElementById('auth-section').style.display = 'block'; // عرض قسم التسجيل/تسجيل الدخول
     }
+}
+
+// تحميل بيانات المستخدم من localStorage
+function loadUserData() {
+    balance = parseInt(localStorage.getItem('balance')) || 0;
+    extracted = parseInt(localStorage.getItem('extracted')) || 0;
+    updateMiningInfo();
 }
 
 // التحديث في الصفحة
@@ -33,9 +40,9 @@ document.getElementById('show-dhikr').addEventListener('click', function() {
     alert('سبحان الله وبحمده، سبحان الله العظيم');
 });
 
-// بدء التعدين
+// بدء التعدين بعد الضغط على الأزرار
 document.getElementById('start-mining').addEventListener('click', function() {
-    if (!isMining) { // إذا لم يكن التعدين جارياً
+    if (!isMining && (document.getElementById('show-verse').clicked || document.getElementById('show-dhikr').clicked)) { // التأكد من الضغط على الأزرار
         isMining = true;
         startTime = Date.now(); // تعيين وقت بداية التعدين
         miningInterval = setInterval(function () {
@@ -73,8 +80,10 @@ document.getElementById('login-form').addEventListener('submit', function(event)
         localStorage.setItem('username', username);
         localStorage.setItem('email', email);
         localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('balance', balance); // حفظ الرصيد الحالي
+        localStorage.setItem('extracted', extracted); // حفظ عدد العملات المستخرجة
         document.getElementById('auth-section').style.display = 'none';
-        updateMiningInfo(); // تحديث معلومات التعدين
+        loadUserData(); // تحميل بيانات المستخدم بعد التسجيل
     } else {
         alert("كلمة المرور غير متطابقة");
     }
