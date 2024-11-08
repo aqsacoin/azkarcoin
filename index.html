@@ -3,44 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع AzkarCoin</title>
+    <title>موقع التعدين</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>أذكارك مع التعدين</h1>
-    </header>
-
-    <!-- قسم عرض الرصيد وعدد العملات المستخرجة -->
-    <div id="mining-info">
-        <h3>رصيدك الحالي: <span id="balance">0</span> عملة</h3>
-        <h3>عدد العملات المستخرجة: <span id="extracted">0</span></h3>
-    </div>
-
-    <!-- أزرار عرض الآية القرآنية، الذكر وبدء التعدين -->
-    <div id="buttons">
-        <button id="show-verse">إعرض الآية</button>
-        <button id="show-dhikr">إعرض الذكر</button>
-        <button id="start-mining">إبدأ التعدين</button>
-    </div>
-
-    <!-- قسم عرض المؤقت -->
-    <div id="mining-timer">الوقت المتبقي: 8:00:00</div>
-
-    <!-- إظهار بيانات تسجيل الدخول والتسجيل إذا كان المستخدم غير مسجل -->
-    <div id="auth-section" style="display: none;">
-        <h2>تسجيل الدخول أو التسجيل</h2>
+    <!-- قسم التسجيل/تسجيل الدخول -->
+    <div id="auth-section">
+        <h2>تسجيل الدخول أو إنشاء حساب</h2>
         <form id="login-form">
-            <label for="username">اسم المستخدم:</label>
-            <input type="text" id="username" name="username" required><br>
-            <label for="email">البريد الإلكتروني:</label>
-            <input type="email" id="email" name="email" required><br>
-            <label for="password">كلمة المرور:</label>
-            <input type="password" id="password" name="password" required><br>
-            <label for="confirm-password">تأكيد كلمة المرور:</label>
-            <input type="password" id="confirm-password" name="confirm-password" required><br>
-            <button type="submit">تسجيل الدخول / التسجيل</button>
+            <input type="text" id="username" placeholder="اسم المستخدم" required><br>
+            <input type="email" id="email" placeholder="البريد الإلكتروني" required><br>
+            <input type="password" id="password" placeholder="كلمة المرور" required><br>
+            <input type="password" id="confirm-password" placeholder="تأكيد كلمة المرور" required><br>
+            <button type="submit">تسجيل الدخول</button>
         </form>
+    </div>
+
+    <!-- صفحة التعدين الرئيسية -->
+    <div id="mining-info">
+        <h1>مرحباً بك في تعدين العملات</h1>
+        <button id="show-verse">عرض الآية</button>
+        <button id="show-dhikr">عرض الذكر</button>
+        <button id="start-mining" disabled>إبدأ التعدين</button>
+        <div id="mining-timer">الوقت المتبقي: 00:00:00</div>
+        <div>الرصيد: <span id="balance">0</span></div>
+        <div>عدد العملات المستخرجة: <span id="extracted">0</span></div>
     </div>
 
     <script src="script.js"></script>
