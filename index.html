@@ -1,34 +1,71 @@
 <!DOCTYPE html>
 <html lang="ar">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>موقع التعدين - AZKARCOIN</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <header>
-            <div id="logo">
-                <h1>موقع التعدين - AZKARCOIN</h1> <!-- الشعار مع اسم الموقع -->
-            </div>
-        </header>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقع AZKARCOIN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        #result, #timer, #coinTotal {
+            margin-top: 20px;
+            font-size: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        #registerForm, #loginForm {
+            display: none;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AZKARCOIN</h1>
+        <div id="result">اضغط على أحد الأزرار لعرض المحتوى</div>
+        <button id="verseButton">عرض آية</button>
+        <button id="dhikrButton">عرض ذكر</button>
+        <button id="hadithButton">عرض حديث</button>
+        <button id="startMiningButton">بدء التعدين</button>
+        <div id="timer">الوقت المتبقي: </div>
+        <div id="coinTotal">العملات المكتسبة: <span id="totalCoins">0</span></div>
 
-        <main>
-            <div class="container">
-                <h2>مرحبًا بك في موقع AZKARCOIN للتعدين</h2>
-                <p>يمكنك الآن بدء عملية التعدين بعد عرض الآية والذكر.</p>
-                
-                <!-- الأزرار -->
-                <button id="verseButton">عرض الآية</button>
-                <button id="dhikrButton">عرض الذكر</button>
-                <button id="startMiningButton" disabled>إبدأ التعدين</button>
+        <h2>التسجيل</h2>
+        <button onclick="toggleForm('registerForm')">فتح نموذج التسجيل</button>
+        <div id="registerForm">
+            <input type="text" id="registerUsername" placeholder="اسم المستخدم">
+            <input type="email" id="registerEmail" placeholder="البريد الإلكتروني">
+            <input type="password" id="registerPassword" placeholder="كلمة المرور">
+            <input type="password" id="registerConfirmPassword" placeholder="تأكيد كلمة المرور">
+            <button onclick="register()">تسجيل</button>
+        </div>
 
-                <!-- عرض النتائج -->
-                <div id="result"></div>
-                <div id="timer"></div>
-            </div>
-        </main>
-
-        <script src="script.js"></script>
-    </body>
+        <h2>تسجيل الدخول</h2>
+        <button onclick="toggleForm('loginForm')">فتح نموذج تسجيل الدخول</button>
+        <div id="loginForm">
+            <input type="email" id="loginEmail" placeholder="البريد الإلكتروني">
+            <input type="password" id="loginPassword" placeholder="كلمة المرور">
+            <button onclick="login()">تسجيل الدخول</button>
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
 </html>
