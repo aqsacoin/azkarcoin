@@ -16,6 +16,11 @@ document.getElementById("register-btn").addEventListener("click", function() {
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirm-password").value;
 
+    if (!email || !username || !password || !confirmPassword) {
+        alert("يرجى ملء جميع الحقول.");
+        return;
+    }
+
     if (password === confirmPassword) {
         localStorage.setItem("user", JSON.stringify({ email, username, password }));
         alert("تم التسجيل بنجاح!");
@@ -29,6 +34,12 @@ document.getElementById("register-btn").addEventListener("click", function() {
 document.getElementById("login-btn").addEventListener("click", function() {
     const username = document.getElementById("login-username").value;
     const password = document.getElementById("login-password").value;
+
+    if (!username || !password) {
+        alert("يرجى ملء جميع الحقول.");
+        return;
+    }
+
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (user && user.username === username && user.password === password) {
