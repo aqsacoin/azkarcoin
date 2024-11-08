@@ -1,41 +1,64 @@
-// تحديد الأزرار
+// متغيرات الأزرار والعناصر
 const showVerseButton = document.getElementById('showVerseButton');
 const showDhikrButton = document.getElementById('showDhikrButton');
 const startMiningButton = document.getElementById('startMiningButton');
 
-// تحديد العناصر التي ستعرض فيها الآية والذكر
 const verseElement = document.getElementById('verse');
 const dhikrElement = document.getElementById('dhikr');
 
-// الآية والذكر
 const verse = "إِنَّ اللّهَ مَعَ الَّذِينَ اتَّقَوْا وَالَّذِينَ هُمْ مُحْسِنُونَ";
 const dhikr = "سُبْحَانَ اللّهِ وَبِحَمْدِهِ";
 
-// إظهار الآية
+// عرض الآية
 showVerseButton.addEventListener('click', function() {
     verseElement.innerHTML = verse;
     checkReadyForMining();
 });
 
-// إظهار الذكر
+// عرض الذكر
 showDhikrButton.addEventListener('click', function() {
     dhikrElement.innerHTML = dhikr;
     checkReadyForMining();
 });
 
-// التحقق من جاهزية البدء في التعدين
+// التحقق من استعداد التعدين
 function checkReadyForMining() {
     if (verseElement.innerHTML && dhikrElement.innerHTML) {
         startMiningButton.disabled = false;
     }
 }
 
-// إضافة وظيفة للتعدين
+// بدء التعدين
 startMiningButton.addEventListener('click', function() {
-    alert("تم بدء التعدين!"); // يمكن إضافة منطق التعدين هنا
+    alert("تم بدء التعدين!");
     startMiningButton.disabled = true;
-    // ضبط المؤقت لـ 8 ساعات (8 * 60 * 60 * 1000 = 28800000 ملي ثانية)
     setTimeout(() => {
-        startMiningButton.disabled = false; // إعادة تفعيل الزر بعد 8 ساعات
-    }, 28800000); 
+        startMiningButton.disabled = false;
+    }, 28800000); // 8 ساعات بالمللي ثانية
 });
+
+// تسجيل الدخول
+document.getElementById('login').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (password === confirmPassword) {
+        localStorage.setItem('user', JSON.stringify({ email, username }));
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+    } else {
+        alert("كلمات السر غير متطابقة.");
+    }
+});
+
+// التحقق من حالة المستخدم عند إعادة تحميل الصفحة
+window.onload = function() {
+    const user = localStorage.getItem('user');
+    if (user) {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('mainContent').style.display = 'block';
+    }
+};
