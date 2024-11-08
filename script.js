@@ -36,6 +36,10 @@ let miningActive = false;
 let canMine = false;
 let loggedInUser = null; // المتغير الذي يخزن المستخدم المسجل دخوله
 
+let ayahClicked = false;
+let hadithClicked = false;
+let dhikrClicked = false;
+
 // استرجاع حالة تسجيل الدخول
 if (localStorage.getItem("loggedInUser")) {
     loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -46,6 +50,7 @@ if (localStorage.getItem("loggedInUser")) {
 showAyahBtn.addEventListener("click", () => {
     const randomAyah = ayat[Math.floor(Math.random() * ayat.length)];
     alert(randomAyah); // عرض الآية في نافذة منبثقة
+    ayahClicked = true; // تعيين متغير الضغط على الزر
     checkIfCanMine(); // التحقق إذا يمكن بدء التعدين
 });
 
@@ -53,6 +58,7 @@ showAyahBtn.addEventListener("click", () => {
 showHadithBtn.addEventListener("click", () => {
     const randomHadith = hadiths[Math.floor(Math.random() * hadiths.length)];
     alert(randomHadith); // عرض الحديث في نافذة منبثقة
+    hadithClicked = true; // تعيين متغير الضغط على الزر
     checkIfCanMine(); // التحقق إذا يمكن بدء التعدين
 });
 
@@ -60,12 +66,13 @@ showHadithBtn.addEventListener("click", () => {
 showDhikrBtn.addEventListener("click", () => {
     const randomDhikr = dhikrs[Math.floor(Math.random() * dhikrs.length)];
     alert(randomDhikr); // عرض الذكر في نافذة منبثقة
+    dhikrClicked = true; // تعيين متغير الضغط على الزر
     checkIfCanMine(); // التحقق إذا يمكن بدء التعدين
 });
 
 // التحقق إذا يمكن بدء التعدين
 function checkIfCanMine() {
-    if (showAyahBtn.clicked && showHadithBtn.clicked && showDhikrBtn.clicked) {
+    if (ayahClicked && hadithClicked && dhikrClicked) {
         mineBtn.disabled = false; // تمكين زر التعدين بعد الضغط على الأزرار
     }
 }
@@ -78,7 +85,7 @@ mineBtn.addEventListener("click", () => {
     }
 });
 
-// مؤقت التعدينا
+// مؤقت التعدين
 function startMining() {
     let interval = setInterval(function () {
         if (timer <= 0) {
