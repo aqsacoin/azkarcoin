@@ -1,45 +1,34 @@
 <!DOCTYPE html>
 <html lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقع التعدين</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>موقع التعدين - AZKARCOIN</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <div id="logo">
+                <h1>موقع التعدين - AZKARCOIN</h1> <!-- الشعار مع اسم الموقع -->
+            </div>
+        </header>
 
-    <div class="container">
-        <h1>أهلاً بك في موقع التعدين</h1>
+        <main>
+            <div class="container">
+                <h2>مرحبًا بك في موقع AZKARCOIN للتعدين</h2>
+                <p>يمكنك الآن بدء عملية التعدين بعد عرض الآية والذكر.</p>
+                
+                <!-- الأزرار -->
+                <button id="verseButton">عرض الآية</button>
+                <button id="dhikrButton">عرض الذكر</button>
+                <button id="startMiningButton" disabled>إبدأ التعدين</button>
 
-        <!-- نموذج التسجيل و الدخول -->
-        <div id="auth">
-            <h2>تسجيل الدخول أو التسجيل</h2>
-            <form id="authForm">
-                <input type="text" id="username" placeholder="إسم المستخدم" required>
-                <input type="email" id="email" placeholder="البريد الإلكتروني" required>
-                <input type="password" id="password" placeholder="كلمة المرور" required>
-                <input type="password" id="confirmPassword" placeholder="تأكيد كلمة المرور" required>
-                <button type="submit">تسجيل</button>
-                <button type="button" id="loginButton">تسجيل الدخول</button>
-            </form>
-        </div>
+                <!-- عرض النتائج -->
+                <div id="result"></div>
+                <div id="timer"></div>
+            </div>
+        </main>
 
-        <!-- واجهة المستخدم بعد التسجيل -->
-        <div id="userContent" style="display:none;">
-            <button id="showAyahBtn">إعرض الآية</button>
-            <button id="showDhikrBtn">إعرض الذكر</button>
-            <button id="showHadithBtn">إعرض الحديث</button>
-            <button id="startMiningBtn">إبدأ التعدين</button>
-
-            <p id="ayah"></p>
-            <p id="dhikr"></p>
-            <p id="hadith"></p>
-
-            <p id="timer">وقت التعدين: 0:00</p>
-            <p>العملات المستخرجة: <span id="minedCoins">0</span></p>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 </html>
