@@ -1,52 +1,31 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AzkarCoin Mining</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azkar Coin</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>تعدين AzkarCoin</h1>
-
-    <!-- Registration/Login Form -->
-    <div id="auth-section" class="auth-section">
-      <h2>التسجيل</h2>
-      <form id="registerForm">
-        <input type="email" placeholder="البريد الإلكتروني" required>
-        <input type="text" placeholder="اسم المستخدم" required>
-        <input type="password" placeholder="كلمة المرور" required>
-        <input type="password" placeholder="تأكيد كلمة المرور" required>
-        <button type="submit">تسجيل</button>
-      </form>
-      <form id="loginForm" style="display: none;">
-        <input type="text" placeholder="اسم المستخدم" required>
-        <input type="password" placeholder="كلمة المرور" required>
-        <button type="submit">تسجيل الدخول</button>
-      </form>
+    <div class="container">
+        <h1>مرحبا بك في موقع Azkar Coin</h1>
+        
+        <div id="content">
+            <button id="ayah-btn">عرض الآية</button>
+            <p id="ayah-text"></p>
+            
+            <button id="zikr-btn">عرض الذكر</button>
+            <p id="zikr-text"></p>
+            
+            <button id="hadith-btn">عرض الحديث</button>
+            <p id="hadith-text"></p>
+            
+            <button id="start-mining-btn" disabled>ابدأ التعدين</button>
+            <p id="mining-status"></p>
+            <p id="coin-balance">رصيدك: <span id="balance">0</span> عملة</p>
+        </div>
     </div>
 
-    <!-- Main Mining Section -->
-    <div id="mining-section" class="mining-section" style="display: none;">
-      <h2>الرصيد: <span id="balance">0</span> عملات</h2>
-      <p>عدد العملات المستخرجة: <span id="mined-coins">0</span></p>
-      
-      <div class="content">
-        <button id="show-ayah">عرض الآية</button>
-        <p id="ayah-display"></p>
-
-        <button id="show-zikr">عرض الذكر</button>
-        <p id="zikr-display"></p>
-
-        <button id="show-hadith">عرض الحديث</button>
-        <p id="hadith-display"></p>
-
-        <button id="start-mining" disabled>ابدأ التعدين</button>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
