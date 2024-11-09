@@ -1,226 +1,55 @@
 <!DOCTYPE html>
 <html lang="ar">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام تسجيل الدخول والتسجيل - أذكار كوين</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            direction: rtl;
-            text-align: center;
-        }
-
-        header {
-            padding: 20px;
-            background-color: #f4f4f4;
-            text-align: center;
-        }
-
-        #siteLogo {
-            font-size: 36px;
-            font-weight: bold;
-            color: #4CAF50; /* اللون المستخدم للشعار */
-        }
-
-        form {
-            margin: 20px;
-        }
-
-        input {
-            margin: 10px;
-            padding: 10px;
-            width: 250px;
-        }
-
-        button {
-            padding: 10px 20px;
-            cursor: pointer;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            font-size: 16px;
-        }
-
-        #logoutBtn {
-            display: none;
-        }
-
-        #mainPage {
-            display: none;
-        }
-
-        #userNameDisplay,
-        #userEmailDisplay {
-            font-size: 18px;
-            margin: 20px;
-        }
-
-        #miningSection {
-            display: none;
-        }
-    </style>
+    <title>أذكار كوين</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
-    <!-- رأس الصفحة مع شعار "أذكار كوين" -->
     <header>
-        <div id="siteLogo">أذكار كوين</div> <!-- الشعار النصي "أذكار كوين" -->
+        <div class="logo">
+            <h1>أذكار كوين</h1> <!-- تعديل اسم الموقع في الشعار -->
+        </div>
     </header>
 
-    <h1>نظام تسجيل الدخول والتسجيل</h1>
-
-    <!-- صفحة الدخول والتسجيل -->
-    <div id="mainPage">
-        <div id="userInfo">
-            <div id="userNameDisplay"></div>
-            <div id="userEmailDisplay"></div>
-            <button type="button" id="logoutBtn">تسجيل الخروج</button>
+    <div id="content">
+        <div id="loginForm">
+            <h2>تسجيل الدخول</h2>
+            <input type="text" id="usernameLogin" placeholder="اسم المستخدم" />
+            <input type="password" id="passwordLogin" placeholder="كلمة المرور" />
+            <button onclick="login()">تسجيل الدخول</button>
         </div>
 
-        <!-- التعدين -->
-        <div id="miningSection">
-            <h2>التعدين</h2>
-            <button id="mineBtn">ابدأ التعدين</button>
-            <p id="timerDisplay">المؤقت: 00:00:00</p>
-            <p id="minedCoinsDisplay">عدد العملات المستخرجة: 0</p>
+        <div id="registerForm">
+            <h2>التسجيل</h2>
+            <input type="email" id="emailRegister" placeholder="البريد الإلكتروني" />
+            <input type="text" id="usernameRegister" placeholder="اسم المستخدم" />
+            <input type="password" id="passwordRegister" placeholder="كلمة المرور" />
+            <input type="password" id="confirmPasswordRegister" placeholder="تأكيد كلمة المرور" />
+            <button onclick="register()">تسجيل</button>
+        </div>
+
+        <!-- الصفحة الرئيسية بعد تسجيل الدخول -->
+        <div id="mainPage" style="display: none;">
+            <h2>مرحبا بك في أذكار كوين!</h2> <!-- تعديل رسالة الترحيب -->
+            
+            <!-- عرض بيانات المستخدم -->
+            <div id="userInfo">
+                <p id="userNameDisplay">اسم المستخدم: </p> <!-- اسم المستخدم -->
+                <p id="userEmailDisplay">البريد الإلكتروني: </p> <!-- البريد الإلكتروني -->
+            </div>
+
+            <!-- أزرار العرض -->
+            <button id="showAyahBtn">عرض آية</button>
+            <button id="showHadithBtn">عرض حديث</button>
+            <button id="showDhikrBtn">عرض ذكر</button>
+            <button id="mineBtn" disabled>بدء التعدين</button>
+            <div id="timer">المؤقت: 00:00:00</div>
+            <div id="minedCoins">عدد العملات المستخرجة: 0</div>
         </div>
     </div>
 
-    <!-- نموذج تسجيل الدخول -->
-    <form id="loginForm">
-        <h3>تسجيل الدخول</h3>
-        <input type="text" id="usernameLogin" placeholder="اسم المستخدم" />
-        <input type="password" id="passwordLogin" placeholder="كلمة المرور" />
-        <button type="button" id="loginBtn">تسجيل الدخول</button>
-    </form>
-
-    <!-- نموذج التسجيل -->
-    <form id="registerForm">
-        <h3>التسجيل</h3>
-        <input type="email" id="emailRegister" placeholder="البريد الإلكتروني" />
-        <input type="text" id="usernameRegister" placeholder="اسم المستخدم" />
-        <input type="password" id="passwordRegister" placeholder="كلمة المرور" />
-        <input type="password" id="confirmPasswordRegister" placeholder="تأكيد كلمة المرور" />
-        <button type="button" id="registerBtn">التسجيل</button>
-    </form>
-
-    <script>
-        // عند تحميل الصفحة
-        document.addEventListener("DOMContentLoaded", function () {
-            // إضافة الأحداث للأزرار
-            document.getElementById("loginBtn").addEventListener("click", login);
-            document.getElementById("registerBtn").addEventListener("click", register);
-            document.getElementById("logoutBtn").addEventListener("click", logout);
-
-            // التحقق من حالة تسجيل الدخول عند تحميل الصفحة
-            if (localStorage.getItem("username")) {
-                showUserInfo();
-            }
-        });
-
-        // دالة تسجيل الدخول
-        function login() {
-            const username = document.getElementById("usernameLogin").value;
-            const password = document.getElementById("passwordLogin").value;
-
-            if (username && password) {
-                localStorage.setItem("username", username);
-                localStorage.setItem("password", password);
-                window.location.reload();  // إعادة تحميل الصفحة
-            } else {
-                alert("الرجاء إدخال اسم المستخدم وكلمة المرور.");
-            }
-        }
-
-        // دالة التسجيل
-        function register() {
-            const email = document.getElementById("emailRegister").value;
-            const username = document.getElementById("usernameRegister").value;
-            const password = document.getElementById("passwordRegister").value;
-            const confirmPassword = document.getElementById("confirmPasswordRegister").value;
-
-            if (password === confirmPassword) {
-                localStorage.setItem("email", email);
-                localStorage.setItem("username", username);
-                localStorage.setItem("password", password);
-                alert("تم التسجيل بنجاح!");
-                window.location.reload();  // إعادة تحميل الصفحة بعد التسجيل
-            } else {
-                alert("كلمة المرور وتأكيد كلمة المرور غير متطابقتين.");
-            }
-        }
-
-        // دالة تسجيل الخروج
-        function logout() {
-            localStorage.clear();  // مسح بيانات المستخدم من التخزين المحلي
-            window.location.reload(); // إعادة تحميل الصفحة
-        }
-
-        // تفعيل واجهة المستخدم بعد تسجيل الدخول
-        function showUserInfo() {
-            const username = localStorage.getItem("username");
-            const email = localStorage.getItem("email");
-
-            if (username && email) {
-                document.getElementById("userNameDisplay").textContent = `اسم المستخدم: ${username}`;
-                document.getElementById("userEmailDisplay").textContent = `البريد الإلكتروني: ${email}`;
-                document.getElementById("mainPage").style.display = "block";  // إظهار الصفحة الرئيسية
-                document.getElementById("loginForm").style.display = "none"; // إخفاء نموذج الدخول
-                document.getElementById("registerForm").style.display = "none"; // إخفاء نموذج التسجيل
-                document.getElementById("logoutBtn").style.display = "inline"; // إظهار زر تسجيل الخروج
-                document.getElementById("miningSection").style.display = "block";  // إظهار قسم التعدين
-            }
-        }
-
-        // التعدين
-        let timer = 0;  // المؤقت بالثواني
-        let miningInterval; // المتغير الخاص بالـ setInterval
-        let minedCoins = 0; // عدد العملات المستخرجة
-        let miningActive = false; // حالة التعدين
-
-        // دالة التعدين
-        document.getElementById("mineBtn").addEventListener("click", () => {
-            if (miningActive) return; // إذا كان التعدين جارياً، لا نفعل شيئاً
-
-            miningActive = true;  // بدء التعدين
-            startMining();
-        });
-
-        // دالة بدء التعدين
-        function startMining() {
-            timer = 0;
-            minedCoins = 0; // إعادة تعيين عدد العملات المستخرجة
-            miningInterval = setInterval(() => {
-                timer++;
-                updateTimerDisplay(); // تحديث العرض عند كل ثانية
-            }, 1000); // تحديث المؤقت كل ثانية
-        }
-
-        // دالة تحديث المؤقت
-        function updateTimerDisplay() {
-            const hours = Math.floor(timer / 3600);
-            const minutes = Math.floor((timer % 3600) / 60);
-            const seconds = timer % 60;
-
-            document.getElementById("timerDisplay").textContent = `المؤقت: ${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
-
-            // التحقق إذا كان قد مر الوقت المحدد (8 ساعات)
-            if (timer >= 28800) { // 28800 ثانية = 8 ساعات
-                clearInterval(miningInterval); // إيقاف التعدين
-                minedCoins += 3; // إضافة 3 عملات عند مرور 8 ساعات
-                document.getElementById("minedCoinsDisplay").textContent = `عدد العملات المستخرجة: ${minedCoins}`;
-                miningActive = false;  // إيقاف حالة التعدين
-            }
-        }
-
-        // دالة لتنسيق الرقم ليظهر بصيغة تحتوي على صفر إذا كان أقل من 10
-        function padZero(num) {
-            return num < 10 ? '0' + num : num;
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
-
 </html>
