@@ -84,19 +84,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // استعلام API للأحاديث النبوية
-    async function getRandomHadith() {
-        try {
-            const response = await fetch("https://api.sunnah.com/v1/hadith/random");
-            const data = await response.json();
-            return data.data.hadith_text;
-        } catch (error) {
-            console.error("خطأ في جلب الحديث:", error);
-            return "حدث خطأ أثناء جلب الحديث.";
-        }
-    }
+    // مصفوفة الأحاديث النبوية
+    const hadiths = [
+        "قال رسول الله صلى الله عليه وسلم: (من لا يشكر الناس لا يشكر الله).",
+        "قال رسول الله صلى الله عليه وسلم: (إنما الأعمال بالنيات، وإنما لكل امرئ ما نوى).",
+        "قال رسول الله صلى الله عليه وسلم: (من لا يرحم الناس لا يرحمه الله).",
+        "قال رسول الله صلى الله عليه وسلم: (لا تؤذوا عباد الله، ولا تعينوا على ظلمهم).",
+        "قال رسول الله صلى الله عليه وسلم: (الدين النصيحة)."
+    ];
 
-    // أذكار ثابتة
+    // استعلام API للأذكار
     const dhikrs = [
         "سبحان الله وبحمده، سبحان الله العظيم",
         "اللهم صلِّ وسلم على نبينا محمد",
@@ -110,8 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("آية من القرآن الكريم: " + randomAyah);
     });
 
-    showHadithBtn.addEventListener("click", async () => {
-        const randomHadith = await getRandomHadith();
+    showHadithBtn.addEventListener("click", () => {
+        const randomHadith = hadiths[Math.floor(Math.random() * hadiths.length)];
         alert("حديث نبوي: " + randomHadith);
     });
 
