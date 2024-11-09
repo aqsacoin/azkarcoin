@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const showHadithBtn = document.getElementById("showHadithBtn");
     const showDhikrBtn = document.getElementById("showDhikrBtn");
     const mineBtn = document.getElementById("mineBtn");
+    const logoutBtn = document.getElementById("logoutBtn"); // إضافة زر تسجيل الخروج
     const userNameDisplay = document.getElementById("userNameDisplay");
     const userEmailDisplay = document.getElementById("userEmailDisplay");
     const timerDisplay = document.getElementById("timer");
@@ -141,22 +142,4 @@ document.addEventListener("DOMContentLoaded", () => {
         timerDisplay.textContent = `المؤقت: ${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
         
         // التحقق إذا كان قد مر 24 ساعة
-        if (timer >= 86400) { // 86400 ثانية = 24 ساعة
-            stopMining();
-            minedCoins += 3; // إضافة 3 عملات بعد كل 24 ساعة
-            minedCoinsDisplay.textContent = `عدد العملات المستخرجة: ${minedCoins}`;
-        }
-    }
-
-    // دالة إيقاف التعدين
-    function stopMining() {
-        clearInterval(miningInterval); // إيقاف المؤقت
-        mineBtn.disabled = false; // تمكين زر التعدين مرة أخرى
-        timer = 0; // إعادة تعيين المؤقت
-    }
-
-    // دالة إضافة صفر أمام الأرقام الصغيرة
-    function padZero(num) {
-        return num < 10 ? '0' + num : num;
-    }
-});
+        if (timer >= 864
