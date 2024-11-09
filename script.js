@@ -31,6 +31,7 @@ const registerForm = document.getElementById("registerForm");
 const mainPage = document.getElementById("mainPage");
 const userNameDisplay = document.getElementById("userNameDisplay");
 const userEmailDisplay = document.getElementById("userEmailDisplay");
+const logoutBtn = document.getElementById("logoutBtn"); // زر تسجيل الخروج
 
 let minedCoins = 0;
 let timer = localStorage.getItem('timer') ? parseInt(localStorage.getItem('timer')) : 8 * 60 * 60; // 8 ساعات بالثواني
@@ -119,7 +120,16 @@ function updateUI() {
     minedCoinsDisplay.textContent = `عدد العملات المستخرجة: ${minedCoins}`;
 }
 
+// تسجيل الخروج
+logoutBtn.addEventListener("click", () => {
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("miningActive");
+    localStorage.removeItem("timer");
+    alert("تم تسجيل الخروج بنجاح.");
+    window.location.reload(); // إعادة تحميل الصفحة بعد تسجيل الخروج
+});
+
 // التحقق إذا كان التعدين نشطاً عند تحميل الصفحة
 if (miningActive) {
     startMining();  // إذا كان التعدين نشطًا عند تحميل الصفحة، استئناف التعدين
-                }
+}
