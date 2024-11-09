@@ -31,7 +31,7 @@ const registerForm = document.getElementById("registerForm");
 const mainPage = document.getElementById("mainPage");
 const userNameDisplay = document.getElementById("userNameDisplay");
 const userEmailDisplay = document.getElementById("userEmailDisplay");
-const logoutBtn = document.getElementById("logoutBtn"); // زر تسجيل الخروج
+const logoutBtn = document.getElementById("logoutBtn");
 
 let minedCoins = 0;
 let timer = localStorage.getItem('timer') ? parseInt(localStorage.getItem('timer')) : 8 * 60 * 60; // 8 ساعات بالثواني
@@ -46,6 +46,49 @@ let dhikrClicked = false;
 if (localStorage.getItem("loggedInUser")) {
     loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     showMainPage();
+}
+
+// دالة التسجيل
+registerForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const username = registerForm.username.value;
+    const email = registerForm.email.value;
+    const password = registerForm.password.value;
+
+    if (username && email && password) {
+        const newUser = { username, email, password };
+        localStorage.setItem("user_" + email, JSON.stringify(newUser));
+        alert("تم التسجيل بنجاح. يمكنك الآن تسجيل الدخول.");
+        registerForm.reset();
+    } else {
+        alert("يرجى ملء جميع الحقول.");
+    }
+});
+
+// دالة تسجيل الدخول
+loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = loginForm.email.value;
+    const password = loginForm.password.value;
+
+    const storedUser = JSON.parse(localStorage.getItem("user_" + email));
+    if (storedUser && storedUser.password === password) {
+        loggedInUser = storedUser;
+        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
+        showMainPage();
+    } else {
+        alert("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
+    }
+});
+
+// دالة عرض الصفحة الرئيسية بعد تسجيل الدخول
+function showMainPage() {
+    loginForm.style.display = "none";
+    registerForm.style.display = "none";
+    mainPage.style.display = "block";
+    userNameDisplay.textContent = `مرحبًا، ${loggedInUser.username}`;
+    userEmailDisplay.textContent = `بريدك الإلكتروني: ${loggedInUser.email}`;
+    updateUI();
 }
 
 // عرض آية
@@ -90,7 +133,7 @@ mineBtn.addEventListener("click", () => {
 
 function startMining() {
     let interval = setInterval(function () {
-        if (!miningActive) { // شرط إضافي للتأكد من أن التعدين مستمر
+        if (!miningActive) {
             clearInterval(interval);
             return;
         }
@@ -106,7 +149,7 @@ function startMining() {
         } else {
             timer--;
             updateUI();
-            localStorage.setItem('timer', timer); // تحديث الوقت المتبقي في كل ثانية
+            localStorage.setItem('timer', timer);
         }
     }, 1000);
 }
@@ -126,10 +169,10 @@ logoutBtn.addEventListener("click", () => {
     localStorage.removeItem("miningActive");
     localStorage.removeItem("timer");
     alert("تم تسجيل الخروج بنجاح.");
-    window.location.reload(); // إعادة تحميل الصفحة بعد تسجيل الخروج
+    window.location.reload();
 });
 
 // التحقق إذا كان التعدين نشطاً عند تحميل الصفحة
 if (miningActive) {
-    startMining();  // إذا كان التعدين نشطًا عند تحميل الصفحة، استئناف التعدين
+    startMining();
 }
