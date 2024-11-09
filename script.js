@@ -1,49 +1,16 @@
-let timer = 28800;  // المؤقت يبدأ من 8 ساعات (28800 ثانية)
-let miningInterval; // المتغير الخاص بالـ setInterval
-let minedCoins = 0; // عدد العملات المستخرجة
-let miningActive = false; // حالة التعدين
+document.addEventListener("DOMContentLoaded", function () {
+    // إضافة الأحداث لأزرار التسجيل وتسجيل الدخول
+    document.getElementById("loginBtn").addEventListener("click", login);
+    document.getElementById("registerBtn").addEventListener("click", register);
+    document.getElementById("logoutBtn").addEventListener("click", logout);
 
-// دالة التعدين
-mineBtn.addEventListener("click", () => {
-    if (mineBtn.disabled || miningActive) return; // إذا كان الزر معطلًا أو التعدين جاري، لا نفعل أي شيء
-
-    mineBtn.disabled = true; // تعطيل زر التعدين أثناء التعدين
-    miningActive = true;  // بدء التعدين
-    startMining();
+    // التحقق من حالة تسجيل الدخول عند تحميل الصفحة
+    if (localStorage.getItem("username")) {
+        showUserInfo();
+    }
 });
 
-// دالة بدء التعدين
-function startMining() {
-    miningInterval = setInterval(() => {
-        timer--;  // تقليل الوقت بمقدار ثانية كل مرة
-        updateTimerDisplay(); // تحديث العرض عند كل ثانية
-    }, 1000); // تحديث المؤقت كل ثانية
-}
-
-// دالة تحديث المؤقت
-function updateTimerDisplay() {
-    const hours = Math.floor(timer / 3600);
-    const minutes = Math.floor((timer % 3600) / 60);
-    const seconds = timer % 60;
-
-    timerDisplay.textContent = `المؤقت: ${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
-    
-    // التحقق إذا انتهت الـ 8 ساعات
-    if (timer <= 0) { // إذا انتهت الـ 8 ساعات
-        clearInterval(miningInterval); // إيقاف التعدين
-        minedCoins += 3; // إضافة 3 عملات عند انتهاء الوقت
-        minedCoinsDisplay.textContent = `عدد العملات المستخرجة: ${minedCoins}`;
-        mineBtn.disabled = false; // إعادة تفعيل زر التعدين
-        miningActive = false;  // إيقاف حالة التعدين
-    }
-}
-
-// دالة لتنسيق الرقم ليظهر بصيغة تحتوي على صفر إذا كان أقل من 10
-function padZero(num) {
-    return num < 10 ? '0' + num : num;
-}
-
-// تسجيل الدخول
+// دالة تسجيل الدخول
 function login() {
     const username = document.getElementById("usernameLogin").value;
     const password = document.getElementById("passwordLogin").value;
@@ -51,13 +18,13 @@ function login() {
     if (username && password) {
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
-        window.location.reload();
+        window.location.reload();  // إعادة تحميل الصفحة
     } else {
         alert("الرجاء إدخال اسم المستخدم وكلمة المرور.");
     }
 }
 
-// التسجيل
+// دالة التسجيل
 function register() {
     const email = document.getElementById("emailRegister").value;
     const username = document.getElementById("usernameRegister").value;
@@ -69,12 +36,13 @@ function register() {
         localStorage.setItem("username", username);
         localStorage.setItem("password", password);
         alert("تم التسجيل بنجاح!");
+        window.location.reload();  // إعادة تحميل الصفحة بعد التسجيل
     } else {
         alert("كلمة المرور وتأكيد كلمة المرور غير متطابقتين.");
     }
 }
 
-// تسجيل الخروج
+// دالة تسجيل الخروج
 function logout() {
     localStorage.clear();  // مسح بيانات المستخدم من التخزين المحلي
     window.location.reload(); // إعادة تحميل الصفحة
@@ -94,12 +62,7 @@ function showUserInfo() {
     }
 }
 
-// التحقق من حالة تسجيل الدخول
-if (localStorage.getItem("username")) {
-    showUserInfo();
-}
-
-// الآيات، الأحاديث والأذكار
+// الأيات، الأحاديث، والأذكار
 const ayat = [
     "وَقَالَ رَبُّكُمْ ادْعُونِي أَسْتَجِبْ لَكُمْ",
     "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
@@ -133,3 +96,49 @@ document.getElementById("showDhikrBtn").addEventListener("click", () => {
     const randomDhikr = dhikr[Math.floor(Math.random() * dhikr.length)];
     alert(randomDhikr);
 });
+
+// التعدين
+let timer = 0;  // المؤقت بالثواني
+let miningInterval; // المتغير الخاص بالـ setInterval
+let minedCoins = 0; // عدد العملات المستخرجة
+let miningActive = false; // حالة التعدين
+
+// دالة التعدين
+document.getElementById("mineBtn").addEventListener("click", () => {
+    if (miningActive) return; // إذا كان التعدين جارياً، لا نفعل شيئاً
+
+    miningActive = true;  // بدء التعدين
+    startMining();
+});
+
+// دالة بدء التعدين
+function startMining() {
+    timer = 0;
+    minedCoins = 0; // إعادة تعيين عدد العملات المستخرجة
+    miningInterval = setInterval(() => {
+        timer++;
+        updateTimerDisplay(); // تحديث العرض عند كل ثانية
+    }, 1000); // تحديث المؤقت كل ثانية
+}
+
+// دالة تحديث المؤقت
+function updateTimerDisplay() {
+    const hours = Math.floor(timer / 3600);
+    const minutes = Math.floor((timer % 3600) / 60);
+    const seconds = timer % 60;
+
+    document.getElementById("timerDisplay").textContent = `المؤقت: ${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
+
+    // التحقق إذا كان قد مر الوقت المحدد (8 ساعات)
+    if (timer >= 28800) { // 28800 ثانية = 8 ساعات
+        clearInterval(miningInterval); // إيقاف التعدين
+        minedCoins += 3; // إضافة 3 عملات عند مرور 8 ساعات
+        document.getElementById("minedCoinsDisplay").textContent = `عدد العملات المستخرجة: ${minedCoins}`;
+        miningActive = false;  // إيقاف حالة التعدين
+    }
+}
+
+// دالة لتنسيق الرقم ليظهر بصيغة تحتوي على صفر إذا كان أقل من 10
+function padZero(num) {
+    return num < 10 ? '0' + num : num;
+}
