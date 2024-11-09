@@ -60,6 +60,7 @@ registerForm.addEventListener("submit", (e) => {
         localStorage.setItem("user_" + email, JSON.stringify(newUser));
         alert("تم التسجيل بنجاح. يمكنك الآن تسجيل الدخول.");
         registerForm.reset();
+        showMainPage(); // عرض الصفحة الرئيسية مباشرة بعد التسجيل
     } else {
         alert("يرجى ملء جميع الحقول.");
     }
