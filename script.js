@@ -29,20 +29,19 @@ const minedCoinsDisplay = document.getElementById("minedCoins");
 const loginForm = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 const mainPage = document.getElementById("mainPage");
-const userNameDisplay = document.getElementById("userNameDisplay");  // العنصر لعرض اسم المستخدم
-const userEmailDisplay = document.getElementById("userEmailDisplay");  // العنصر لعرض البريد الإلكتروني
+const userNameDisplay = document.getElementById("userNameDisplay");
+const userEmailDisplay = document.getElementById("userEmailDisplay");
 
 let minedCoins = 0;
 let timer = localStorage.getItem('timer') ? parseInt(localStorage.getItem('timer')) : 8 * 60 * 60; // 8 ساعات بالثواني
-let miningActive = localStorage.getItem('miningActive') === 'true'; // استرجاع حالة التعدين
-let canMine = false; // يتم تعيين هذه القيمة إلى true عندما يتم الضغط على جميع الأزرار
-let loggedInUser = null; // المتغير الذي يخزن المستخدم المسجل دخوله
+let miningActive = localStorage.getItem('miningActive') === 'true';
+let canMine = false;
+let loggedInUser = null;
 
 let ayahClicked = false;
 let hadithClicked = false;
 let dhikrClicked = false;
 
-// استرجاع حالة تسجيل الدخول
 if (localStorage.getItem("loggedInUser")) {
     loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
     showMainPage();
@@ -51,32 +50,31 @@ if (localStorage.getItem("loggedInUser")) {
 // عرض آية
 showAyahBtn.addEventListener("click", () => {
     const randomAyah = ayat[Math.floor(Math.random() * ayat.length)];
-    alert(randomAyah); // عرض الآية في نافذة منبثقة
-    ayahClicked = true; // تعيين متغير الضغط على الزر
-    checkIfCanMine(); // التحقق إذا يمكن بدء التعدين
+    alert(randomAyah);
+    ayahClicked = true;
+    checkIfCanMine();
 });
 
 // عرض حديث
 showHadithBtn.addEventListener("click", () => {
     const randomHadith = hadiths[Math.floor(Math.random() * hadiths.length)];
-    alert(randomHadith); // عرض الحديث في نافذة منبثقة
-    hadithClicked = true; // تعيين متغير الضغط على الزر
-    checkIfCanMine(); // التحقق إذا يمكن بدء التعدين
+    alert(randomHadith);
+    hadithClicked = true;
+    checkIfCanMine();
 });
 
 // عرض ذكر
 showDhikrBtn.addEventListener("click", () => {
     const randomDhikr = dhikrs[Math.floor(Math.random() * dhikrs.length)];
-    alert(randomDhikr); // عرض الذكر في نافذة منبثقة
-    dhikrClicked = true; // تعيين متغير الضغط على الزر
-    checkIfCanMine(); // التحقق إذا يمكن بدء التعدين
+    alert(randomDhikr);
+    dhikrClicked = true;
+    checkIfCanMine();
 });
 
-// التحقق إذا يمكن بدء التعدين
 function checkIfCanMine() {
     if (ayahClicked && hadithClicked && dhikrClicked) {
-        canMine = true; // تمكين التعدين بعد الضغط على جميع الأزرار
-        mineBtn.disabled = false; // تمكين زر التعدين
+        canMine = true;
+        mineBtn.disabled = false;
     }
 }
 
@@ -84,27 +82,30 @@ function checkIfCanMine() {
 mineBtn.addEventListener("click", () => {
     if (canMine && !miningActive) {
         miningActive = true;
-        localStorage.setItem('miningActive', 'true'); // تخزين حالة التعدين في localStorage
+        localStorage.setItem('miningActive', 'true');
         startMining();
     }
 });
 
-// مؤقت التعدين
 function startMining() {
     let interval = setInterval(function () {
+        if (!miningActive) { // شرط إضافي للتأكد من أن التعدين مستمر
+            clearInterval(interval);
+            return;
+        }
         if (timer <= 0) {
             clearInterval(interval);
             alert("تم التعدين! تم إضافة عملات جديدة.");
-            minedCoins += 3; // إضافة 3 عملات بعد 8 ساعات
+            minedCoins += 3;
             updateUI();
             miningActive = false;
-            canMine = false; // عدم السماح بالتعدين مرة أخرى
-            mineBtn.disabled = true; // تعطيل زر التعدين بعد أن انتهت المدة
-            localStorage.setItem('miningActive', 'false'); // تحديث حالة التعدين في localStorage
+            canMine = false;
+            mineBtn.disabled = true;
+            localStorage.setItem('miningActive', 'false');
         } else {
             timer--;
-            updateUI(); // تحديث المؤقت
-            localStorage.setItem('timer', timer); // حفظ الوقت المتبقي في localStorage
+            updateUI();
+            localStorage.setItem('timer', timer); // تحديث الوقت المتبقي في كل ثانية
         }
     }, 1000);
 }
@@ -118,58 +119,7 @@ function updateUI() {
     minedCoinsDisplay.textContent = `عدد العملات المستخرجة: ${minedCoins}`;
 }
 
-// دالة تسجيل الدخول
-function login() {
-    const username = document.getElementById("usernameLogin").value;
-    const password = document.getElementById("passwordLogin").value;
-
-    const storedUser = JSON.parse(localStorage.getItem(username));
-
-    if (storedUser && storedUser.password === password) {
-        loggedInUser = username;
-        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-        showMainPage();
-    } else {
-        alert("اسم المستخدم أو كلمة المرور غير صحيحة.");
-    }
-}
-
-// دالة التسجيل
-function register() {
-    const email = document.getElementById("emailRegister").value;
-    const username = document.getElementById("usernameRegister").value;
-    const password = document.getElementById("passwordRegister").value;
-    const confirmPassword = document.getElementById("confirmPasswordRegister").value;
-
-    if (password === confirmPassword) {
-        if (!localStorage.getItem(username)) {
-            // تخزين بيانات المستخدم في localStorage
-            const userData = { email: email, username: username, password: password };
-            localStorage.setItem(username, JSON.stringify(userData));
-            alert("تم التسجيل بنجاح!");
-            registerForm.style.display = "none";
-            loginForm.style.display = "block";
-        } else {
-            alert("اسم المستخدم موجود مسبقًا.");
-        }
-    } else {
-        alert("كلمة المرور وتأكيد كلمة المرور غير متطابقين.");
-    }
-}
-
-// دالة إظهار الصفحة الرئيسية بعد تسجيل الدخول
-function showMainPage() {
-    loginForm.style.display = "none";
-    registerForm.style.display = "none";
-    mainPage.style.display = "block";
-
-    // عرض بيانات المستخدم في الصفحة الشخصية
-    const userData = JSON.parse(localStorage.getItem(loggedInUser));
-    userNameDisplay.textContent = `اسم المستخدم: ${userData.username}`;
-    userEmailDisplay.textContent = `البريد الإلكتروني: ${userData.email}`;
-}
-
 // التحقق إذا كان التعدين نشطاً عند تحميل الصفحة
 if (miningActive) {
-    startMining();  // إذا كان التعدين نشطًا عند تحميل الصفحة، نبدأ التعدين مرة أخرى
-}
+    startMining();  // إذا كان التعدين نشطًا عند تحميل الصفحة، استئناف التعدين
+                }
