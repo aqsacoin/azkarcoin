@@ -120,6 +120,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // دالة التعدين
     mineBtn.addEventListener("click", () => {
+        if (mineBtn.disabled) return; // إذا كان الزر معطلًا، لا نفعل أي شيء
+
         mineBtn.disabled = true; // تعطيل زر التعدين أثناء التعدين
         startMining();
     });
@@ -142,4 +144,24 @@ document.addEventListener("DOMContentLoaded", () => {
         timerDisplay.textContent = `المؤقت: ${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
         
         // التحقق إذا كان قد مر 24 ساعة
-        if (timer >= 864
+        if (timer >= 86400) {
+            clearInterval(miningInterval); // إيقاف التعدين
+            minedCoins += 3; // إضافة 3 عملات عند مرور 24 ساعة
+            minedCoinsDisplay.textContent = `عدد العملات المستخرجة: ${minedCoins}`;
+            mineBtn.disabled = false; // إعادة تفعيل زر التعدين
+        }
+    }
+
+    // دالة لتنسيق الرقم ليظهر بصيغة تحتوي على صفر إذا كان أقل من 10
+    function padZero(num) {
+        return num < 10 ? '0' + num : num;
+    }
+
+    // زر تسجيل الخروج
+    logoutBtn.addEventListener("click", () => {
+        localStorage.removeItem("loggedInUser");
+        loginForm.style.display = "block";
+        mainPage.style.display = "none";
+        alert("تم تسجيل الخروج بنجاح.");
+    });
+});
