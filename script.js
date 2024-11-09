@@ -1,4 +1,4 @@
-let timer = 0;  // المؤقت بالثواني
+let timer = 28800;  // المؤقت يبدأ من 8 ساعات (28800 ثانية)
 let miningInterval; // المتغير الخاص بالـ setInterval
 let minedCoins = 0; // عدد العملات المستخرجة
 let miningActive = false; // حالة التعدين
@@ -14,10 +14,8 @@ mineBtn.addEventListener("click", () => {
 
 // دالة بدء التعدين
 function startMining() {
-    timer = 0;
-    minedCoins = 0; // إعادة تعيين عدد العملات المستخرجة
     miningInterval = setInterval(() => {
-        timer++;
+        timer--;  // تقليل الوقت بمقدار ثانية كل مرة
         updateTimerDisplay(); // تحديث العرض عند كل ثانية
     }, 1000); // تحديث المؤقت كل ثانية
 }
@@ -30,10 +28,10 @@ function updateTimerDisplay() {
 
     timerDisplay.textContent = `المؤقت: ${padZero(hours)}:${padZero(minutes)}:${padZero(seconds)}`;
     
-    // التحقق إذا كان قد مر 24 ساعة
-    if (timer >= 86400) { // 86400 ثانية = 24 ساعة
+    // التحقق إذا انتهت الـ 8 ساعات
+    if (timer <= 0) { // إذا انتهت الـ 8 ساعات
         clearInterval(miningInterval); // إيقاف التعدين
-        minedCoins += 3; // إضافة 3 عملات عند مرور 24 ساعة
+        minedCoins += 3; // إضافة 3 عملات عند انتهاء الوقت
         minedCoinsDisplay.textContent = `عدد العملات المستخرجة: ${minedCoins}`;
         mineBtn.disabled = false; // إعادة تفعيل زر التعدين
         miningActive = false;  // إيقاف حالة التعدين
