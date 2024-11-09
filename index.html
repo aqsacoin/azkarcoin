@@ -9,7 +9,7 @@
 <body>
     <header>
         <div class="logo">
-            <h1>أذكار كوين</h1> <!-- تعديل اسم الموقع في الشعار -->
+            <h1>أذكار كوين</h1>
         </div>
     </header>
 
@@ -18,7 +18,7 @@
             <h2>تسجيل الدخول</h2>
             <input type="text" id="usernameLogin" placeholder="اسم المستخدم" />
             <input type="password" id="passwordLogin" placeholder="كلمة المرور" />
-            <button id="loginBtn">تسجيل الدخول</button> <!-- تعديل الزر ليتوافق مع الـ JS -->
+            <button id="loginBtn">تسجيل الدخول</button>
         </div>
 
         <div id="registerForm">
@@ -27,17 +27,17 @@
             <input type="text" id="usernameRegister" placeholder="اسم المستخدم" />
             <input type="password" id="passwordRegister" placeholder="كلمة المرور" />
             <input type="password" id="confirmPasswordRegister" placeholder="تأكيد كلمة المرور" />
-            <button id="registerBtn">تسجيل</button> <!-- تعديل الزر ليتوافق مع الـ JS -->
+            <button id="registerBtn">تسجيل</button>
         </div>
 
         <!-- الصفحة الرئيسية بعد تسجيل الدخول -->
         <div id="mainPage" style="display: none;">
-            <h2>مرحبا بك في أذكار كوين!</h2> <!-- تعديل رسالة الترحيب -->
+            <h2>مرحبا بك في أذكار كوين!</h2>
             
             <!-- عرض بيانات المستخدم -->
             <div id="userInfo">
-                <p id="userNameDisplay">اسم المستخدم: </p> <!-- اسم المستخدم -->
-                <p id="userEmailDisplay">البريد الإلكتروني: </p> <!-- البريد الإلكتروني -->
+                <p id="userNameDisplay">اسم المستخدم: </p>
+                <p id="userEmailDisplay">البريد الإلكتروني: </p>
             </div>
 
             <!-- أزرار العرض -->
@@ -47,6 +47,8 @@
             <button id="mineBtn" disabled>بدء التعدين</button>
             <div id="timer">المؤقت: 00:00:00</div>
             <div id="minedCoins">عدد العملات المستخرجة: 0</div>
+            <!-- زر تسجيل الخروج -->
+            <button id="logoutBtn">تسجيل الخروج</button>
         </div>
     </div>
 
