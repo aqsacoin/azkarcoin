@@ -165,7 +165,8 @@
                 <a href="https://www.youtube.com" target="_blank">إنضم إلي يوتيوب</a>
             </div>
             <div class="task-link">
-                <a href="https://t.me" target="_blank">إنضم إلي قناة التليجرام</a>
+                <!-- الرابط الذي طلبته -->
+                <a href="https://t.me/pinetwork_10" target="_blank">إنضم إلي قناة التليجرام</a>
             </div>
             <div class="task-link">
                 <a href="https://t.me" target="_blank">إنضم إلي مجموعة التليجرام</a>
@@ -237,4 +238,13 @@
 
         function showDailyTasks() {
             document.getElementById('task-daily').style.display = 'block';
-            document
+            document.getElementById('task-links').style.display = 'none';
+        }
+
+        function confirmTask() {
+            var code = document.getElementById('code-input').value;
+            alert("تم تأكيد الكود: " + code);
+        }
+    </script>
+</body>
+</html>
