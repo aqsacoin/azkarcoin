@@ -1,55 +1,64 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أذكار كوين</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AzkarCoin</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <h1>أذكار كوين</h1> <!-- تعديل اسم الموقع في الشعار -->
-        </div>
-    </header>
+  <div class="background"></div>
+  <div class="container">
+    <h1>AzkarCoin</h1>
 
-    <div id="content">
-        <div id="loginForm">
-            <h2>تسجيل الدخول</h2>
-            <input type="text" id="usernameLogin" placeholder="اسم المستخدم" />
-            <input type="password" id="passwordLogin" placeholder="كلمة المرور" />
-            <button onclick="login()">تسجيل الدخول</button>
-        </div>
+    <!-- نموذج تسجيل الدخول -->
+    <div class="form-container">
+      <div id="login-form">
+        <form id="login" action="javascript:void(0);">
+          <input type="text" id="login-username" placeholder="اسم المستخدم" required>
+          <input type="password" id="login-password" placeholder="كلمة المرور" required>
+          <button type="submit" onclick="loginUser()">تسجيل الدخول</button>
+        </form>
+        <button onclick="switchToRegister()">إنشاء حساب جديد</button>
+      </div>
 
-        <div id="registerForm">
-            <h2>التسجيل</h2>
-            <input type="email" id="emailRegister" placeholder="البريد الإلكتروني" />
-            <input type="text" id="usernameRegister" placeholder="اسم المستخدم" />
-            <input type="password" id="passwordRegister" placeholder="كلمة المرور" />
-            <input type="password" id="confirmPasswordRegister" placeholder="تأكيد كلمة المرور" />
-            <button onclick="register()">تسجيل</button>
-        </div>
-
-        <!-- الصفحة الرئيسية بعد تسجيل الدخول -->
-        <div id="mainPage" style="display: none;">
-            <h2>مرحبا بك في أذكار كوين!</h2> <!-- تعديل رسالة الترحيب -->
-            
-            <!-- عرض بيانات المستخدم -->
-            <div id="userInfo">
-                <p id="userNameDisplay">اسم المستخدم: </p> <!-- اسم المستخدم -->
-                <p id="userEmailDisplay">البريد الإلكتروني: </p> <!-- البريد الإلكتروني -->
-            </div>
-
-            <!-- أزرار العرض -->
-            <button id="showAyahBtn">عرض آية</button>
-            <button id="showHadithBtn">عرض حديث</button>
-            <button id="showDhikrBtn">عرض ذكر</button>
-            <button id="mineBtn" disabled>بدء التعدين</button>
-            <div id="timer">المؤقت: 00:00:00</div>
-            <div id="minedCoins">عدد العملات المستخرجة: 0</div>
-        </div>
+      <!-- نموذج التسجيل -->
+      <div id="register-form" style="display:none;">
+        <form id="register" action="javascript:void(0);">
+          <input type="text" id="register-username" placeholder="اسم المستخدم" required>
+          <input type="email" id="register-email" placeholder="البريد الإلكتروني" required>
+          <input type="password" id="register-password" placeholder="كلمة المرور" required>
+          <input type="password" id="register-password-repeat" placeholder="أعد إدخال كلمة المرور" required>
+          <button type="submit" onclick="registerUser()">إنشاء حساب</button>
+        </form>
+        <button onclick="switchToLogin()">العودة لتسجيل الدخول</button>
+      </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- صفحة المستخدم بعد تسجيل الدخول -->
+    <div id="user-dashboard" style="display:none;">
+      <h2>أهلاً بك في AzkarCoin، <span id="username-display"></span></h2>
+      <div id="user-info">
+        <p>عدد العملات: <span id="user-coins">0</span></p>
+        <p>عدد العملات من الإحالات: <span id="referral-coins">0</span></p>
+      </div>
+
+      <div id="azkar-buttons">
+        <button id="allahuAkbar-btn" onclick="playAzkarSound('allahuAkbar')" disabled>الله أكبر</button>
+        <button id="alhamdulillah-btn" onclick="playAzkarSound('alhamdulillah')" disabled>الحمد لله</button>
+        <button id="laIlahaIllallah-btn" onclick="playAzkarSound('laIlahaIllallah')" disabled>لا إله إلا الله</button>
+        <button id="subhanAllah-btn" onclick="playAzkarSound('subhanAllah')" disabled>سبحان الله</button>
+      </div>
+
+      <div id="mining-section">
+        <button id="start-mining-btn" onclick="startMining()">ابدأ التعدين</button>
+        <div id="mining-timer"></div>
+        <p id="mining-info">اضغط على "ابدأ التعدين" للحصول على عملات AzkarCoin!</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
