@@ -145,6 +145,33 @@
             background-color: #2f5d62;
             transform: translateY(-3px);
         }
+
+        .task-button-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .task-button-wrapper input {
+            padding: 8px;
+            margin-left: 10px;
+            border-radius: 5px;
+            width: 150px;
+        }
+
+        .task-button-wrapper button {
+            background-color: #f0a500;
+            border: none;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        .task-button-wrapper button:hover {
+            background-color: #2f5d62;
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body>
@@ -161,90 +188,63 @@
 
         <div id="task-links" style="display:none;">
             <h2>المهام</h2>
-            <div class="task-link">
-                <a href="https://www.youtube.com" target="_blank">إنضم إلي يوتيوب</a>
+            <div class="task-button-wrapper">
+                <a href="https://www.youtube.com" target="_blank">
+                    <button>شاهد لتربح</button>
+                </a>
+                <input type="text" placeholder="أدخل الكود هنا">
+                <button onclick="confirmTask()">تأكيد المهمة</button>
             </div>
-            <div class="task-link">
-                <!-- الرابط الذي طلبته -->
-                <a href="https://t.me/pinetwork_10" target="_blank">إنضم إلي قناة التليجرام</a>
+            <div class="task-button-wrapper">
+                <a href="https://t.me/pinetwork_10" target="_blank">
+                    <button>شاهد لتربح</button>
+                </a>
+                <input type="text" placeholder="أدخل الكود هنا">
+                <button onclick="confirmTask()">تأكيد المهمة</button>
             </div>
-            <div class="task-link">
-                <a href="https://t.me" target="_blank">إنضم إلي مجموعة التليجرام</a>
+            <div class="task-button-wrapper">
+                <a href="https://t.me" target="_blank">
+                    <button>شاهد لتربح</button>
+                </a>
+                <input type="text" placeholder="أدخل الكود هنا">
+                <button onclick="confirmTask()">تأكيد المهمة</button>
             </div>
         </div>
 
         <div id="task-daily" style="display:none;">
             <h2>المهام اليومية</h2>
             <!-- 10 حقول لمهام يوتيوب -->
-            <div class="task-daily-field">
-                <input type="text" placeholder="أدخل رابط الفيديو">
-                <button>شاهد لتربح</button>
+            <div class="task-button-wrapper">
+                <a href="#" target="_blank">
+                    <button>شاهد لتربح</button>
+                </a>
+                <input type="text" placeholder="أدخل الكود هنا">
+                <button onclick="confirmTask()">تأكيد المهمة</button>
             </div>
-            <div class="task-daily-field">
-                <input type="text" placeholder="أدخل رابط الفيديو">
-                <button>شاهد لتربح</button>
+            <div class="task-button-wrapper">
+                <a href="#" target="_blank">
+                    <button>شاهد لتربح</button>
+                </a>
+                <input type="text" placeholder="أدخل الكود هنا">
+                <button onclick="confirmTask()">تأكيد المهمة</button>
             </div>
-            <div class="task-daily-field">
-                <input type="text" placeholder="أدخل رابط الفيديو">
-                <button>شاهد لتربح</button>
+            <div class="task-button-wrapper">
+                <a href="#" target="_blank">
+                    <button>شاهد لتربح</button>
+                </a>
+                <input type="text" placeholder="أدخل الكود هنا">
+                <button onclick="confirmTask()">تأكيد المهمة</button>
             </div>
-            <div class="task-daily-field">
-                <input type="text" placeholder="أدخل رابط الفيديو">
-                <button>شاهد لتربح</button>
+            <div class="task-button-wrapper">
+                <a href="#" target="_blank">
+                    <button>شاهد لتربح</button>
+                </a>
+                <input type="text" placeholder="أدخل الكود هنا">
+                <button onclick="confirmTask()">تأكيد المهمة</button>
             </div>
-            <div class="task-daily-field">
-                <input type="text" placeholder="أدخل رابط الفيديو">
-                <button>شاهد لتربح</button>
-            </div>
-            <div class="task-daily-field">
-                <input type="text" placeholder="أدخل رابط الفيديو">
-                <button>شاهد لتربح</button>
-            </div>
-            <div class="task-daily-field">
-                <input type="text" placeholder="أدخل رابط الفيديو">
-                <button>شاهد لتربح</button>
-            </div>
-            <div class="task-daily-field">
-                <input type="text" placeholder="أدخل رابط الفيديو">
-                <button>شاهد لتربح</button>
-            </div>
-            <div class="task-daily-field">
-                <input type="text" placeholder="أدخل رابط الفيديو">
-                <button>شاهد لتربح</button>
-            </div>
-            <div class="task-daily-field">
-                <input type="text" placeholder="أدخل رابط الفيديو">
-                <button>شاهد لتربح</button>
-            </div>
-        </div>
-
-        <div id="task-code">
-            <label for="code-input">أدخل الكود بعد إتمام المهمة:</label>
-            <input type="text" id="code-input" placeholder="أدخل الكود هنا">
-        </div>
-
-        <!-- زر تأكيد الكود -->
-        <button id="confirm-task-btn" onclick="confirmTask()">تأكيد الكود</button>
-
-        <!-- زر العودة إلى الصفحة الرئيسية -->
-        <button id="back-home-btn" onclick="window.location.href='index.html'">العودة إلى الصفحة الرئيسية</button>
-    </div>
-
-    <script>
-        function showTasks() {
-            document.getElementById('task-links').style.display = 'block';
-            document.getElementById('task-daily').style.display = 'none';
-        }
-
-        function showDailyTasks() {
-            document.getElementById('task-daily').style.display = 'block';
-            document.getElementById('task-links').style.display = 'none';
-        }
-
-        function confirmTask() {
-            var code = document.getElementById('code-input').value;
-            alert("تم تأكيد الكود: " + code);
-        }
-    </script>
-</body>
-</html>
+            <div class="task-button-wrapper">
+                <a href="#" target="_blank">
+                    <button>شاهد لتربح</button>
+                </a>
+                <input type="text" placeholder="أدخل الكود هنا">
+                <button
