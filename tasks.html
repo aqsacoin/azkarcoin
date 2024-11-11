@@ -101,6 +101,50 @@
             font-size: 1.1em;
             color: #f0a500;
         }
+
+        #back-home-btn, #confirm-task-btn {
+            padding: 12px 25px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+
+        #back-home-btn:hover, #confirm-task-btn:hover {
+            background-color: #218838;
+        }
+
+        #task-links, #task-daily {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .task-link, .task-daily-field {
+            margin: 10px 0;
+        }
+
+        .task-daily-field input {
+            width: 80%;
+            padding: 8px;
+            margin-right: 10px;
+            border-radius: 5px;
+        }
+
+        .task-daily-field button {
+            background-color: #f0a500;
+            border: none;
+            color: #fff;
+            padding: 8px 15px;
+            border-radius: 5px;
+        }
+
+        .task-daily-field button:hover {
+            background-color: #2f5d62;
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body>
@@ -109,27 +153,88 @@
     <div class="container">
         <h1>صفحة المهام اليومية</h1>
         
-        <div id="task-section">
-            <h2>المهام المتاحة</h2>
-            <div id="task-buttons">
-                <!-- زر المهمة 1 -->
-                <button onclick="startTask('مهمة 1')">مهمة 1: مشاهدة فيديو يوتيوب</button>
-                <button onclick="startTask('مهمة 2')">مهمة 2: التسجيل في صفحة</button>
-                <!-- إضافة المزيد من المهام هنا -->
+        <div id="task-buttons">
+            <!-- زر المهام -->
+            <button onclick="showTasks()">التحقق من المهام</button>
+            <button onclick="showDailyTasks()">التحقق من المهام اليومية</button>
+        </div>
+
+        <div id="task-links" style="display:none;">
+            <h2>المهام</h2>
+            <div class="task-link">
+                <a href="https://www.youtube.com" target="_blank">إنضم إلي يوتيوب</a>
             </div>
-            
-            <div id="task-code">
-                <label for="code-input">أدخل الكود بعد إتمام المهمة:</label>
-                <input type="text" id="code-input" placeholder="أدخل الكود هنا">
+            <div class="task-link">
+                <a href="https://t.me" target="_blank">إنضم إلي قناة التليجرام</a>
+            </div>
+            <div class="task-link">
+                <a href="https://t.me" target="_blank">إنضم إلي مجموعة التليجرام</a>
             </div>
         </div>
+
+        <div id="task-daily" style="display:none;">
+            <h2>المهام اليومية</h2>
+            <!-- 10 حقول لمهام يوتيوب -->
+            <div class="task-daily-field">
+                <input type="text" placeholder="أدخل رابط الفيديو">
+                <button>شاهد لتربح</button>
+            </div>
+            <div class="task-daily-field">
+                <input type="text" placeholder="أدخل رابط الفيديو">
+                <button>شاهد لتربح</button>
+            </div>
+            <div class="task-daily-field">
+                <input type="text" placeholder="أدخل رابط الفيديو">
+                <button>شاهد لتربح</button>
+            </div>
+            <div class="task-daily-field">
+                <input type="text" placeholder="أدخل رابط الفيديو">
+                <button>شاهد لتربح</button>
+            </div>
+            <div class="task-daily-field">
+                <input type="text" placeholder="أدخل رابط الفيديو">
+                <button>شاهد لتربح</button>
+            </div>
+            <div class="task-daily-field">
+                <input type="text" placeholder="أدخل رابط الفيديو">
+                <button>شاهد لتربح</button>
+            </div>
+            <div class="task-daily-field">
+                <input type="text" placeholder="أدخل رابط الفيديو">
+                <button>شاهد لتربح</button>
+            </div>
+            <div class="task-daily-field">
+                <input type="text" placeholder="أدخل رابط الفيديو">
+                <button>شاهد لتربح</button>
+            </div>
+            <div class="task-daily-field">
+                <input type="text" placeholder="أدخل رابط الفيديو">
+                <button>شاهد لتربح</button>
+            </div>
+            <div class="task-daily-field">
+                <input type="text" placeholder="أدخل رابط الفيديو">
+                <button>شاهد لتربح</button>
+            </div>
+        </div>
+
+        <div id="task-code">
+            <label for="code-input">أدخل الكود بعد إتمام المهمة:</label>
+            <input type="text" id="code-input" placeholder="أدخل الكود هنا">
+        </div>
+
+        <!-- زر تأكيد الكود -->
+        <button id="confirm-task-btn" onclick="confirmTask()">تأكيد الكود</button>
+
+        <!-- زر العودة إلى الصفحة الرئيسية -->
+        <button id="back-home-btn" onclick="window.location.href='index.html'">العودة إلى الصفحة الرئيسية</button>
     </div>
 
     <script>
-        function startTask(taskName) {
-            alert('تم بدء ' + taskName);
-            // هنا يمكن إضافة الكود لتحويل المستخدم إلى رابط الفيديو أو الصفحة الخاصة بالمهمة
+        function showTasks() {
+            document.getElementById('task-links').style.display = 'block';
+            document.getElementById('task-daily').style.display = 'none';
         }
-    </script>
-</body>
-</html>
+
+        function showDailyTasks() {
+            document.getElementById('task-daily').style.display = 'block';
+            document
