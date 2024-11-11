@@ -50,6 +50,26 @@ function loginUser() {
   }
 }
 
+// تشغيل صوت الذكر
+function playAudio(phrase) {
+  let audio;
+  switch (phrase) {
+    case "سبحان الله":
+      audio = new Audio("https://aqsacoin.github.io/azkarcoin/كاريoki_سبحان%20الله%20mp3.mp3");
+      break;
+    case "لا إله إلا الله":
+      audio = new Audio("https://aqsacoin.github.io/azkarcoin/كاريوكي_لا%20إله%20إلا%20الله%20mp3.mp3");
+      break;
+    case "الحمد لله":
+      audio = new Audio("https://aqsacoin.github.io/azkarcoin/كاريوكي_الحمد%20لله%20mp3.mp3");
+      break;
+    case "الله أكبر":
+      audio = new Audio("https://aqsacoin.github.io/azkarcoin/كاريوكي_الله%20أكبر%20mp3.mp3");
+      break;
+  }
+  if (audio) audio.play();
+}
+
 // بدء التعدين وإضافة العملات
 function startMining() {
   const lastMiningTime = localStorage.getItem("lastMiningTime");
