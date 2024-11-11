@@ -1,104 +1,132 @@
-/* الخلفية السوداء اللامعة */
+/* إعدادات عامة */
 body {
-    background: linear-gradient(45deg, #000000, #333333);
-    font-family: 'Amiri', serif;
-    color: white;
-    margin: 0;
-    padding: 0;
-}
-
-h1, h2, h3 {
-    text-align: center;
-    color: #F2A900;
-}
-
-button {
-    background-color: #F2A900;
-    color: white;
-    border: 2px solid #F2A900;
-    padding: 12px 25px;
-    font-size: 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-button:hover {
-    background-color: #FFC107;
-}
-
-.navbar {
-    background-color: #000000;
-    padding: 12px;
-    text-align: center;
-}
-
-.navbar a {
-    color: #F2A900;
-    text-decoration: none;
-    padding: 10px 20px;
-    margin: 0 8px;
-    font-size: 18px;
-}
-
-.navbar a:hover {
-    background-color: #FFC107;
-    border-radius: 5px;
+  font-family: 'Amiri', serif;
+  color: #fff; /* تغيير لون النصوص إلى أبيض للتناسب مع الخلفية السوداء */
+  background-color: #f2f3f4;
+  text-align: center;
+  overflow-x: hidden;
 }
 
 .container {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7); /* خلفية سوداء شفافة لامعة */
+  border-radius: 15px;
+  border: 2px solid rgba(0, 0, 0, 0.1); /* برواز أسود شفاف */
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
 }
 
-footer {
-    background-color: #000000;
-    color: white;
-    text-align: center;
-    padding: 15px;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+h1 {
+  color: #f0a500; /* تغيير لون العنوان ليصبح ذهبي للتباين مع الخلفية */
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #f0a500;
+  padding-bottom: 10px;
 }
 
-.form-container {
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 8px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    margin: 20px auto;
-    max-width: 400px;
+/* إعداد الخلفية بنمط الأرابيسك */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9BkN6Ce_uaJzHzMe-YYPOvf9SkIKMUmbTGagUZDqHLDyuEh5Z7EXv3FPE&s=10');
+  background-size: cover;
+  opacity: 0.08;
+  z-index: -1;
 }
 
-input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+/* إعدادات النموذج */
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid rgba(255, 255, 255, 0.3); /* برواز أبيض شفاف */
+  border-radius: 5px;
+  font-size: 1em;
+  color: #fff; /* تغيير لون النصوص داخل الحقول إلى أبيض */
+  background-color: rgba(255, 255, 255, 0.1); /* خلفية شفافة فاتحة */
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #F2A900;
-    border: none;
-    color: white;
-    border-radius: 5px;
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f0a500;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-button:disabled {
-    background-color: #ccc;
+/* تأثير ثلاثي الأبعاد للأزرار */
+.form-container button:hover {
+  background-color: #2f5d62;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
 }
 
-#timer {
-    font-size: 24px;
-    margin: 20px 0;
+/* صفحة المستخدم */
+#user-dashboard h2 {
+  color: #f0a500; /* تغيير اللون ليتناسب مع الخلفية السوداء */
 }
 
-#minedCoins {
-    font-size: 20px;
-    margin: 20px 0;
+#azkar-buttons {
+  display: flex;
+  flex-direction: row-reverse; /* ترتيب الأزرار من اليمين لليسار */
+  justify-content: center; /* محاذاة الأزرار إلى الوسط */
+}
+
+#azkar-buttons button {
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  background-color: #2f5d62;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#azkar-buttons button:hover {
+  background-color: #f0a500;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+}
+
+#azkar-buttons button:disabled {
+  background-color: #999;
+  box-shadow: none;
+  transform: none;
+}
+
+#mining-section {
+  margin-top: 20px;
+}
+
+#start-mining-btn {
+  background-color: #f0a500;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#start-mining-btn:hover {
+  background-color: #2f5d62;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+}
+
+#mining-timer {
+  margin-top: 15px;
+  font-size: 1.1em;
+  color: #f0a500; /* تغيير لون التوقيت ليصبح ذهبي */
 }
