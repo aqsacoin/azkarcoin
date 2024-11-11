@@ -6,10 +6,9 @@
     <title>صفحة المهام</title>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
     <style>
-        /* إعدادات عامة */
         body {
             font-family: 'Amiri', serif;
-            color: #fff; 
+            color: #fff;
             background-color: #f2f3f4;
             text-align: center;
             overflow-x: hidden;
@@ -19,9 +18,9 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background: rgba(0, 0, 0, 0.7); 
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 15px;
-            border: 2px solid rgba(0, 0, 0, 0.1); 
+            border: 2px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
         }
 
@@ -184,6 +183,8 @@
             <!-- زر المهام -->
             <button onclick="showTasks()">التحقق من المهام</button>
             <button onclick="showDailyTasks()">التحقق من المهام اليومية</button>
+            <!-- زر الرجوع -->
+            <button id="back-home-btn" onclick="goBackHome()">الرجوع للصفحة الرئيسية</button>
         </div>
 
         <div id="task-links" style="display:none;">
@@ -247,4 +248,4 @@
                     <button>شاهد لتربح</button>
                 </a>
                 <input type="text" placeholder="أدخل الكود هنا">
-                <button
+                <button onclick="confirmTask()">تأكيد المهمة</button
