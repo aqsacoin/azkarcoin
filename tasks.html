@@ -237,17 +237,20 @@
         function showTasks() {
             document.getElementById('task-links').style.display = 'block';
             document.getElementById('task-daily').style.display = 'none';
+            document.getElementById('task-buttons').style.display = 'none';
         }
 
         function showDailyTasks() {
             document.getElementById('task-links').style.display = 'none';
             document.getElementById('task-daily').style.display = 'block';
+            document.getElementById('task-buttons').style.display = 'none';
         }
 
         function goBackHome() {
             document.getElementById('task-links').style.display = 'none';
             document.getElementById('task-daily').style.display = 'none';
+            document.getElementById('task-buttons').style.display = 'block';
         }
 
         function confirmTask() {
-            alert("تم تأكيد المهمة
+            alert("تم تأكيد المهمة");
