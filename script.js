@@ -1,168 +1,110 @@
-// المصفوفات
-const ayat = [
-    "إِنَّ اللَّهَ وَمَلَائِكَتَهُ يُصَلُّونَ عَلَى النَّبِيِّ ۚ يَا أَيُّهَا الَّذِينَ آمَنُوا صَلُّوا عَلَيْهِ وَسَلِّمُوا تَسْلِيمًا",
-    "وَقُل رَّبُّ زِدْنِي عِلْمًا",
-    "قُلْ إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَاِي وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ",
-    // أضف باقي الآيات هنا
-];
-
-const hadiths = [
-    "قال رسول الله صلى الله عليه وسلم: من لا يشكر الناس لا يشكر الله.",
-    "قال رسول الله صلى الله عليه وسلم: خير الناس أنفعهم للناس.",
-    // أضف باقي الأحاديث هنا
-];
-
-const dhikrs = [
-    "سبحان الله والحمد لله ولا إله إلا الله والله أكبر",
-    "اللهم صل على محمد",
-    "اللهم اغفر لي ولأبوي وللمؤمنين",
-    // أضف باقي الأذكار هنا
-];
-
-// العناصر في الصفحة
-const showAyahBtn = document.getElementById("showAyahBtn");
-const showHadithBtn = document.getElementById("showHadithBtn");
-const showDhikrBtn = document.getElementById("showDhikrBtn");
-const mineBtn = document.getElementById("mineBtn");
-const timerDisplay = document.getElementById("timer");
-const minedCoinsDisplay = document.getElementById("minedCoins");
-const loginForm = document.getElementById("loginForm");
-const registerForm = document.getElementById("registerForm");
-const mainPage = document.getElementById("mainPage");
-const userNameDisplay = document.getElementById("userNameDisplay");  // العنصر لعرض اسم المستخدم
-const userEmailDisplay = document.getElementById("userEmailDisplay");  // العنصر لعرض البريد الإلكتروني
-
-let minedCoins = 0;
-let timer = localStorage.getItem('timer') ? parseInt(localStorage.getItem('timer')) : 8 * 60 * 60; // 8 ساعات بالثواني
-let miningActive = false;
-let canMine = false; // يتم تعيين هذه القيمة إلى true عندما يتم الضغط على جميع الأزرار
-let loggedInUser = null; // المتغير الذي يخزن المستخدم المسجل دخوله
-
-let ayahClicked = false;
-let hadithClicked = false;
-let dhikrClicked = false;
-
-// استرجاع حالة تسجيل الدخول
-if (localStorage.getItem("loggedInUser")) {
-    loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    showMainPage();
+// تبديل العرض بين نموذج تسجيل الدخول والتسجيل
+function switchToRegister() {
+  document.getElementById("login-form").style.display = "none";
+  document.getElementById("register-form").style.display = "block";
 }
 
-// عرض آية
-showAyahBtn.addEventListener("click", () => {
-    const randomAyah = ayat[Math.floor(Math.random() * ayat.length)];
-    alert(randomAyah); // عرض الآية في نافذة منبثقة
-    ayahClicked = true; // تعيين متغير الضغط على الزر
-    checkIfCanMine(); // التحقق إذا يمكن بدء التعدين
-});
-
-// عرض حديث
-showHadithBtn.addEventListener("click", () => {
-    const randomHadith = hadiths[Math.floor(Math.random() * hadiths.length)];
-    alert(randomHadith); // عرض الحديث في نافذة منبثقة
-    hadithClicked = true; // تعيين متغير الضغط على الزر
-    checkIfCanMine(); // التحقق إذا يمكن بدء التعدين
-});
-
-// عرض ذكر
-showDhikrBtn.addEventListener("click", () => {
-    const randomDhikr = dhikrs[Math.floor(Math.random() * dhikrs.length)];
-    alert(randomDhikr); // عرض الذكر في نافذة منبثقة
-    dhikrClicked = true; // تعيين متغير الضغط على الزر
-    checkIfCanMine(); // التحقق إذا يمكن بدء التعدين
-});
-
-// التحقق إذا يمكن بدء التعدين
-function checkIfCanMine() {
-    if (ayahClicked && hadithClicked && dhikrClicked) {
-        canMine = true; // تمكين التعدين بعد الضغط على جميع الأزرار
-        mineBtn.disabled = false; // تمكين زر التعدين
-    }
+function switchToLogin() {
+  document.getElementById("register-form").style.display = "none";
+  document.getElementById("login-form").style.display = "block";
 }
 
-// بدء التعدين
-mineBtn.addEventListener("click", () => {
-    if (canMine) {
-        miningActive = true;
-        startMining();
-    }
-});
+// تسجيل مستخدم جديد
+function registerUser() {
+  const username = document.getElementById("register-username").value;
+  const email = document.getElementById("register-email").value;
+  const password = document.getElementById("register-password").value;
+  const confirmPassword = document.getElementById("register-password-repeat").value;
 
-// مؤقت التعدين
+  if (password !== confirmPassword) {
+    alert("كلمتا المرور غير متطابقتين. الرجاء التأكد.");
+    return;
+  }
+
+  if (username && email && password) {
+    localStorage.setItem("username", username);
+    localStorage.setItem("password", password);
+
+    alert("تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.");
+    switchToLogin();
+  } else {
+    alert("الرجاء ملء جميع الحقول.");
+  }
+}
+
+// تسجيل الدخول
+function loginUser() {
+  const username = document.getElementById("login-username").value;
+  const password = document.getElementById("login-password").value;
+
+  const storedUsername = localStorage.getItem("username");
+  const storedPassword = localStorage.getItem("password");
+
+  if (username === storedUsername && password === storedPassword) {
+    document.getElementById("username-display").textContent = storedUsername;
+    document.getElementById("login-form").style.display = "none";
+    document.getElementById("user-dashboard").style.display = "block";
+    checkMiningStatus(); // تحقق من حالة التعدين عند تسجيل الدخول
+  } else {
+    alert("اسم المستخدم أو كلمة المرور غير صحيحة.");
+  }
+}
+
+// بدء التعدين وإضافة العملات
 function startMining() {
-    let interval = setInterval(function () {
-        if (timer <= 0) {
-            clearInterval(interval);
-            alert("تم التعدين! تم إضافة عملات جديدة.");
-            minedCoins += 3; // إضافة 3 عملات بعد 8 ساعات
-            updateUI();
-            miningActive = false;
-            canMine = false; // عدم السماح بالتعدين مرة أخرى
-            mineBtn.disabled = true; // تعطيل زر التعدين بعد أن انتهت المدة
-        } else {
-            timer--;
-            updateUI(); // تحديث المؤقت
-            localStorage.setItem('timer', timer); // حفظ الوقت المتبقي في localStorage
-        }
-    }, 1000);
+  const lastMiningTime = localStorage.getItem("lastMiningTime");
+  const now = new Date().getTime();
+
+  // التحقق إذا كان المستخدم قد بدأ التعدين في آخر 24 ساعة
+  if (lastMiningTime && now - lastMiningTime < 24 * 60 * 60 * 1000) {
+    alert("يجب الانتظار حتى انتهاء المؤقت قبل بدء التعدين مرة أخرى.");
+    return;
+  }
+
+  alert("تم بدء عملية التعدين! سيتم إضافة العملات إلى حسابك.");
+
+  let userCoins = document.getElementById("user-coins");
+  userCoins.textContent = parseInt(userCoins.textContent) + 3;
+
+  let referralCoins = document.getElementById("referral-coins");
+  referralCoins.textContent = parseInt(referralCoins.textContent) + 1;
+
+  // تخزين توقيت التعدين الأخير وتحديث المؤقت
+  localStorage.setItem("lastMiningTime", now);
+  startMiningTimer(24 * 60 * 60); // 24 ساعة بالثواني
 }
 
-// تحديث واجهة المستخدم
-function updateUI() {
-    let hours = Math.floor(timer / 3600);
-    let minutes = Math.floor((timer % 3600) / 60);
-    let seconds = timer % 60;
-    timerDisplay.textContent = `المؤقت: ${hours}:${minutes}:${seconds}`;
-    minedCoinsDisplay.textContent = `عدد العملات المستخرجة: ${minedCoins}`;
-}
+// بدء مؤقت التعدين
+function startMiningTimer(duration) {
+  const timerDisplay = document.getElementById("mining-timer");
+  let timer = duration;
 
-// دالة تسجيل الدخول
-function login() {
-    const username = document.getElementById("usernameLogin").value;
-    const password = document.getElementById("passwordLogin").value;
+  const interval = setInterval(function() {
+    const hours = Math.floor(timer / 3600);
+    const minutes = Math.floor((timer % 3600) / 60);
+    const seconds = timer % 60;
 
-    const storedUser = JSON.parse(localStorage.getItem(username));
+    timerDisplay.textContent = `الوقت المتبقي للتعدين: ${hours}:${minutes}:${seconds}`;
 
-    if (storedUser && storedUser.password === password) {
-        loggedInUser = username;
-        localStorage.setItem("loggedInUser", JSON.stringify(loggedInUser));
-        showMainPage();
-    } else {
-        alert("اسم المستخدم أو كلمة المرور غير صحيحة.");
+    if (--timer < 0) {
+      clearInterval(interval);
+      timerDisplay.textContent = "يمكنك بدء التعدين الآن!";
+      localStorage.removeItem("lastMiningTime");
     }
+  }, 1000);
 }
 
-// دالة التسجيل
-function register() {
-    const email = document.getElementById("emailRegister").value;
-    const username = document.getElementById("usernameRegister").value;
-    const password = document.getElementById("passwordRegister").value;
-    const confirmPassword = document.getElementById("confirmPasswordRegister").value;
+// التحقق من حالة التعدين عند تسجيل الدخول
+function checkMiningStatus() {
+  const lastMiningTime = localStorage.getItem("lastMiningTime");
+  const now = new Date().getTime();
 
-    if (password === confirmPassword) {
-        if (!localStorage.getItem(username)) {
-            // تخزين بيانات المستخدم في localStorage
-            const userData = { email: email, username: username, password: password };
-            localStorage.setItem(username, JSON.stringify(userData));
-            alert("تم التسجيل بنجاح!");
-            registerForm.style.display = "none";
-            loginForm.style.display = "block";
-        } else {
-            alert("اسم المستخدم موجود مسبقًا.");
-        }
-    } else {
-        alert("كلمة المرور وتأكيد كلمة المرور غير متطابقين.");
+  if (lastMiningTime) {
+    const timeSinceLastMining = Math.floor((now - lastMiningTime) / 1000);
+    const remainingTime = 24 * 60 * 60 - timeSinceLastMining;
+
+    if (remainingTime > 0) {
+      startMiningTimer(remainingTime);
     }
-}
-
-// دالة إظهار الصفحة الرئيسية بعد تسجيل الدخول
-function showMainPage() {
-    loginForm.style.display = "none";
-    registerForm.style.display = "none";
-    mainPage.style.display = "block";
-
-    // عرض بيانات المستخدم في الصفحة الشخصية
-    const userData = JSON.parse(localStorage.getItem(loggedInUser));
-    userNameDisplay.textContent = `اسم المستخدم: ${userData.username}`;
-    userEmailDisplay.textContent = `البريد الإلكتروني: ${userData.email}`;
+  }
 }
