@@ -8,7 +8,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- الهيدر مع مكان للإعلان -->
   <header>
     <div class="ad-banner">إعلان هنا</div> <!-- مكان للإعلان -->
     <h1>AZKARCOIN</h1>
@@ -58,7 +57,6 @@
     </div>
   </div>
 
-  <!-- الفوتر مع مكان للإعلان -->
   <footer>
     <div class="ad-banner">إعلان هنا</div> <!-- مكان للإعلان -->
   </footer>
@@ -78,7 +76,7 @@
     // إذا كان التسجيل هو الأول، يبدأ العد التنازلي مباشرة
     if (isFirstLogin === null) {
       localStorage.setItem("isFirstLogin", "false"); // وضع علامة على أن المستخدم قد سجل بالفعل
-      startMining();
+      startMining(); // بدء التعدين
     }
 
     // إذا كان هناك وقت انتهاء تعدين محفوظ، استخدمه لإظهار العد التنازلي
@@ -155,5 +153,3 @@
       console.log("تشغيل الصوت لـ: " + azkar);
     }
   </script>
-</body>
-</html>
