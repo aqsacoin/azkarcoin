@@ -12,32 +12,8 @@
   <div class="container">
     <h1>AzkarCoin</h1>
 
-    <!-- نموذج تسجيل الدخول -->
-    <div class="form-container">
-      <div id="login-form">
-        <form id="login" action="javascript:void(0);">
-          <input type="text" id="login-username" placeholder="اسم المستخدم" required>
-          <input type="password" id="login-password" placeholder="كلمة المرور" required>
-          <button type="submit" onclick="loginUser()">تسجيل الدخول</button>
-        </form>
-        <button onclick="switchToRegister()">إنشاء حساب جديد</button>
-      </div>
-
-      <!-- نموذج التسجيل -->
-      <div id="register-form" style="display:none;">
-        <form id="register" action="javascript:void(0);">
-          <input type="text" id="register-username" placeholder="اسم المستخدم" required>
-          <input type="email" id="register-email" placeholder="البريد الإلكتروني" required>
-          <input type="password" id="register-password" placeholder="كلمة المرور" required>
-          <input type="password" id="register-password-repeat" placeholder="أعد إدخال كلمة المرور" required>
-          <button type="submit" onclick="registerUser()">إنشاء حساب</button>
-        </form>
-        <button onclick="switchToLogin()">العودة لتسجيل الدخول</button>
-      </div>
-    </div>
-
     <!-- صفحة المستخدم بعد تسجيل الدخول -->
-    <div id="user-dashboard" style="display:none;">
+    <div id="user-dashboard">
       <h2>أهلاً بك في AzkarCoin، <span id="username-display"></span></h2>
       <div id="user-info">
         <p>عدد العملات: <span id="user-coins">0</span></p>
@@ -57,10 +33,12 @@
         <p id="mining-info">اضغط على "ابدأ التعدين" للحصول على عملات AzkarCoin!</p>
       </div>
 
-      <!-- زر الانتقال إلى صفحة المهام -->
       <div id="tasks-section">
         <button id="tasks-btn" onclick="window.location.href='tasks.html'">الانتقال إلى المهام اليومية</button>
       </div>
+
+      <!-- زر تسجيل الخروج -->
+      <button id="logout-btn" onclick="logoutUser()">تسجيل الخروج</button>
     </div>
   </div>
 
