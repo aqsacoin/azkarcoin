@@ -11,12 +11,13 @@
     body {
       font-family: 'Amiri', serif;
       direction: rtl;
-      background-color: #f0f0f0; /* لون خلفية موحد */
+      background-color: #f9f9f9; /* لون خلفية مريح وهادئ */
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
+      color: #333;
     }
 
     .container {
@@ -24,16 +25,17 @@
       max-width: 450px;
       background-color: #fff;
       padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
       text-align: center;
       box-sizing: border-box;
     }
 
     h1 {
       margin-bottom: 20px;
-      font-size: 28px;
-      color: #333;
+      font-size: 32px;
+      color: #4CAF50;
+      font-weight: bold;
     }
 
     .form-container {
@@ -42,12 +44,20 @@
 
     .form-container input {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 5px;
-      border: 1px solid #ddd;
+      padding: 14px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
       font-size: 16px;
+      background-color: #f9f9f9;
       box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    .form-container input:focus {
+      border-color: #4CAF50;
+      background-color: #e8f5e9;
+      outline: none;
     }
 
     .form-container button {
@@ -55,9 +65,9 @@
       padding: 14px;
       background-color: #4CAF50; /* اللون الأساسي */
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       color: white;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       transition: background-color 0.3s;
     }
@@ -66,20 +76,19 @@
       background-color: #45a049;
     }
 
-    .form-group {
-      position: relative;
-    }
-
-    /* تنسيق زر "إنشاء حساب جديد" */
     .form-container button.secondary {
       background-color: #ddd;
       color: #333;
-      font-size: 14px;
+      font-size: 16px;
       margin-top: 20px;
     }
 
     .form-container button.secondary:hover {
       background-color: #ccc;
+    }
+
+    .form-group {
+      position: relative;
     }
 
   </style>
