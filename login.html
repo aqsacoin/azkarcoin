@@ -7,53 +7,42 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
   <style>
-    /* تنسيق الصفحة بشكل يتماشى مع التصميم العام */
+    /* تحسين تصميم الفورم */
     body {
       font-family: 'Amiri', serif;
       direction: rtl;
-      background-color: #f0f0f0; /* لون خلفية موحد */
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
+      background-color: #f4f4f4;
     }
-
-    .container {
-      width: 100%;
-      max-width: 450px;
+    .login-container {
       background-color: #fff;
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
       text-align: center;
-      box-sizing: border-box;
     }
-
-    h1 {
+    .login-container h1 {
       margin-bottom: 20px;
-      font-size: 28px;
+      font-size: 24px;
       color: #333;
     }
-
-    .form-container {
+    .login-container input {
       width: 100%;
-    }
-
-    .form-container input {
-      width: 100%;
-      padding: 12px;
+      padding: 10px;
       margin: 10px 0;
       border-radius: 5px;
       border: 1px solid #ddd;
       font-size: 16px;
-      box-sizing: border-box;
     }
-
-    .form-container button {
+    .login-container button {
       width: 100%;
-      padding: 14px;
-      background-color: #4CAF50; /* اللون الأساسي */
+      padding: 12px;
+      background-color: #4CAF50;
       border: none;
       border-radius: 5px;
       color: white;
@@ -61,79 +50,61 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-
-    .form-container button:hover {
+    .login-container button:hover {
       background-color: #45a049;
     }
-
     .toggle-password {
       position: absolute;
       right: 10px;
       top: 10px;
       cursor: pointer;
     }
-
     .form-group {
       position: relative;
     }
-
-    /* تنسيق زر "إنشاء حساب جديد" */
-    .form-container button.secondary {
-      background-color: #ddd;
-      color: #333;
-      font-size: 14px;
-      margin-top: 20px;
-    }
-
-    .form-container button.secondary:hover {
-      background-color: #ccc;
-    }
-
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="login-container">
     <h1>تسجيل الدخول</h1>
-
-    <div class="form-container">
-      <form id="login" action="javascript:void(0);">
-        <div class="form-group">
-          <input type="text" id="login-username" placeholder="اسم المستخدم" required autocomplete="off">
-        </div>
-        <div class="form-group">
-          <input type="password" id="login-password" placeholder="كلمة المرور" required autocomplete="off">
-          <span class="toggle-password" onclick="togglePassword()">👁️</span>
-        </div>
-        <button type="submit" onclick="loginUser()">تسجيل الدخول</button>
-      </form>
-      <button class="secondary" onclick="window.location.href='register.html'">إنشاء حساب جديد</button>
-    </div>
+    <form id="login-form">
+      <div class="form-group">
+        <input type="text" id="username" name="username" placeholder="اسم المستخدم" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" name="password" placeholder="كلمة المرور" required>
+        <span class="toggle-password" onclick="togglePassword()">👁️</span>
+      </div>
+      <button type="submit" id="login-btn">تسجيل الدخول</button>
+    </form>
   </div>
 
   <script>
     // دالة لتفعيل أو إخفاء كلمة السر
     function togglePassword() {
-      const passwordField = document.getElementById("login-password");
+      const passwordField = document.getElementById("password");
       const type = passwordField.type === "password" ? "text" : "password";
       passwordField.type = type;
     }
 
     // التحقق من الحقول
-    function loginUser() {
-      const username = document.getElementById("login-username").value;
-      const password = document.getElementById("login-password").value;
+    document.getElementById("login-form").addEventListener("submit", function(event) {
+      event.preventDefault(); // منع إرسال النموذج مباشرة
 
-      // التحقق من الحقول الفارغة
+      // الحصول على البيانات من الحقول
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      // التحقق من الحقول
       if (username === "" || password === "") {
         alert("الرجاء ملء جميع الحقول.");
       } else {
         // إذا كانت الحقول غير فارغة، سيتم تنفيذ عملية تسجيل الدخول
         alert("تم تسجيل الدخول بنجاح!");
-        // يمكنك إضافة كود لإعادة التوجيه إلى صفحة أخرى بعد تسجيل الدخول
-        // على سبيل المثال:
-        window.location.href = "index.html"; // تأكد من أن الملف index.html موجود
+        // هنا يمكن إضافة الكود لإعادة توجيه المستخدم إلى الصفحة الرئيسية مثلاً:
+        window.location.href = "index.html"; // تأكد من أن ملف index.html موجود
       }
-    }
+    });
   </script>
 </body>
 </html>
