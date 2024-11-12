@@ -47,7 +47,7 @@
     </div>
 
     <div id="mining-section">
-      <button id="start-mining-btn" onclick="startMining()">ابدأ التعدين</button>
+      <button id="start-mining-btn" onclick="startMining()" disabled>ابدأ التعدين</button>
       <div id="mining-timer"></div>
       <p id="mining-info">اضغط على "ابدأ التعدين" للحصول على عملات AzkarCoin!</p>
     </div>
@@ -64,5 +64,85 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <script>
+    // البيانات الأساسية
+    let userCoins = localStorage.getItem("userCoins") || 50; // يحصل المستخدم على 50 عملة عند التسجيل الأول
+    let miningInterval = 10; // مدة التعدين بالثواني
+    let miningEndTime = localStorage.getItem("miningEndTime");
+
+    // تحديث عملات المستخدم
+    document.getElementById("user-coins").textContent = userCoins;
+
+    // إذا كان هناك وقت انتهاء تعدين محفوظ، استخدمه لإظهار العد التنازلي
+    if (miningEndTime) {
+      let remainingTime = Math.max(miningEndTime - Date.now(), 0);
+      startMiningCountdown(remainingTime);
+    }
+
+    // دالة لبدء التعدين
+    function startMining() {
+      // تعطيل الأزرار
+      disableAzkarButtons();
+
+      // بدء العد التنازلي للتعدين
+      let endTime = Date.now() + miningInterval * 1000;
+      localStorage.setItem("miningEndTime", endTime);
+
+      // تحديث العد التنازلي كل ثانية
+      startMiningCountdown(miningInterval * 1000);
+
+      // إضافة 10 عملات بعد انتهاء التعدين
+      setTimeout(() => {
+        userCoins += 10;
+        localStorage.setItem("userCoins", userCoins);
+        document.getElementById("user-coins").textContent = userCoins;
+
+        // إعادة تفعيل الأزرار بعد انتهاء التعدين
+        enableAzkarButtons();
+      }, miningInterval * 1000);
+    }
+
+    // دالة لبدء العد التنازلي
+    function startMiningCountdown(remainingTime) {
+      let timerElement = document.getElementById("mining-timer");
+      let interval = setInterval(() => {
+        remainingTime -= 1000;
+        let seconds = Math.floor(remainingTime / 1000);
+        let minutes = Math.floor(seconds / 60);
+        seconds = seconds % 60;
+        timerElement.textContent = `الوقت المتبقي: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+        if (remainingTime <= 0) {
+          clearInterval(interval);
+          timerElement.textContent = "التعدين جاهز للبدء!";
+        }
+      }, 1000);
+    }
+
+    // تعطيل جميع الأزرار
+    function disableAzkarButtons() {
+      document.getElementById("allahuAkbar-btn").disabled = true;
+      document.getElementById("alhamdulillah-btn").disabled = true;
+      document.getElementById("subhanAllah-btn").disabled = true;
+      document.getElementById("laIlahaIllallah-btn").disabled = true;
+      document.getElementById("start-mining-btn").disabled = true;
+    }
+
+    // تمكين جميع الأزرار
+    function enableAzkarButtons() {
+      document.getElementById("allahuAkbar-btn").disabled = false;
+      document.getElementById("alhamdulillah-btn").disabled = false;
+      document.getElementById("subhanAllah-btn").disabled = false;
+      document.getElementById("laIlahaIllallah-btn").disabled = false;
+      document.getElementById("start-mining-btn").disabled = false;
+    }
+
+    // دالة لتشغيل الصوت (إذا كان هناك دالة playAzkarSound)
+    function playAzkarSound(azkar) {
+      // هنا يمكن إضافة الكود لتشغيل الصوت المناسب
+      console.log("تشغيل الصوت لـ: " + azkar);
+    }
+  </script>
 </body>
 </html>
