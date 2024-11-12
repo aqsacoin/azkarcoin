@@ -19,15 +19,13 @@
     <!-- مكان لصورة المستخدم واسم المستخدم وعدد عملاته المكتسبة في الجهة اليمنى -->
     <div class="user-info">
       <div class="user-image">
-        <img src="https://via.placeholder.com/100" alt="صورة المستخدم" id="user-avatar">
+        <!-- صورة المستخدم -->
+        <img id="user-avatar" src="https://via.placeholder.com/100" alt="صورة المستخدم">
       </div>
       <div class="user-details">
         <h2 id="username-display">اسم المستخدم</h2>
         <p>عدد العملات: <span id="user-coins">0</span></p>
-        <!-- زر رفع الصورة -->
-        <button class="upload-photo-btn" onclick="uploadPhoto()">رفع صورة</button>
-        <!-- زر تسجيل الخروج -->
-        <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
+        <p>عدد العملات المحالة: <span id="referral-coins">0</span></p>
       </div>
     </div>
 
@@ -48,6 +46,16 @@
     <!-- زر المهام في الجهة اليسرى -->
     <div id="tasks-section">
       <button id="tasks-btn" onclick="window.location.href='tasks.html'">الانتقال إلى المهام اليومية</button>
+    </div>
+
+    <!-- زر رفع الصورة -->
+    <div id="upload-avatar-section">
+      <button onclick="uploadPhoto()">رفع صورة المستخدم</button>
+    </div>
+
+    <!-- زر تسجيل الخروج -->
+    <div id="logout-section">
+      <button onclick="logoutUser()">تسجيل الخروج</button>
     </div>
   </div>
 
