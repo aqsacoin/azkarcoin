@@ -11,7 +11,7 @@
     body {
       font-family: 'Amiri', serif;
       direction: rtl;
-      background-color: #f0f0f0; /* لون خلفية موحد */
+      background-color: #f0f0f0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -22,7 +22,7 @@
     .container {
       width: 100%;
       max-width: 450px;
-      background-color: rgba(0, 0, 0, 0.7); /* خلفية سوداء شفافة */
+      background-color: rgba(0, 0, 0, 0.7);
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -31,9 +31,9 @@
     }
 
     h1 {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       font-size: 28px;
-      color: #FFD700; /* اللون الذهبي */
+      color: #FFD700;
     }
 
     .form-container {
@@ -53,18 +53,18 @@
     .form-container button {
       width: 100%;
       padding: 14px;
-      background-color: #FFD700; /* اللون الذهبي */
+      background-color: #FFD700;
       border: none;
       border-radius: 5px;
-      color: black; /* النص باللون الأسود */
+      color: black;
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s;
-      font-family: 'Amiri', serif; /* نفس خط العنوان */
+      font-family: 'Amiri', serif;
     }
 
     .form-container button:hover {
-      background-color: #FFC107; /* تغيير اللون قليلاً عند التمرير */
+      background-color: #FFC107;
     }
 
     .toggle-password {
@@ -90,16 +90,16 @@
     }
 
     .form-container .info-text {
-      color: #FFD700; /* اللون الذهبي */
+      color: #FFD700;
       font-size: 16px;
-      margin-top: 20px;
+      margin-top: 10px;
     }
-
   </style>
 </head>
 <body>
   <div class="container">
     <h1>تسجيل الدخول</h1>
+    <p class="info-text">أذكروا الله آناء الليل و أطراف النهار</p> <!-- الجملة أسفل العنوان -->
 
     <div class="form-container">
       <form id="login" action="javascript:void(0);">
@@ -113,7 +113,6 @@
         <button type="submit" onclick="loginUser()">تسجيل الدخول</button>
       </form>
       <button class="secondary" onclick="window.location.href='register.html'">إنشاء حساب جديد</button>
-      <p class="info-text">أذكروا الله آناء الله و أطراف النهار</p> <!-- الجملة أسفل العنوان -->
     </div>
   </div>
 
