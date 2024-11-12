@@ -19,11 +19,15 @@
     <!-- مكان لصورة المستخدم واسم المستخدم وعدد عملاته المكتسبة في الجهة اليمنى -->
     <div class="user-info">
       <div class="user-image">
-        <img src="https://via.placeholder.com/100" alt="صورة المستخدم">
+        <img src="https://via.placeholder.com/100" alt="صورة المستخدم" id="user-avatar">
       </div>
       <div class="user-details">
         <h2 id="username-display">اسم المستخدم</h2>
         <p>عدد العملات: <span id="user-coins">0</span></p>
+        <!-- زر رفع الصورة -->
+        <button class="upload-photo-btn" onclick="uploadPhoto()">رفع صورة</button>
+        <!-- زر تسجيل الخروج -->
+        <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
       </div>
     </div>
 
