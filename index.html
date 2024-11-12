@@ -33,21 +33,18 @@
 
     <!-- أزرار الأذكار وزر التعدين والموقت -->
     <div id="azkar-buttons" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; justify-items: center; margin-top: 20px;">
-      <!-- الأزرار في الأعلى: سبحان الله و لا إله إلا الله -->
       <div style="grid-column: span 2;">
-        <button id="laIlahaIllallah-btn" onclick="playAzkarSound('laIlahaIllallah')" disabled>لا إله إلا الله</button>
-        <button id="subhanAllah-btn" onclick="playAzkarSound('subhanAllah')" disabled>سبحان الله</button>
+        <button id="laIlahaIllallah-btn" onclick="playAzkarSound('laIlahaIllallah')">لا إله إلا الله</button>
+        <button id="subhanAllah-btn" onclick="playAzkarSound('subhanAllah')">سبحان الله</button>
       </div>
-
-      <!-- الأزرار في الأسفل: الله أكبر و الحمد لله -->
       <div style="grid-column: span 2;">
-        <button id="allahuAkbar-btn" onclick="playAzkarSound('allahuAkbar')" disabled>الله أكبر</button>
-        <button id="alhamdulillah-btn" onclick="playAzkarSound('alhamdulillah')" disabled>الحمد لله</button>
+        <button id="allahuAkbar-btn" onclick="playAzkarSound('allahuAkbar')">الله أكبر</button>
+        <button id="alhamdulillah-btn" onclick="playAzkarSound('alhamdulillah')">الحمد لله</button>
       </div>
     </div>
 
     <div id="mining-section">
-      <button id="start-mining-btn" onclick="startMining()" disabled>ابدأ التعدين</button>
+      <button id="start-mining-btn" onclick="startMining()">ابدأ التعدين</button>
       <div id="mining-timer"></div>
       <p id="mining-info">اضغط على "ابدأ التعدين" للحصول على عملات AzkarCoin!</p>
     </div>
@@ -70,38 +67,34 @@
     let userCoins = localStorage.getItem("userCoins") || 50; // يحصل المستخدم على 50 عملة عند التسجيل الأول
     let miningInterval = 86400; // مدة التعدين 24 ساعة بالثواني
     let miningEndTime = localStorage.getItem("miningEndTime");
-    let isFirstLogin = localStorage.getItem("isFirstLogin");
 
-    // تحديث عملات المستخدم
+    // تحديث عدد العملات
     document.getElementById("user-coins").textContent = userCoins;
 
-    // إذا كان التسجيل هو الأول، يبدأ العد التنازلي مباشرة
-    if (isFirstLogin === null) {
-      localStorage.setItem("isFirstLogin", "false"); // وضع علامة على أن المستخدم قد سجل بالفعل
-      startMining();
-    }
-
-    // إذا كان هناك وقت انتهاء تعدين محفوظ، استخدمه لإظهار العد التنازلي
+    // فحص إذا كان هناك وقت انتهاء للتعدين محفوظ في localStorage
     if (miningEndTime) {
       let remainingTime = Math.max(miningEndTime - Date.now(), 0);
-      startMiningCountdown(remainingTime);
+      if (remainingTime > 0) {
+        startMiningCountdown(remainingTime);
+        disableAzkarButtons();
+      }
     }
 
     // دالة لبدء التعدين
     function startMining() {
-      // تعطيل الأزرار
+      // تعطيل الأزرار أثناء التعدين
       disableAzkarButtons();
 
-      // بدء العد التنازلي للتعدين
+      // إعداد وقت انتهاء التعدين وتخزينه
       let endTime = Date.now() + miningInterval * 1000;
       localStorage.setItem("miningEndTime", endTime);
 
-      // تحديث العد التنازلي كل ثانية
+      // بدء العد التنازلي للتعدين
       startMiningCountdown(miningInterval * 1000);
 
-      // إضافة 10 عملات بعد انتهاء التعدين
+      // زيادة العملات بعد انتهاء فترة التعدين
       setTimeout(() => {
-        userCoins += 10;
+        userCoins = parseInt(userCoins) + 10;
         localStorage.setItem("userCoins", userCoins);
         document.getElementById("user-coins").textContent = userCoins;
 
@@ -110,7 +103,7 @@
       }, miningInterval * 1000);
     }
 
-    // دالة لبدء العد التنازلي
+    // دالة العد التنازلي للتعدين
     function startMiningCountdown(remainingTime) {
       let timerElement = document.getElementById("mining-timer");
       let interval = setInterval(() => {
@@ -128,7 +121,7 @@
       }, 1000);
     }
 
-    // تعطيل جميع الأزرار
+    // تعطيل الأزرار أثناء التعدين
     function disableAzkarButtons() {
       document.getElementById("allahuAkbar-btn").disabled = true;
       document.getElementById("alhamdulillah-btn").disabled = true;
@@ -137,7 +130,7 @@
       document.getElementById("start-mining-btn").disabled = true;
     }
 
-    // تمكين جميع الأزرار
+    // تمكين الأزرار بعد انتهاء التعدين
     function enableAzkarButtons() {
       document.getElementById("allahuAkbar-btn").disabled = false;
       document.getElementById("alhamdulillah-btn").disabled = false;
@@ -148,19 +141,16 @@
 
     // دالة لتشغيل الصوت (إذا كان هناك دالة playAzkarSound)
     function playAzkarSound(azkar) {
-      // هنا يمكن إضافة الكود لتشغيل الصوت المناسب
       console.log("تشغيل الصوت لـ: " + azkar);
     }
 
     // دالة تسجيل الخروج
     function logout() {
-      // مسح بيانات المستخدم من Local Storage
-      localStorage.removeItem("userCoins");
-      localStorage.removeItem("miningEndTime");
-      localStorage.removeItem("isFirstLogin");
+      // الاحتفاظ ببيانات التعدين والمؤقت دون حذفها
+      alert("تم تسجيل خروجك بنجاح!");
 
-      // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول أو الصفحة الرئيسية
-      window.location.href = "index.html"; // تأكد أن صفحة تسجيل الدخول أو الرئيسية هي "index.html"
+      // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
+      window.location.href = "login.html"; // تأكد من أن صفحة تسجيل الدخول موجودة باسم "login.html"
     }
   </script>
 </body>
