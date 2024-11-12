@@ -1,130 +1,111 @@
-// تبديل العرض بين نموذج تسجيل الدخول والتسجيل
-function switchToRegister() {
-  document.getElementById("login-form").style.display = "none";
-  document.getElementById("register-form").style.display = "block";
+// وظيفة لتشغيل الصوت عند الضغط على الأزرار
+function playAzkarSound(azkarType) {
+  var audio = new Audio(azkarType + '.mp3');
+  audio.play();
 }
 
-function switchToLogin() {
-  document.getElementById("register-form").style.display = "none";
-  document.getElementById("login-form").style.display = "block";
-}
-
-// تسجيل مستخدم جديد
-function registerUser() {
-  const username = document.getElementById("register-username").value;
-  const email = document.getElementById("register-email").value;
-  const password = document.getElementById("register-password").value;
-  const confirmPassword = document.getElementById("register-password-repeat").value;
-
-  if (password !== confirmPassword) {
-    alert("كلمتا المرور غير متطابقتين. الرجاء التأكد.");
-    return;
-  }
-
-  if (username && email && password) {
-    localStorage.setItem("username", username);
-    localStorage.setItem("password", password);
-
-    alert("تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول.");
-    switchToLogin();
-  } else {
-    alert("الرجاء ملء جميع الحقول.");
-  }
-}
-
-// تسجيل الدخول
-function loginUser() {
-  const username = document.getElementById("login-username").value;
-  const password = document.getElementById("login-password").value;
-
-  const storedUsername = localStorage.getItem("username");
-  const storedPassword = localStorage.getItem("password");
-
-  if (username === storedUsername && password === storedPassword) {
-    document.getElementById("username-display").textContent = storedUsername;
-    document.getElementById("login-form").style.display = "none";
-    document.getElementById("user-dashboard").style.display = "block";
-    checkMiningStatus(); // تحقق من حالة التعدين عند تسجيل الدخول
-  } else {
-    alert("اسم المستخدم أو كلمة المرور غير صحيحة.");
-  }
-}
-
-// تشغيل صوت الذكر
-function playAudio(phrase) {
-  let audio;
-  switch (phrase) {
-    case "سبحان الله":
-      audio = new Audio("https://aqsacoin.github.io/azkarcoin/كاريoki_سبحان%20الله%20mp3.mp3");
-      break;
-    case "لا إله إلا الله":
-      audio = new Audio("https://aqsacoin.github.io/azkarcoin/كاريوكي_لا%20إله%20إلا%20الله%20mp3.mp3");
-      break;
-    case "الحمد لله":
-      audio = new Audio("https://aqsacoin.github.io/azkarcoin/كاريوكي_الحمد%20لله%20mp3.mp3");
-      break;
-    case "الله أكبر":
-      audio = new Audio("https://aqsacoin.github.io/azkarcoin/كاريوكي_الله%20أكبر%20mp3.mp3");
-      break;
-  }
-  if (audio) audio.play();
-}
-
-// بدء التعدين وإضافة العملات
+// وظيفة لبدء عملية التعدين
 function startMining() {
-  const lastMiningTime = localStorage.getItem("lastMiningTime");
-  const now = new Date().getTime();
+  var miningInfo = document.getElementById('mining-info');
+  var startButton = document.getElementById('start-mining-btn');
+  var timer = document.getElementById('mining-timer');
+  
+  var timeLeft = 24 * 60 * 60; // 24 ساعة بالثواني
 
-  // التحقق إذا كان المستخدم قد بدأ التعدين في آخر 24 ساعة
-  if (lastMiningTime && now - lastMiningTime < 24 * 60 * 60 * 1000) {
-    alert("يجب الانتظار حتى انتهاء المؤقت قبل بدء التعدين مرة أخرى.");
-    return;
-  }
+  var timerInterval = setInterval(function() {
+    var hours = Math.floor(timeLeft / 3600);
+    var minutes = Math.floor((timeLeft % 3600) / 60);
+    var seconds = timeLeft % 60;
+    
+    timer.innerHTML = hours + ':' + minutes + ':' + seconds;
+    timeLeft--;
 
-  alert("تم بدء عملية التعدين! سيتم إضافة العملات إلى حسابك.");
-
-  let userCoins = document.getElementById("user-coins");
-  userCoins.textContent = parseInt(userCoins.textContent) + 3;
-
-  let referralCoins = document.getElementById("referral-coins");
-  referralCoins.textContent = parseInt(referralCoins.textContent) + 1;
-
-  // تخزين توقيت التعدين الأخير وتحديث المؤقت
-  localStorage.setItem("lastMiningTime", now);
-  startMiningTimer(24 * 60 * 60); // 24 ساعة بالثواني
-}
-
-// بدء مؤقت التعدين
-function startMiningTimer(duration) {
-  const timerDisplay = document.getElementById("mining-timer");
-  let timer = duration;
-
-  const interval = setInterval(function() {
-    const hours = Math.floor(timer / 3600);
-    const minutes = Math.floor((timer % 3600) / 60);
-    const seconds = timer % 60;
-
-    timerDisplay.textContent = `الوقت المتبقي للتعدين: ${hours}:${minutes}:${seconds}`;
-
-    if (--timer < 0) {
-      clearInterval(interval);
-      timerDisplay.textContent = "يمكنك بدء التعدين الآن!";
-      localStorage.removeItem("lastMiningTime");
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      miningInfo.innerHTML = "لقد انتهت فترة التعدين. حظاً سعيداً!";
+      startButton.disabled = false; // تمكين الزر بعد انتهاء فترة التعدين
     }
   }, 1000);
+
+  miningInfo.innerHTML = "يتم الآن التعدين...";
+  startButton.disabled = true; // تعطيل الزر أثناء التعدين
 }
 
-// التحقق من حالة التعدين عند تسجيل الدخول
-function checkMiningStatus() {
-  const lastMiningTime = localStorage.getItem("lastMiningTime");
-  const now = new Date().getTime();
+// وظيفة لتحميل بيانات المستخدم
+function loadUserData() {
+  var username = localStorage.getItem("username");
+  var coins = localStorage.getItem("coins");
+  var referralCoins = localStorage.getItem("referralCoins");
 
-  if (lastMiningTime) {
-    const timeSinceLastMining = Math.floor((now - lastMiningTime) / 1000);
-    const remainingTime = 24 * 60 * 60 - timeSinceLastMining;
+  if (username) {
+    // عرض بيانات المستخدم
+    document.getElementById("username-display").innerText = username;
+    document.getElementById("user-coins").innerText = coins;
+    document.getElementById("referral-coins").innerText = referralCoins || "0";
 
-    if (remainingTime > 0) {
-      startMiningTimer(remainingTime);
-    }
+    // تمكين الأزرار الخاصة بالتعدين
+    document.getElementById("allahuAkbar-btn").disabled = false;
+    document.getElementById("alhamdulillah-btn").disabled = false;
+    document.getElementById("laIlahaIllallah-btn").disabled = false;
+    document.getElementById("subhanAllah-btn").disabled = false;
+  } else {
+    // إذا لم يتم تسجيل الدخول
+    window.location.href = 'login.html';
   }
+}
+
+// وظيفة لتسجيل الخروج
+function logoutUser() {
+  // إزالة بيانات المستخدم من التخزين المحلي
+  localStorage.removeItem("username");
+  localStorage.removeItem("coins");
+  localStorage.removeItem("referralCoins");
+
+  // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
+  window.location.href = 'login.html';
+}
+
+// وظيفة لتسجيل الدخول
+function loginUser() {
+  var username = document.getElementById('login-username').value;
+  var password = document.getElementById('login-password').value;
+  
+  // التحقق من صحة بيانات الدخول
+  if(username && password) {
+    // تخزين بيانات المستخدم في التخزين المحلي
+    localStorage.setItem("username", username);
+    localStorage.setItem("coins", "0");
+    localStorage.setItem("referralCoins", "0");
+
+    // إعادة التوجيه إلى الصفحة الرئيسية بعد تسجيل الدخول
+    window.location.href = 'index.html';
+  } else {
+    alert("يرجى إدخال اسم المستخدم وكلمة المرور");
+  }
+}
+
+// وظيفة للتسجيل
+function registerUser() {
+  var username = document.getElementById('register-username').value;
+  var email = document.getElementById('register-email').value;
+  var password = document.getElementById('register-password').value;
+  var passwordRepeat = document.getElementById('register-password-repeat').value;
+
+  // التحقق من صحة البيانات
+  if (username && email && password && passwordRepeat && password === passwordRepeat) {
+    // تخزين بيانات المستخدم في التخزين المحلي
+    localStorage.setItem("username", username);
+    localStorage.setItem("coins", "0");
+    localStorage.setItem("referralCoins", "0");
+
+    // إعادة التوجيه إلى الصفحة الرئيسية بعد التسجيل
+    window.location.href = 'index.html';
+  } else {
+    alert("يرجى التأكد من البيانات المدخلة");
+  }
+}
+
+// تحميل بيانات المستخدم عند فتح الصفحة الرئيسية
+if (window.location.href.indexOf("index.html") !== -1) {
+  loadUserData();
 }
