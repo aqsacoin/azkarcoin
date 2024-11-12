@@ -17,7 +17,19 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      color: #333;
+      color: #FFD700; /* تغيير لون الخطوط إلى الذهبي */
+      position: relative;
+    }
+
+    /* إضافة طبقة شفافة سوداء */
+    .background-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* طبقة سوداء مع شفافية */
+      z-index: -1; /* لضمان أن الطبقة في الخلف */
     }
 
     .container {
@@ -34,7 +46,7 @@
     h1 {
       margin-bottom: 20px;
       font-size: 32px;
-      color: #4CAF50;
+      color: #FFD700; /* تغيير لون العنوان إلى الذهبي */
       font-weight: bold;
     }
 
@@ -55,8 +67,8 @@
     }
 
     .form-container input:focus {
-      border-color: #4CAF50;
-      background-color: #e8f5e9;
+      border-color: #FFD700; /* تغيير لون الحافة إلى الذهبي عند التركيز */
+      background-color: #fff4e1; /* لون خلفية الحقل عند التركيز */
       outline: none;
     }
 
@@ -94,6 +106,9 @@
   </style>
 </head>
 <body>
+  <!-- طبقة الشفافية السوداء -->
+  <div class="background-overlay"></div>
+
   <div class="container">
     <h1>تسجيل الدخول</h1>
 
