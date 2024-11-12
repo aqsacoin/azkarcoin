@@ -7,46 +7,53 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
   <style>
-    /* تحسين تصميم الفورم */
+    /* تنسيق الصفحة بشكل يتماشى مع التصميم العام */
     body {
       font-family: 'Amiri', serif;
       direction: rtl;
+      background-color: #f0f0f0; /* لون خلفية موحد */
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      background-color: #f4f4f4;
     }
+
     .container {
       width: 100%;
-      max-width: 400px;
+      max-width: 450px;
       background-color: #fff;
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
+      box-sizing: border-box;
     }
+
     h1 {
       margin-bottom: 20px;
-      font-size: 24px;
+      font-size: 28px;
       color: #333;
     }
+
     .form-container {
       width: 100%;
     }
+
     .form-container input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 10px 0;
       border-radius: 5px;
       border: 1px solid #ddd;
       font-size: 16px;
+      box-sizing: border-box;
     }
+
     .form-container button {
       width: 100%;
-      padding: 12px;
-      background-color: #4CAF50;
+      padding: 14px;
+      background-color: #4CAF50; /* اللون الأساسي */
       border: none;
       border-radius: 5px;
       color: white;
@@ -54,18 +61,34 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
+
     .form-container button:hover {
       background-color: #45a049;
     }
+
     .toggle-password {
       position: absolute;
       right: 10px;
       top: 10px;
       cursor: pointer;
     }
+
     .form-group {
       position: relative;
     }
+
+    /* تنسيق زر "إنشاء حساب جديد" */
+    .form-container button.secondary {
+      background-color: #ddd;
+      color: #333;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    .form-container button.secondary:hover {
+      background-color: #ccc;
+    }
+
   </style>
 </head>
 <body>
@@ -83,7 +106,7 @@
         </div>
         <button type="submit" onclick="loginUser()">تسجيل الدخول</button>
       </form>
-      <button onclick="window.location.href='register.html'">إنشاء حساب جديد</button>
+      <button class="secondary" onclick="window.location.href='register.html'">إنشاء حساب جديد</button>
     </div>
   </div>
 
