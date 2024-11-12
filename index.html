@@ -39,9 +39,9 @@
   </footer>
 
   <script>
-    let userCoins = localStorage.getItem("userCoins") || 50;
-    let miningInterval = 86400 * 1000; // 24 ساعة بالمللي ثانية
-    let miningEndTime = localStorage.getItem("miningEndTime");
+    let userCoins = parseInt(localStorage.getItem("userCoins") || 0);
+    const miningInterval = 24 * 60 * 60 * 1000; // 24 ساعة بالمللي ثانية
+    let miningEndTime = parseInt(localStorage.getItem("miningEndTime") || 0);
     let azkarClickedFlags = {
       subhanAllah: false,
       alhamdulillah: false,
@@ -49,53 +49,71 @@
       allahuAkbar: false
     };
 
-    // تحديث العملات بعد تسجيل الدخول الأول
-    document.getElementById("user-coins").textContent = userCoins;
-
-    // بدء دورة التعدين عند تسجيل الدخول لأول مرة
-    if (!miningEndTime) {
-      startInitialMining();
-    } else {
-      checkMiningStatus();
+    // تحديث عرض العملات
+    function updateCoinsDisplay() {
+      document.getElementById("user-coins").textContent = userCoins;
     }
 
-    function startInitialMining() {
-      let endTime = Date.now() + miningInterval;
-      localStorage.setItem("miningEndTime", endTime);
-      startMiningCountdown(endTime);
-    }
-
-    function checkMiningStatus() {
-      let remainingTime = miningEndTime - Date.now();
-      if (remainingTime > 0) {
-        startMiningCountdown(miningEndTime);
-      } else {
-        // بعد انتهاء المؤقت يمنح المستخدم 10 عملات وتفعيل الأذكار
-        userCoins = parseInt(userCoins) + 10;
+    // منح المستخدم 50 عملة عند التسجيل لأول مرة
+    function initializeUserCoins() {
+      if (userCoins === 0) {
+        userCoins = 50;
         localStorage.setItem("userCoins", userCoins);
-        document.getElementById("user-coins").textContent = userCoins;
+      }
+      updateCoinsDisplay();
+    }
+
+    // بدء العد التنازلي عند تسجيل الدخول
+    function startInitialMiningCountdown() {
+      if (miningEndTime === 0) {
+        miningEndTime = Date.now() + miningInterval;
+        localStorage.setItem("miningEndTime", miningEndTime);
+      }
+      startMiningCountdown();
+    }
+
+    // فحص حالة التعدين عند تسجيل الدخول
+    function checkMiningStatus() {
+      if (Date.now() >= miningEndTime) {
+        userCoins += 10;
+        localStorage.setItem("userCoins", userCoins);
+        miningEndTime = 0;
+        localStorage.removeItem("miningEndTime");
+        updateCoinsDisplay();
         enableAzkarButtons();
+      } else {
+        startMiningCountdown();
       }
     }
 
-    function startMiningCountdown(endTime) {
-      let timerElement = document.getElementById("mining-timer");
-      let interval = setInterval(() => {
-        let remainingTime = endTime - Date.now();
+    // بدء عد تنازلي للتعدين
+    function startMiningCountdown() {
+      const timerElement = document.getElementById("mining-timer");
+      const interval = setInterval(() => {
+        const remainingTime = miningEndTime - Date.now();
 
         if (remainingTime <= 0) {
           clearInterval(interval);
           timerElement.textContent = "انتهى وقت التعدين!";
           enableAzkarButtons();
+          checkMiningStatus();
         } else {
-          let hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
-          let minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
-          let seconds = Math.floor((remainingTime / 1000) % 60);
-          timerElement.textContent = `الوقت المتبقي: ${hours} : ${minutes < 10 ? '0' + minutes : minutes} : ${seconds < 10 ? '0' + seconds : seconds}`;
+          const hours = Math.floor((remainingTime / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
+          const seconds = Math.floor((remainingTime / 1000) % 60);
+          timerElement.textContent = `الوقت المتبقي: ${hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
         }
       }, 1000);
     }
 
+    // تمكين أزرار الأذكار بعد انتهاء التعدين
+    function enableAzkarButtons() {
+      Object.keys(azkarClickedFlags).forEach(id => {
+        document.getElementById(id + '-btn').disabled = false;
+      });
+    }
+
+    // تسجيل الضغط على أزرار الأذكار
     function azkarClicked(azkar) {
       azkarClickedFlags[azkar] = true;
 
@@ -105,36 +123,25 @@
       }
     }
 
+    // بدء دورة تعدين جديدة
     function startMining() {
-      // تعطيل زر "ابدأ التعدين" وبدء دورة تعدين جديدة
       document.getElementById("start-mining-btn").disabled = true;
-      disableAzkarButtons();
+      Object.keys(azkarClickedFlags).forEach(id => {
+        azkarClickedFlags[id] = false;
+        document.getElementById(id + '-btn').disabled = true;
+      });
 
-      let endTime = Date.now() + miningInterval;
-      localStorage.setItem("miningEndTime", endTime);
-      startMiningCountdown(endTime);
-
-      // إعادة تعيين الأذكار بعد بدء التعدين
-      azkarClickedFlags = {
-        subhanAllah: false,
-        alhamdulillah: false,
-        laIlahaIllallah: false,
-        allahuAkbar: false
-      };
+      miningEndTime = Date.now() + miningInterval;
+      localStorage.setItem("miningEndTime", miningEndTime);
+      startMiningCountdown();
     }
 
-    function enableAzkarButtons() {
-      document.getElementById("subhanAllah-btn").disabled = false;
-      document.getElementById("alhamdulillah-btn").disabled = false;
-      document.getElementById("laIlahaIllallah-btn").disabled = false;
-      document.getElementById("allahuAkbar-btn").disabled = false;
-    }
-
-    function disableAzkarButtons() {
-      document.getElementById("subhanAllah-btn").disabled = true;
-      document.getElementById("alhamdulillah-btn").disabled = true;
-      document.getElementById("laIlahaIllallah-btn").disabled = true;
-      document.getElementById("allahuAkbar-btn").disabled = true;
+    // تهيئة البيانات عند بدء التشغيل
+    initializeUserCoins();
+    if (miningEndTime === 0) {
+      startInitialMiningCountdown();
+    } else {
+      checkMiningStatus();
     }
   </script>
 </body>
