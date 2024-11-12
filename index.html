@@ -151,6 +151,17 @@
       // هنا يمكن إضافة الكود لتشغيل الصوت المناسب
       console.log("تشغيل الصوت لـ: " + azkar);
     }
+
+    // دالة تسجيل الخروج
+    function logout() {
+      // مسح بيانات المستخدم من Local Storage
+      localStorage.removeItem("userCoins");
+      localStorage.removeItem("miningEndTime");
+      localStorage.removeItem("isFirstLogin");
+
+      // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول أو الصفحة الرئيسية
+      window.location.href = "index.html"; // تأكد أن صفحة تسجيل الدخول أو الرئيسية هي "index.html"
+    }
   </script>
 </body>
 </html>
