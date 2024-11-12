@@ -88,7 +88,7 @@
 <body>
   <div class="container">
     <h1>تسجيل الدخول</h1>
-    <p class="info-text">أذكروا الله آناء الله و أطراف النهار</p> <!-- الجملة أسفل العنوان -->
+    <p class="info-text">و أذكر ربك إذا نسيت</p> <!-- الجملة أسفل العنوان -->
     
     <div class="form-container">
       <form id="login" action="javascript:void(0);">
@@ -96,7 +96,7 @@
         <input type="password" id="login-password" placeholder="كلمة المرور" required>
         <button type="submit" onclick="loginUser()">تسجيل الدخول</button>
       </form>
-      <button class="secondary" onclick="window.location.href='reg6.html'">إنشاء حساب جديد</button>
+      <button class="secondary" onclick="window.location.href='register.html'">إنشاء حساب جديد</button>
     </div>
   </div>
 
@@ -108,8 +108,10 @@
       if (username === "" || password === "") {
         alert("الرجاء ملء جميع الحقول.");
       } else {
+        // في حالة نجاح تسجيل الدخول
         alert("تم تسجيل الدخول بنجاح!");
-        // إضافة التوجيه أو الوظائف الأخرى هنا
+        // التوجيه إلى صفحة index.html بعد النجاح
+        window.location.href = "index.html";
       }
     }
   </script>
