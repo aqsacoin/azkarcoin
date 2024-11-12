@@ -2,120 +2,106 @@
 body {
   font-family: 'Amiri', serif;
   color: #fff;
-  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9BkN6Ce_uaJzHzMe-YYPOvf9SkIKMUmbTGagUZDqHLDyuEh5Z7EXv3FPE&s=10'); /* رابط صورة الأرابيسك */
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9BkN6Ce_uaJzHzMe-YYPOvf9SkIKMUmbTGagUZDqHLDyuEh5Z7EXv3FPE&s=10');
   background-size: cover;
-  background-position: center;
-  text-align: center;
-  overflow-x: hidden;
+  opacity: 0.08;
+  z-index: -1;
   margin: 0;
   padding: 0;
-}
-
-/* إعدادات الهيدر و الفوتر */
-header, footer {
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* خلفية شبه شفافة */
-  padding: 20px 0;
-  color: #f0a500;
-}
-
-header .ad-banner, footer .ad-banner {
-  width: 100%;
-  background-color: #f0a500;
-  padding: 10px;
-  color: #000;
   text-align: center;
-  margin-bottom: 20px;
+  overflow-x: hidden;
 }
 
-/* إعدادات الصفحة الرئيسية */
 .container {
-  max-width: 1000px;
+  max-width: 1200px; /* توسيع العرض */
   margin: 0 auto;
   padding: 20px;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 15px;
   border: 2px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }
 
-/* العنوان الرئيسي */
 h1 {
   color: #f0a500;
   font-size: 2.5em;
   margin-bottom: 20px;
   border-bottom: 2px solid #f0a500;
   padding-bottom: 10px;
-  width: 100%;
+}
+
+/* الهيدر والإعلانات */
+.header-ad, .footer-ad {
+  background-color: #f0a500;
+  color: white;
+  padding: 15px;
+  font-size: 1.2em;
   text-align: center;
-}
-
-h2 {
-  color: #f0a500;
-  font-size: 1.8em;
-  margin-bottom: 10px;
-}
-
-/* معلومات المستخدم */
-#user-info {
-  color: #fff;
   margin-bottom: 20px;
-  text-align: center;
+}
+
+.header-ad {
+  margin-top: 20px;
+}
+
+/* إعدادات النموذج */
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 5px;
+  font-size: 1em;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #f0a500;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.form-container button:hover {
+  background-color: #2f5d62;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-4px);
+}
+
+/* صفحة المستخدم */
+#user-dashboard h2 {
+  color: #f0a500;
+}
+
+#user-info {
+  text-align: right;
+  margin: 20px 0;
 }
 
 #user-info img {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  margin-bottom: 10px;
+  border: 2px solid #fff;
+  margin-right: 15px;
 }
 
 #user-info p {
-  font-size: 1.2em;
-  margin: 5px;
+  display: inline-block;
+  font-size: 1.1em;
 }
 
-#user-info .username {
-  font-weight: bold;
-}
-
-#user-info .coins {
-  color: #f0a500;
-}
-
-/* إعداد الأزرار */
-button {
-  padding: 10px 20px;
-  margin: 10px;
-  border-radius: 10px;
-  background-color: #2f5d62;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
-}
-
-button:hover {
-  background-color: #f0a500;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
-  transform: translateY(-5px);
-}
-
-button:disabled {
-  background-color: #999;
-  box-shadow: none;
-  transform: none;
-}
-
-/* أزرار الأذكار */
 #azkar-buttons {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: center;
-  width: 100%;
+  margin-top: 20px;
 }
 
 #azkar-buttons button {
@@ -141,16 +127,8 @@ button:disabled {
   transform: none;
 }
 
-/* إعداد التعدين */
 #mining-section {
   margin-top: 20px;
-  text-align: center;
-}
-
-#mining-timer {
-  margin-top: 15px;
-  font-size: 1.1em;
-  color: #f0a500;
 }
 
 #start-mining-btn {
@@ -170,17 +148,22 @@ button:disabled {
   transform: translateY(-5px);
 }
 
-/* إعداد زر المهام */
+#mining-timer {
+  margin-top: 15px;
+  font-size: 1.1em;
+  color: #f0a500;
+}
+
 #tasks-section {
-  position: absolute;
-  left: 20px;
-  bottom: 20px;
+  text-align: left;
+  margin-top: 20px;
 }
 
 #tasks-btn {
   background-color: #f0a500;
   color: #fff;
   padding: 10px 20px;
+  font-size: 1.2em;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -193,12 +176,51 @@ button:disabled {
   transform: translateY(-5px);
 }
 
-/* إعدادات الهيدر */
-header .ad-banner {
-  margin-bottom: 20px;
+/* التنسيق للجانب الأيمن */
+.right-side {
+  text-align: right;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 20px;
 }
 
-/* إعدادات الفوتر */
-footer .ad-banner {
-  margin-top: 20px;
+.left-side {
+  text-align: left;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 20px;
+}
+
+/* زر تسجيل الخروج */
+.logout-btn {
+  background-color: #f0a500;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #2f5d62;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.upload-photo-btn {
+  background-color: #f0a500;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.upload-photo-btn:hover {
+  background-color: #2f5d62;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
 }
