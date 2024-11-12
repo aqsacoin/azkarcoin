@@ -11,98 +11,77 @@
     body {
       font-family: 'Amiri', serif;
       direction: rtl;
-      background-color: #f9f9f9; /* لون خلفية مريح وهادئ */
+      background-color: #f0f0f0; /* لون خلفية موحد */
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
-      color: #FFD700; /* تغيير لون الخطوط إلى الذهبي */
-      position: relative;
-    }
-
-    /* إضافة طبقة شفافة سوداء */
-    .background-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* طبقة سوداء مع شفافية */
-      z-index: -1; /* لضمان أن الطبقة في الخلف */
     }
 
     .container {
       width: 100%;
       max-width: 450px;
-      background-color: rgba(0, 0, 0, 0.7); /* حاوية سوداء شفافة لامعة */
+      background-color: rgba(0, 0, 0, 0.7); /* خلفية سوداء شفافة */
       padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       text-align: center;
       box-sizing: border-box;
-      border: 2px solid rgba(0, 0, 0, 0.3); /* برواز أسود حول الحاوية */
     }
 
     h1 {
-      margin-bottom: 10px;
-      font-size: 32px;
-      color: #FFD700; /* تغيير لون العنوان إلى الذهبي */
-      font-weight: bold;
-    }
-
-    .subtitle {
-      font-size: 18px;
-      color: #FFD700;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
+      font-size: 28px;
+      color: #FFD700; /* اللون الذهبي */
     }
 
     .form-container {
       width: 100%;
-      padding: 30px;
-      border-radius: 12px;
-      border: 3px solid rgba(0, 0, 0, 0.3); /* برواز أسود شفاف حول حاوية الحقول والأزرار */
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-size: 16px;
       box-sizing: border-box;
     }
 
-    .form-container input,
     .form-container button {
       width: 100%;
       padding: 14px;
-      margin: 12px 0;
-      border-radius: 8px;
-      border: 2px solid rgba(0, 0, 0, 0.2); /* برواز أسود شفاف حول الحقول */
-      font-size: 16px;
-      background-color: #f9f9f9;
-      color: #FFD700; /* لون الخطوط داخل الحقول ذهبى */
-      transition: all 0.3s ease;
-      box-sizing: border-box;
-    }
-
-    .form-container input:focus,
-    .form-container button:focus {
-      border-color: #FFD700; /* تغيير لون الحافة إلى الذهبي عند التركيز */
-      background-color: #fff4e1; /* لون خلفية الحقل عند التركيز */
-      outline: none;
-    }
-
-    .form-container button {
-      background-color: #4CAF50; /* اللون الأساسي */
+      background-color: #FFD700; /* اللون الذهبي */
       border: none;
-      color: white;
-      font-size: 18px;
+      border-radius: 5px;
+      color: black; /* النص باللون الأسود */
+      font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s;
+      font-family: 'Amiri', serif; /* نفس خط العنوان */
     }
 
     .form-container button:hover {
-      background-color: #45a049;
+      background-color: #FFC107; /* تغيير اللون قليلاً عند التمرير */
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+    }
+
+    .form-group {
+      position: relative;
     }
 
     .form-container button.secondary {
       background-color: #ddd;
       color: #333;
-      font-size: 16px;
+      font-size: 14px;
       margin-top: 20px;
     }
 
@@ -110,48 +89,49 @@
       background-color: #ccc;
     }
 
-    .form-group {
-      position: relative;
+    .form-container .info-text {
+      color: #FFD700; /* اللون الذهبي */
+      font-size: 16px;
+      margin-top: 20px;
     }
 
   </style>
 </head>
 <body>
-  <!-- طبقة الشفافية السوداء -->
-  <div class="background-overlay"></div>
-
   <div class="container">
     <h1>تسجيل الدخول</h1>
-    <p class="subtitle">أذكروا الله آناء الليل وأطراف النهار</p> <!-- الجملة التي طلبتها -->
-    
+
     <div class="form-container">
       <form id="login" action="javascript:void(0);">
         <div class="form-group">
-          <input type="text" id="login-username" placeholder="اسم المستخدم" required autocomplete="off">
+          <input type="text" id="login-username" placeholder="اسم المستخدم" required>
         </div>
         <div class="form-group">
-          <input type="password" id="login-password" placeholder="كلمة المرور" required autocomplete="off">
+          <input type="password" id="login-password" placeholder="كلمة المرور" required>
+          <span class="toggle-password" onclick="togglePassword()">👁️</span>
         </div>
         <button type="submit" onclick="loginUser()">تسجيل الدخول</button>
       </form>
       <button class="secondary" onclick="window.location.href='register.html'">إنشاء حساب جديد</button>
+      <p class="info-text">أذكروا الله آناء الله و أطراف النهار</p> <!-- الجملة أسفل العنوان -->
     </div>
   </div>
 
   <script>
-    // التحقق من الحقول
+    function togglePassword() {
+      const passwordField = document.getElementById("login-password");
+      const type = passwordField.type === "password" ? "text" : "password";
+      passwordField.type = type;
+    }
+
     function loginUser() {
       const username = document.getElementById("login-username").value;
       const password = document.getElementById("login-password").value;
 
-      // التحقق من الحقول الفارغة
       if (username === "" || password === "") {
         alert("الرجاء ملء جميع الحقول.");
       } else {
-        // إذا كانت الحقول غير فارغة، سيتم تنفيذ عملية تسجيل الدخول
         alert("تم تسجيل الدخول بنجاح!");
-        // يمكنك إضافة كود لإعادة التوجيه إلى صفحة أخرى بعد تسجيل الدخول
-        // على سبيل المثال:
         window.location.href = "index.html"; // تأكد من أن الملف index.html موجود
       }
     }
