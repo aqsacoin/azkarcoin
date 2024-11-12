@@ -68,7 +68,7 @@
   <script>
     // البيانات الأساسية
     let userCoins = localStorage.getItem("userCoins") || 50; // يحصل المستخدم على 50 عملة عند التسجيل الأول
-    let miningInterval = 10; // مدة التعدين بالثواني
+    let miningInterval = 86400; // مدة التعدين 24 ساعة بالثواني
     let miningEndTime = localStorage.getItem("miningEndTime");
     let isFirstLogin = localStorage.getItem("isFirstLogin");
 
@@ -117,8 +117,12 @@
         remainingTime -= 1000;
         let seconds = Math.floor(remainingTime / 1000);
         let minutes = Math.floor(seconds / 60);
+        let hours = Math.floor(minutes / 60);
+        minutes = minutes % 60;
         seconds = seconds % 60;
-        timerElement.textContent = `الوقت المتبقي: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+
+        // عرض الوقت المتبقي
+        timerElement.textContent = `الوقت المتبقي: ${hours}:${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
 
         if (remainingTime <= 0) {
           clearInterval(interval);
