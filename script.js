@@ -36,12 +36,19 @@ function loadUserData() {
   var username = localStorage.getItem("username");
   var coins = localStorage.getItem("coins");
   var referralCoins = localStorage.getItem("referralCoins");
+  var avatar = localStorage.getItem("avatar");
 
   if (username) {
     // عرض بيانات المستخدم
     document.getElementById("username-display").innerText = username;
     document.getElementById("user-coins").innerText = coins;
     document.getElementById("referral-coins").innerText = referralCoins || "0";
+
+    // تحديث صورة المستخدم
+    var userAvatar = document.getElementById('user-avatar');
+    if (avatar) {
+      userAvatar.src = avatar;
+    }
 
     // تمكين الأزرار الخاصة بالتعدين
     document.getElementById("allahuAkbar-btn").disabled = false;
@@ -60,9 +67,34 @@ function logoutUser() {
   localStorage.removeItem("username");
   localStorage.removeItem("coins");
   localStorage.removeItem("referralCoins");
+  localStorage.removeItem("avatar");
 
   // إعادة توجيه المستخدم إلى صفحة تسجيل الدخول
   window.location.href = 'login.html';
+}
+
+// وظيفة لتحميل صورة المستخدم
+function uploadPhoto() {
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+
+  input.onchange = function(e) {
+    var file = e.target.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(readerEvent) {
+      var img = readerEvent.target.result;
+      localStorage.setItem("avatar", img); // حفظ الصورة في التخزين المحلي
+
+      // تحديث الصورة في الصفحة
+      document.getElementById('user-avatar').src = img;
+    };
+    
+    reader.readAsDataURL(file);
+  };
+
+  input.click(); // فتح نافذة اختيار الملف
 }
 
 // وظيفة لتسجيل الدخول
