@@ -11,7 +11,7 @@
     body {
       font-family: 'Amiri', serif;
       direction: rtl;
-      background-color: #f0f0f0; /* لون خلفية موحد */
+      background-color: #f0f0f0;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -22,7 +22,7 @@
     .container {
       width: 100%;
       max-width: 450px;
-      background-color: rgba(0, 0, 0, 0.7); /* خلفية سوداء شفافة */
+      background-color: rgba(0, 0, 0, 0.7);
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -31,7 +31,7 @@
     }
 
     h1 {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       font-size: 28px;
       color: #FFD700; /* اللون الذهبي */
     }
@@ -56,26 +56,21 @@
       background-color: #FFD700; /* اللون الذهبي */
       border: none;
       border-radius: 5px;
-      color: black; /* النص باللون الأسود */
+      color: black;
       font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s;
-      font-family: 'Amiri', serif; /* نفس خط العنوان */
+      font-family: 'Amiri', serif;
     }
 
     .form-container button:hover {
-      background-color: #FFC107; /* تغيير اللون قليلاً عند التمرير */
+      background-color: #FFC107;
     }
 
-    .toggle-password {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      cursor: pointer;
-    }
-
-    .form-group {
-      position: relative;
+    .info-text {
+      color: #FFD700;
+      font-size: 16px;
+      margin-top: 10px;
     }
 
     .form-container button.secondary {
@@ -88,42 +83,24 @@
     .form-container button.secondary:hover {
       background-color: #ccc;
     }
-
-    .form-container .info-text {
-      color: #FFD700; /* اللون الذهبي */
-      font-size: 16px;
-      margin-top: 20px;
-    }
-
   </style>
 </head>
 <body>
   <div class="container">
     <h1>تسجيل الدخول</h1>
-
+    <p class="info-text">أذكروا الله آناء الله و أطراف النهار</p> <!-- الجملة أسفل العنوان -->
+    
     <div class="form-container">
       <form id="login" action="javascript:void(0);">
-        <div class="form-group">
-          <input type="text" id="login-username" placeholder="اسم المستخدم" required>
-        </div>
-        <div class="form-group">
-          <input type="password" id="login-password" placeholder="كلمة المرور" required>
-          <span class="toggle-password" onclick="togglePassword()">👁️</span>
-        </div>
+        <input type="text" id="login-username" placeholder="اسم المستخدم" required>
+        <input type="password" id="login-password" placeholder="كلمة المرور" required>
         <button type="submit" onclick="loginUser()">تسجيل الدخول</button>
       </form>
-      <button class="secondary" onclick="window.location.href='register.html'">إنشاء حساب جديد</button>
-      <p class="info-text">أذكروا الله آناء الله و أطراف النهار</p> <!-- الجملة أسفل العنوان -->
+      <button class="secondary" onclick="window.location.href='reg6.html'">إنشاء حساب جديد</button>
     </div>
   </div>
 
   <script>
-    function togglePassword() {
-      const passwordField = document.getElementById("login-password");
-      const type = passwordField.type === "password" ? "text" : "password";
-      passwordField.type = type;
-    }
-
     function loginUser() {
       const username = document.getElementById("login-username").value;
       const password = document.getElementById("login-password").value;
@@ -132,7 +109,7 @@
         alert("الرجاء ملء جميع الحقول.");
       } else {
         alert("تم تسجيل الدخول بنجاح!");
-        window.location.href = "index.html"; // تأكد من أن الملف index.html موجود
+        // إضافة التوجيه أو الوظائف الأخرى هنا
       }
     }
   </script>
