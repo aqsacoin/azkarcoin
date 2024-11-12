@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>إنشاء حساب جديد</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="background"></div>
+  <div class="container">
+    <h1>إنشاء حساب جديد</h1>
+
+    <div class="form-container">
+      <form id="register" action="javascript:void(0);">
+        <input type="text" id="register-username" placeholder="اسم المستخدم" required>
+        <input type="email" id="register-email" placeholder="البريد الإلكتروني" required>
+        <input type="password" id="register-password" placeholder="كلمة المرور" required>
+        <input type="password" id="register-password-repeat" placeholder="أعد إدخال كلمة المرور" required>
+        <button type="submit" onclick="registerUser()">إنشاء حساب</button>
+      </form>
+      <button onclick="window.location.href='login.html'">العودة لتسجيل الدخول</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
