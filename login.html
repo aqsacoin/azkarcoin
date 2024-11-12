@@ -6,22 +6,111 @@
   <title>تسجيل الدخول</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <style>
+    /* تحسين تصميم الفورم */
+    body {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 100%;
+      max-width: 400px;
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #333;
+    }
+    .form-container {
+      width: 100%;
+    }
+    .form-container input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      font-size: 16px;
+    }
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4CAF50;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .form-container button:hover {
+      background-color: #45a049;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      cursor: pointer;
+    }
+    .form-group {
+      position: relative;
+    }
+  </style>
 </head>
 <body>
-  <div class="background"></div>
   <div class="container">
     <h1>تسجيل الدخول</h1>
 
     <div class="form-container">
       <form id="login" action="javascript:void(0);">
-        <input type="text" id="login-username" placeholder="اسم المستخدم" required>
-        <input type="password" id="login-password" placeholder="كلمة المرور" required>
+        <div class="form-group">
+          <input type="text" id="login-username" placeholder="اسم المستخدم" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="login-password" placeholder="كلمة المرور" required>
+          <span class="toggle-password" onclick="togglePassword()">👁️</span>
+        </div>
         <button type="submit" onclick="loginUser()">تسجيل الدخول</button>
       </form>
       <button onclick="window.location.href='register.html'">إنشاء حساب جديد</button>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    // دالة لتفعيل أو إخفاء كلمة السر
+    function togglePassword() {
+      const passwordField = document.getElementById("login-password");
+      const type = passwordField.type === "password" ? "text" : "password";
+      passwordField.type = type;
+    }
+
+    // التحقق من الحقول
+    function loginUser() {
+      const username = document.getElementById("login-username").value;
+      const password = document.getElementById("login-password").value;
+
+      // التحقق من الحقول الفارغة
+      if (username === "" || password === "") {
+        alert("الرجاء ملء جميع الحقول.");
+      } else {
+        // إذا كانت الحقول غير فارغة، سيتم تنفيذ عملية تسجيل الدخول
+        alert("تم تسجيل الدخول بنجاح!");
+        // يمكنك إضافة كود لإعادة التوجيه إلى صفحة أخرى بعد تسجيل الدخول
+        // على سبيل المثال:
+        window.location.href = "index.html"; // تأكد من أن الملف index.html موجود
+      }
+    }
+  </script>
 </body>
 </html>
