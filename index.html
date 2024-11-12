@@ -70,9 +70,16 @@
     let userCoins = localStorage.getItem("userCoins") || 50; // يحصل المستخدم على 50 عملة عند التسجيل الأول
     let miningInterval = 10; // مدة التعدين بالثواني
     let miningEndTime = localStorage.getItem("miningEndTime");
+    let isFirstLogin = localStorage.getItem("isFirstLogin");
 
     // تحديث عملات المستخدم
     document.getElementById("user-coins").textContent = userCoins;
+
+    // إذا كان التسجيل هو الأول، يبدأ العد التنازلي مباشرة
+    if (isFirstLogin === null) {
+      localStorage.setItem("isFirstLogin", "false"); // وضع علامة على أن المستخدم قد سجل بالفعل
+      startMining();
+    }
 
     // إذا كان هناك وقت انتهاء تعدين محفوظ، استخدمه لإظهار العد التنازلي
     if (miningEndTime) {
