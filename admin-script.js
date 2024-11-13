@@ -30,12 +30,43 @@ function addUser() {
 }
 
 function editUser(userId) {
-  alert(`تعديل المستخدم ${userId}`);
+  fetch(`/admin/edit-user/${userId}`, {
+    method: 'POST',
+    body: JSON.stringify({ userId: userId }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert(`تم تعديل المستخدم ${userId}`);
+      loadUsers();  // إعادة تحميل قائمة المستخدمين بعد التعديل
+    } else {
+      alert('حدث خطأ أثناء تعديل المستخدم');
+    }
+  })
+  .catch(error => console.error('Error:', error));
 }
 
 function deleteUser(userId) {
   if (confirm('هل أنت متأكد أنك تريد حذف هذا المستخدم؟')) {
-    alert(`تم حذف المستخدم ${userId}`);
+    fetch(`/admin/delete-user/${userId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert(`تم حذف المستخدم ${userId}`);
+        loadUsers();  // إعادة تحميل قائمة المستخدمين بعد الحذف
+      } else {
+        alert('حدث خطأ أثناء حذف المستخدم');
+      }
+    })
+    .catch(error => console.error('Error:', error));
   }
 }
 
@@ -58,12 +89,43 @@ function addAd() {
 }
 
 function editAd(adId) {
-  alert(`تعديل الإعلان ${adId}`);
+  fetch(`/admin/edit-ad/${adId}`, {
+    method: 'POST',
+    body: JSON.stringify({ adId: adId }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert(`تم تعديل الإعلان ${adId}`);
+      loadAds();  // إعادة تحميل قائمة الإعلانات بعد التعديل
+    } else {
+      alert('حدث خطأ أثناء تعديل الإعلان');
+    }
+  })
+  .catch(error => console.error('Error:', error));
 }
 
 function deleteAd(adId) {
   if (confirm('هل أنت متأكد أنك تريد حذف هذا الإعلان؟')) {
-    alert(`تم حذف الإعلان ${adId}`);
+    fetch(`/admin/delete-ad/${adId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert(`تم حذف الإعلان ${adId}`);
+        loadAds();  // إعادة تحميل قائمة الإعلانات بعد الحذف
+      } else {
+        alert('حدث خطأ أثناء حذف الإعلان');
+      }
+    })
+    .catch(error => console.error('Error:', error));
   }
 }
 
@@ -86,12 +148,43 @@ function addAzkar() {
 }
 
 function editAzkar(azkarId) {
-  alert(`تعديل الذكر ${azkarId}`);
+  fetch(`/admin/edit-azkar/${azkarId}`, {
+    method: 'POST',
+    body: JSON.stringify({ azkarId: azkarId }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert(`تم تعديل الذكر ${azkarId}`);
+      loadAzkar();  // إعادة تحميل قائمة الأذكار بعد التعديل
+    } else {
+      alert('حدث خطأ أثناء تعديل الذكر');
+    }
+  })
+  .catch(error => console.error('Error:', error));
 }
 
 function deleteAzkar(azkarId) {
   if (confirm('هل أنت متأكد أنك تريد حذف هذا الذكر؟')) {
-    alert(`تم حذف الذكر ${azkarId}`);
+    fetch(`/admin/delete-azkar/${azkarId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        alert(`تم حذف الذكر ${azkarId}`);
+        loadAzkar();  // إعادة تحميل قائمة الأذكار بعد الحذف
+      } else {
+        alert('حدث خطأ أثناء حذف الذكر');
+      }
+    })
+    .catch(error => console.error('Error:', error));
   }
 }
 
@@ -109,7 +202,23 @@ function loadMiningSettings() {
 }
 
 function editMiningSettings() {
-  alert('تعديل إعدادات التعدين');
+  fetch(`/admin/edit-mining-settings`, {
+    method: 'POST',
+    body: JSON.stringify({ setting: 'newSetting' }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      alert('تم تعديل إعدادات التعدين');
+      loadMiningSettings();  // إعادة تحميل الإعدادات بعد التعديل
+    } else {
+      alert('حدث خطأ أثناء تعديل الإعدادات');
+    }
+  })
+  .catch(error => console.error('Error:', error));
 }
 
 // إدارة المهام اليومية
@@ -124,18 +233,4 @@ function loadTasks() {
       </ul>
     `;
   }, 1000);
-}
-
-function addTask() {
-  alert('إضافة مهمة جديدة');
-}
-
-function editTask(taskId) {
-  alert(`تعديل المهمة ${taskId}`);
-}
-
-function deleteTask(taskId) {
-  if (confirm('هل أنت متأكد أنك تريد حذف هذه المهمة؟')) {
-    alert(`تم حذف المهمة ${taskId}`);
-  }
 }
