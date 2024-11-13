@@ -1,4 +1,3 @@
-// دالة لإظهار القسم المحدد
 function showSection(sectionId) {
   // إخفاء جميع الأقسام
   const sections = document.querySelectorAll('.content-section');
@@ -6,39 +5,72 @@ function showSection(sectionId) {
     section.style.display = 'none';
   });
 
-  // إظهار القسم المحدد
+  // عرض القسم المحدد
   const sectionToShow = document.getElementById(sectionId);
   if (sectionToShow) {
     sectionToShow.style.display = 'block';
   }
 }
 
-// دالة لعرض المستخدمين
 function loadUsers() {
-  // إضافة كود هنا لعرض المستخدمين (على سبيل المثال من قاعدة بيانات)
-  document.getElementById('user-list').innerHTML = '<p>قائمة المستخدمين سيتم تحميلها هنا.</p>';
+  // عرض المستخدمين من قاعدة البيانات أو من مصدر البيانات
+  document.getElementById('user-list').innerHTML = `
+    <ul>
+      <li>مستخدم 1</li>
+      <li>مستخدم 2</li>
+      <li>مستخدم 3</li>
+    </ul>
+  `;
 }
 
-// دالة لتحديث الإعلانات
 function editAds() {
-  // إضافة كود هنا لتحديث الإعلانات
-  document.getElementById('ads-list').innerHTML = '<p>الإعلانات سيتم تحديثها هنا.</p>';
+  // عرض الإعلانات من قاعدة البيانات أو من مصدر البيانات
+  document.getElementById('ads-list').innerHTML = `
+    <ul>
+      <li>إعلان 1 <button onclick="deleteAd()">حذف</button></li>
+      <li>إعلان 2 <button onclick="deleteAd()">حذف</button></li>
+    </ul>
+  `;
 }
 
-// دالة لتحديث الأذكار
+function deleteAd() {
+  // حذف الإعلان
+  alert("تم حذف الإعلان");
+}
+
 function editAzkar() {
-  // إضافة كود هنا لتحديث الأذكار
-  document.getElementById('azkar-list').innerHTML = '<p>الأذكار سيتم تحديثها هنا.</p>';
+  // عرض الأذكار من قاعدة البيانات أو من مصدر البيانات
+  document.getElementById('azkar-list').innerHTML = `
+    <ul>
+      <li>ذكر 1 <button onclick="deleteAzkar()">حذف</button></li>
+      <li>ذكر 2 <button onclick="deleteAzkar()">حذف</button></li>
+    </ul>
+  `;
 }
 
-// دالة لتحديث إعدادات التعدين
+function deleteAzkar() {
+  // حذف الذكر
+  alert("تم حذف الذكر");
+}
+
 function editMiningSettings() {
-  // إضافة كود هنا لتحديث إعدادات التعدين
-  document.getElementById('mining-settings').innerHTML = '<p>إعدادات التعدين سيتم تحديثها هنا.</p>';
+  // عرض إعدادات التعدين
+  document.getElementById('mining-settings').innerHTML = `
+    <p>تعديل إعدادات التعدين هنا.</p>
+  `;
 }
 
-// دالة لعرض وتعديل المهام اليومية
 function loadTasks() {
-  // إضافة كود هنا لعرض وتعديل المهام اليومية
-  document.getElementById('tasks-list').innerHTML = '<p>المهام اليومية سيتم عرضها هنا.</p>';
+  // عرض المهام اليومية
+  document.getElementById('tasks-list').innerHTML = `
+    <ul>
+      <li>مهمة 1 <button onclick="deleteTask()">حذف</button></li>
+      <li>مهمة 2 <button onclick="deleteTask()">حذف</button></li>
+    </ul>
+  `;
+}
+
+function deleteTask() {
+  // حذف المهمة
+  alert("تم حذف المهمة");
 }
