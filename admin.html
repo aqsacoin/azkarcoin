@@ -34,45 +34,39 @@
       <section id="users" class="content-section" style="display:none;">
         <h2>إدارة المستخدمين</h2>
         <button onclick="loadUsers()">عرض جميع المستخدمين</button>
-        <div id="user-list">
-          <!-- عرض المستخدمين هنا -->
-        </div>
+        <button onclick="addUser()">إضافة مستخدم جديد</button>
+        <div id="user-list"></div>
       </section>
 
       <!-- قسم إدارة الإعلانات -->
       <section id="ads" class="content-section" style="display:none;">
         <h2>إدارة الإعلانات</h2>
-        <button onclick="editAds()">تحديث الإعلانات</button>
-        <div id="ads-list">
-          <!-- الإعلانات الحالية ستكون هنا -->
-        </div>
+        <button onclick="loadAds()">عرض الإعلانات</button>
+        <button onclick="addAd()">إضافة إعلان جديد</button>
+        <div id="ads-list"></div>
       </section>
 
       <!-- قسم إدارة الأذكار -->
       <section id="azkar" class="content-section" style="display:none;">
         <h2>إدارة الأذكار</h2>
-        <button onclick="editAzkar()">تحديث الأذكار</button>
-        <div id="azkar-list">
-          <!-- الأذكار الحالية ستكون هنا -->
-        </div>
+        <button onclick="loadAzkar()">عرض الأذكار</button>
+        <button onclick="addAzkar()">إضافة ذكر جديد</button>
+        <div id="azkar-list"></div>
       </section>
 
       <!-- قسم إعدادات التعدين -->
       <section id="mining" class="content-section" style="display:none;">
         <h2>إعدادات التعدين</h2>
         <button onclick="editMiningSettings()">تحديث إعدادات التعدين</button>
-        <div id="mining-settings">
-          <!-- إعدادات التعدين هنا -->
-        </div>
+        <div id="mining-settings"></div>
       </section>
 
       <!-- قسم إدارة المهام اليومية -->
       <section id="tasks" class="content-section" style="display:none;">
         <h2>إدارة المهام اليومية</h2>
         <button onclick="loadTasks()">عرض/تعديل المهام اليومية</button>
-        <div id="tasks-list">
-          <!-- عرض المهام هنا -->
-        </div>
+        <button onclick="addTask()">إضافة مهمة جديدة</button>
+        <div id="tasks-list"></div>
       </section>
     </main>
   </div>
