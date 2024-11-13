@@ -67,13 +67,6 @@
       background-color: #FFC107;
     }
 
-    .toggle-password {
-      position: absolute;
-      right: 10px;
-      top: 10px;
-      cursor: pointer;
-    }
-
     .form-group {
       position: relative;
     }
@@ -108,7 +101,6 @@
         </div>
         <div class="form-group">
           <input type="password" id="login-password" placeholder="كلمة المرور" required>
-          <span class="toggle-password" onclick="togglePassword()">👁️</span>
         </div>
         <button type="submit" onclick="loginUser()">تسجيل الدخول</button>
       </form>
@@ -117,12 +109,6 @@
   </div>
 
   <script>
-    function togglePassword() {
-      const passwordField = document.getElementById("login-password");
-      const type = passwordField.type === "password" ? "text" : "password";
-      passwordField.type = type;
-    }
-
     function loginUser() {
       const username = document.getElementById("login-username").value;
       const password = document.getElementById("login-password").value;
