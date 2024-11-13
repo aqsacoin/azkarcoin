@@ -1,46 +1,31 @@
 /* إعدادات عامة */
 body {
   font-family: 'Amiri', serif;
-  color: #FFD700; /* تغيير لون النصوص إلى الذهبي */
+  color: #FFD700;
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9BkN6Ce_uaJzHzMe-YYPOvf9SkIKMUmbTGagUZDqHLDyuEh5Z7EXv3FPE&s=10');
   background-size: cover;
-  background-color: rgba(0, 0, 0, 0.7); /* طبقة مظللة للخلفية تغطي كامل الصفحة */
-  background-blend-mode: overlay; /* دمج طبقة اللون الشفاف مع الخلفية */
+  background-color: rgba(0, 0, 0, 0.7);
+  background-blend-mode: overlay;
   margin: 0;
   padding: 0;
   text-align: center;
   overflow-x: hidden;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background: rgba(0, 0, 0, 0.7); /* جعل الخلفية الشفافة تغطي كامل الصفحة */
-  border-radius: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* لوحة التحكم */
 .dashboard {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }
 
-/* القائمة الجانبية */
 .sidebar {
   width: 250px;
-  background-color: #2f5d62;
+  background-color: #333;
+  color: #FFD700;
   padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar h2 {
-  color: #FFD700;
-  font-size: 1.8em;
+  font-size: 1.5em;
+  text-align: center;
   margin-bottom: 20px;
 }
 
@@ -50,82 +35,47 @@ body {
 }
 
 .sidebar ul li {
-  color: #FFD700;
-  font-size: 1.2em;
   padding: 10px;
   cursor: pointer;
-  border-bottom: 1px solid #555;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
 .sidebar ul li:hover {
-  background-color: #4a6e72;
+  background-color: #555;
 }
 
-/* المحتوى الرئيسي */
 .main-content {
-  flex: 1;
+  flex-grow: 1;
   padding: 20px;
-  margin-left: 30px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #FFD700;
 }
 
 .content-section {
-  background-color: rgba(0, 0, 0, 0.7);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  margin-bottom: 20px;
-}
-
-.content-section h2 {
-  color: #FFD700;
-  font-size: 2em;
-  margin-bottom: 15px;
+  display: none;
 }
 
 button {
-  padding: 10px 20px;
   background-color: #2f5d62;
   color: #FFD700;
+  padding: 10px;
   border: none;
-  border-radius: 10px;
-  font-size: 1.2em;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.3s;
+  border-radius: 5px;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 button:hover {
-  background-color: #4a6e72;
-  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
 }
 
-#user-list, #ads-list, #azkar-list, #mining-settings, #tasks-list {
-  margin-top: 20px;
-}
-
-/* تحسين التوافق مع الأجهزة المحمولة */
+/* لجعل الأزرار تستجيب بشكل جيد على الجوال */
 @media (max-width: 768px) {
-  .container {
-    width: 90%;
-    padding: 10px;
-  }
-
-  .dashboard {
-    flex-direction: column;
-  }
-
   .sidebar {
-    width: 100%;
-    margin-bottom: 20px;
+    width: 200px;
   }
 
   .main-content {
-    margin-left: 0;
-  }
-
-  button {
-    width: 100%;
-    font-size: 1.2em;
-    margin-top: 10px;
+    padding: 10px;
   }
 }
