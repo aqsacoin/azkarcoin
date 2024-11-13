@@ -1,3 +1,4 @@
+// الدالة لعرض القسم المختار وإخفاء باقي الأقسام
 function showSection(sectionId) {
   // إخفاء جميع الأقسام
   const sections = document.querySelectorAll('.content-section');
@@ -5,72 +6,136 @@ function showSection(sectionId) {
     section.style.display = 'none';
   });
 
-  // عرض القسم المحدد
-  const sectionToShow = document.getElementById(sectionId);
-  if (sectionToShow) {
-    sectionToShow.style.display = 'block';
+  // عرض القسم المختار
+  const section = document.getElementById(sectionId);
+  section.style.display = 'block';
+}
+
+// إدارة المستخدمين
+function loadUsers() {
+  const userList = document.getElementById('user-list');
+  userList.innerHTML = '<p>قيد التحميل...</p>';
+  setTimeout(() => {
+    userList.innerHTML = `
+      <ul>
+        <li>مستخدم 1 <button onclick="editUser(1)">تعديل</button><button onclick="deleteUser(1)">حذف</button></li>
+        <li>مستخدم 2 <button onclick="editUser(2)">تعديل</button><button onclick="deleteUser(2)">حذف</button></li>
+      </ul>
+    `;
+  }, 1000);
+}
+
+function addUser() {
+  alert('إضافة مستخدم جديد');
+}
+
+function editUser(userId) {
+  alert(`تعديل المستخدم ${userId}`);
+}
+
+function deleteUser(userId) {
+  if (confirm('هل أنت متأكد أنك تريد حذف هذا المستخدم؟')) {
+    alert(`تم حذف المستخدم ${userId}`);
   }
 }
 
-function loadUsers() {
-  // عرض المستخدمين من قاعدة البيانات أو من مصدر البيانات
-  document.getElementById('user-list').innerHTML = `
-    <ul>
-      <li>مستخدم 1</li>
-      <li>مستخدم 2</li>
-      <li>مستخدم 3</li>
-    </ul>
-  `;
+// إدارة الإعلانات
+function loadAds() {
+  const adsList = document.getElementById('ads-list');
+  adsList.innerHTML = '<p>قيد التحميل...</p>';
+  setTimeout(() => {
+    adsList.innerHTML = `
+      <ul>
+        <li>إعلان 1 <button onclick="editAd(1)">تعديل</button><button onclick="deleteAd(1)">حذف</button></li>
+        <li>إعلان 2 <button onclick="editAd(2)">تعديل</button><button onclick="deleteAd(2)">حذف</button></li>
+      </ul>
+    `;
+  }, 1000);
 }
 
-function editAds() {
-  // عرض الإعلانات من قاعدة البيانات أو من مصدر البيانات
-  document.getElementById('ads-list').innerHTML = `
-    <ul>
-      <li>إعلان 1 <button onclick="deleteAd()">حذف</button></li>
-      <li>إعلان 2 <button onclick="deleteAd()">حذف</button></li>
-    </ul>
-  `;
+function addAd() {
+  alert('إضافة إعلان جديد');
 }
 
-function deleteAd() {
-  // حذف الإعلان
-  alert("تم حذف الإعلان");
+function editAd(adId) {
+  alert(`تعديل الإعلان ${adId}`);
 }
 
-function editAzkar() {
-  // عرض الأذكار من قاعدة البيانات أو من مصدر البيانات
-  document.getElementById('azkar-list').innerHTML = `
-    <ul>
-      <li>ذكر 1 <button onclick="deleteAzkar()">حذف</button></li>
-      <li>ذكر 2 <button onclick="deleteAzkar()">حذف</button></li>
-    </ul>
-  `;
+function deleteAd(adId) {
+  if (confirm('هل أنت متأكد أنك تريد حذف هذا الإعلان؟')) {
+    alert(`تم حذف الإعلان ${adId}`);
+  }
 }
 
-function deleteAzkar() {
-  // حذف الذكر
-  alert("تم حذف الذكر");
+// إدارة الأذكار
+function loadAzkar() {
+  const azkarList = document.getElementById('azkar-list');
+  azkarList.innerHTML = '<p>قيد التحميل...</p>';
+  setTimeout(() => {
+    azkarList.innerHTML = `
+      <ul>
+        <li>ذكر 1 <button onclick="editAzkar(1)">تعديل</button><button onclick="deleteAzkar(1)">حذف</button></li>
+        <li>ذكر 2 <button onclick="editAzkar(2)">تعديل</button><button onclick="deleteAzkar(2)">حذف</button></li>
+      </ul>
+    `;
+  }, 1000);
+}
+
+function addAzkar() {
+  alert('إضافة ذكر جديد');
+}
+
+function editAzkar(azkarId) {
+  alert(`تعديل الذكر ${azkarId}`);
+}
+
+function deleteAzkar(azkarId) {
+  if (confirm('هل أنت متأكد أنك تريد حذف هذا الذكر؟')) {
+    alert(`تم حذف الذكر ${azkarId}`);
+  }
+}
+
+// إعدادات التعدين
+function loadMiningSettings() {
+  const miningSettings = document.getElementById('mining-settings');
+  miningSettings.innerHTML = '<p>قيد التحميل...</p>';
+  setTimeout(() => {
+    miningSettings.innerHTML = `
+      <p>إعدادات التعدين الحالية: 
+        <button onclick="editMiningSettings()">تعديل</button>
+      </p>
+    `;
+  }, 1000);
 }
 
 function editMiningSettings() {
-  // عرض إعدادات التعدين
-  document.getElementById('mining-settings').innerHTML = `
-    <p>تعديل إعدادات التعدين هنا.</p>
-  `;
+  alert('تعديل إعدادات التعدين');
 }
 
+// إدارة المهام اليومية
 function loadTasks() {
-  // عرض المهام اليومية
-  document.getElementById('tasks-list').innerHTML = `
-    <ul>
-      <li>مهمة 1 <button onclick="deleteTask()">حذف</button></li>
-      <li>مهمة 2 <button onclick="deleteTask()">حذف</button></li>
-    </ul>
-  `;
+  const tasksList = document.getElementById('tasks-list');
+  tasksList.innerHTML = '<p>قيد التحميل...</p>';
+  setTimeout(() => {
+    tasksList.innerHTML = `
+      <ul>
+        <li>مهمة 1 <button onclick="editTask(1)">تعديل</button><button onclick="deleteTask(1)">حذف</button></li>
+        <li>مهمة 2 <button onclick="editTask(2)">تعديل</button><button onclick="deleteTask(2)">حذف</button></li>
+      </ul>
+    `;
+  }, 1000);
 }
 
-function deleteTask() {
-  // حذف المهمة
-  alert("تم حذف المهمة");
+function addTask() {
+  alert('إضافة مهمة جديدة');
+}
+
+function editTask(taskId) {
+  alert(`تعديل المهمة ${taskId}`);
+}
+
+function deleteTask(taskId) {
+  if (confirm('هل أنت متأكد أنك تريد حذف هذه المهمة؟')) {
+    alert(`تم حذف المهمة ${taskId}`);
+  }
 }
