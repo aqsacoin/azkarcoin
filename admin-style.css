@@ -1,0 +1,131 @@
+/* إعدادات عامة */
+body {
+  font-family: 'Amiri', serif;
+  color: #FFD700; /* تغيير لون النصوص إلى الذهبي */
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9BkN6Ce_uaJzHzMe-YYPOvf9SkIKMUmbTGagUZDqHLDyuEh5Z7EXv3FPE&s=10');
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0.7); /* طبقة مظللة للخلفية تغطي كامل الصفحة */
+  background-blend-mode: overlay; /* دمج طبقة اللون الشفاف مع الخلفية */
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.7); /* جعل الخلفية الشفافة تغطي كامل الصفحة */
+  border-radius: 15px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* لوحة التحكم */
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/* القائمة الجانبية */
+.sidebar {
+  width: 250px;
+  background-color: #2f5d62;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar h2 {
+  color: #FFD700;
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  color: #FFD700;
+  font-size: 1.2em;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #555;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar ul li:hover {
+  background-color: #4a6e72;
+}
+
+/* المحتوى الرئيسي */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  margin-left: 30px;
+}
+
+.content-section {
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.content-section h2 {
+  color: #FFD700;
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #2f5d62;
+  color: #FFD700;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+  background-color: #4a6e72;
+  transform: scale(1.05);
+}
+
+#user-list, #ads-list, #azkar-list, #mining-settings, #tasks-list {
+  margin-top: 20px;
+}
+
+/* تحسين التوافق مع الأجهزة المحمولة */
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .main-content {
+    margin-left: 0;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1.2em;
+    margin-top: 10px;
+  }
+}
