@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة تحكم AzkarCoin</title>
+  <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+  <div class="dashboard">
+    <!-- القائمة الجانبية -->
+    <aside class="sidebar">
+      <h2>لوحة التحكم</h2>
+      <ul>
+        <li onclick="showSection('statistics')">إحصائيات الموقع</li>
+        <li onclick="showSection('users')">إدارة المستخدمين</li>
+        <li onclick="showSection('ads')">إدارة الإعلانات</li>
+        <li onclick="showSection('azkar')">إدارة الأذكار</li>
+        <li onclick="showSection('mining')">إعدادات التعدين</li>
+        <li onclick="showSection('tasks')">المهام اليومية</li>
+      </ul>
+    </aside>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="main-content">
+      <!-- قسم إحصائيات الموقع -->
+      <section id="statistics" class="content-section">
+        <h2>إحصائيات الموقع</h2>
+        <p>عدد المستخدمين: <span id="user-count">0</span></p>
+        <p>إجمالي العملات المكتسبة: <span id="total-coins">0</span></p>
+      </section>
+
+      <!-- قسم إدارة المستخدمين -->
+      <section id="users" class="content-section" style="display:none;">
+        <h2>إدارة المستخدمين</h2>
+        <button onclick="loadUsers()">عرض جميع المستخدمين</button>
+        <div id="user-list">
+          <!-- عرض المستخدمين هنا -->
+        </div>
+      </section>
+
+      <!-- قسم إدارة الإعلانات -->
+      <section id="ads" class="content-section" style="display:none;">
+        <h2>إدارة الإعلانات</h2>
+        <button onclick="editAds()">تحديث الإعلانات</button>
+        <div id="ads-list">
+          <!-- الإعلانات الحالية ستكون هنا -->
+        </div>
+      </section>
+
+      <!-- قسم إدارة الأذكار -->
+      <section id="azkar" class="content-section" style="display:none;">
+        <h2>إدارة الأذكار</h2>
+        <button onclick="editAzkar()">تحديث الأذكار</button>
+        <div id="azkar-list">
+          <!-- الأذكار الحالية ستكون هنا -->
+        </div>
+      </section>
+
+      <!-- قسم إعدادات التعدين -->
+      <section id="mining" class="content-section" style="display:none;">
+        <h2>إعدادات التعدين</h2>
+        <button onclick="editMiningSettings()">تحديث إعدادات التعدين</button>
+        <div id="mining-settings">
+          <!-- إعدادات التعدين هنا -->
+        </div>
+      </section>
+
+      <!-- قسم إدارة المهام اليومية -->
+      <section id="tasks" class="content-section" style="display:none;">
+        <h2>إدارة المهام اليومية</h2>
+        <button onclick="loadTasks()">عرض/تعديل المهام اليومية</button>
+        <div id="tasks-list">
+          <!-- عرض المهام هنا -->
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="admin-script.js"></script>
+</body>
+</html>
